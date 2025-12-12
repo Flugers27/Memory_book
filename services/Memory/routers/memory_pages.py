@@ -9,7 +9,7 @@ from typing import List
 import uuid
 
 from ..dependencies import get_current_user_id
-from config import get_db, MemoryAgent, MemoryPage
+#from config import get_db, AgentBD, MemoryPage
 from .. import schemas
 
 
