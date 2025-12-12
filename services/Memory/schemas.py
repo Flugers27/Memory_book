@@ -10,30 +10,46 @@ import uuid
 class MemoryBase(BaseModel):
     class Config:
         from_attributes = True  # Заменяет orm_mode в Pydantic v2
-
+        json_encoders = {
+            uuid.UUID: lambda v: str(v) if v else None,}
+        
 # ========== MEMORY AGENT SCHEMAS ==========
-class MemoryAgentBase(MemoryBase):
+class AgentBase(MemoryBase):
     full_name: str = Field(..., max_length=255, description="Полное имя агента")
     birth_date: Optional[date] = Field(None, description="Дата рождения")
     death_date: Optional[date] = Field(None, description="Дата смерти")
     avatar_url: Optional[str] = Field(None, description="URL аватара")
 
-class MemoryAgentCreate(MemoryAgentBase):
+class AgentInList(MemoryBase):
+    id_agent: uuid.UUID
+    full_name: str
+    birth_date: Optional[date] = None
+    death_date: Optional[date] = None
+
+class AgentListResponse(MemoryBase):
+    user_id: uuid.UUID
+    agent_list: List[AgentInList]
+
+class AgentCreate(AgentBase):
     pass
 
-class MemoryAgentUpdate(MemoryBase):
-    full_name: Optional[str] = Field(None, max_length=255)
+class AgentUpdate(AgentBase):
+    pass
+
+class AgentResponse(MemoryBase):
+    id_agent: uuid.UUID
+    full_name: str
     birth_date: Optional[date] = None
     death_date: Optional[date] = None
     avatar_url: Optional[str] = None
-
-class MemoryAgent(MemoryAgentBase):
-    id_agent: uuid.UUID
     user_id: uuid.UUID
-    created_at: datetime
-    updated_at: datetime
 
-class MemoryAgentWithPages(MemoryAgent):
+
+# Старая схема Agent оставляем для обратной совместимости
+class Agent(AgentResponse):
+    pass
+
+class MemoryAgentWithPages(Agent):
     memory_pages: List["MemoryPage"] = []
 
 # ========== MEMORY PAGE SCHEMAS ==========
@@ -63,40 +79,4 @@ class MemoryPage(MemoryPageBase):
     created_at: datetime
     updated_at: datetime
 
-class MemoryPageWithTitles(MemoryPage):
-    memory_titles: List["MemoryTitles"] = []
 
-# ========== MEMORY TITLES SCHEMAS ==========
-class MemoryTitlesBase(MemoryBase):
-    head: str = Field(..., max_length=100, description="Заголовок")
-    body: Optional[str] = Field(None, description="Содержимое")
-    sort_order: int = Field(0, description="Порядок сортировки")
-    parent_id: Optional[uuid.UUID] = Field(None, description="ID родительского заголовка")
-    page_id: uuid.UUID = Field(..., description="ID страницы")
-
-class MemoryTitlesCreate(MemoryTitlesBase):
-    pass
-
-class MemoryTitlesUpdate(MemoryBase):
-    head: Optional[str] = Field(None, max_length=100)
-    body: Optional[str] = None
-    sort_order: Optional[int] = None
-
-class MemoryTitles(MemoryTitlesBase):
-    id_titles: uuid.UUID
-    created_at: datetime
-    expires_at: datetime
-
-class MemoryTitlesWithChildren(MemoryTitles):
-    children: List["MemoryTitles"] = []
-
-# ========== COMPOSITE SCHEMAS ==========
-class FullMemoryPageResponse(MemoryBase):
-    """Полная информация о странице с агентом и заголовками"""
-    memory_page: MemoryPageWithTitles
-    memory_agent: MemoryAgent
-    memory_titles: List[MemoryTitlesWithChildren] = []
-
-# Обновляем ссылки для рекурсивных типов
-MemoryPageWithTitles.update_forward_refs()
-MemoryTitlesWithChildren.update_forward_refs()

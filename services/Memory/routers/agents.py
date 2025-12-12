@@ -10,15 +10,16 @@ import uuid
 from ..config import get_db
 from .. import schemas
 from ..crud import (
-    get_memory_agent, get_memory_agents_by_user, create_memory_agent,
+    get_memory_agent, get_memory_agent_list_by_user, create_memory_agent,
     update_memory_agent, delete_memory_agent
 )
 # Используем локальную зависимость из Memory/dependencies.py
 from ..dependencies import get_current_user_id
 
-router = APIRouter(prefix="/agents", tags=["memory_agents"])
+router = APIRouter(tags=["agent"])
 
-@router.get("/", response_model=List[schemas.MemoryAgent])
+    #Получение списка агентов памяти текущего пользователя
+@router.get("/agent_list", response_model=schemas.AgentListResponse)
 async def get_agents(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
@@ -26,17 +27,37 @@ async def get_agents(
     db: Session = Depends(get_db)
 ):
     """Получение списка агентов памяти текущего пользователя"""
-    agents = get_memory_agents_by_user(
+    return get_memory_agent_list_by_user(
         db=db,
         user_id=user_id,
         skip=skip,
         limit=limit
     )
-    return agents
 
-@router.post("/", response_model=schemas.MemoryAgent, status_code=status.HTTP_201_CREATED)
+@router.get("/{agent_id}", response_model=schemas.Agent)
+async def get_agent(
+    agent_id: uuid.UUID,  # UUID тип
+    user_id: uuid.UUID = Depends(get_current_user_id),  # UUID тип
+    db: Session = Depends(get_db)
+):
+    """Получение агента памяти по ID"""
+    agent = get_memory_agent(db, agent_id).to_dict()
+    print(type(agent['user_id']))
+    print(type(user_id))
+    print(user_id==agent['user_id'])
+    
+    if not agent or agent['user_id'] != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Agent not found or access denied"
+        )
+    
+    return agent
+
+    #Создание нового агента памяти
+@router.post("/", response_model=schemas.AgentResponse, status_code=status.HTTP_201_CREATED)
 async def create_agent(
-    agent_data: schemas.MemoryAgentCreate,
+    agent_data: schemas.AgentCreate,  # Без user_id
     user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
@@ -46,29 +67,12 @@ async def create_agent(
         agent_data=agent_data,
         user_id=user_id
     )
-    return agent
+    return agent.to_dict()  # Возвращаем объект SQLAlchemy
 
-@router.get("/{agent_id}", response_model=schemas.MemoryAgent)
-async def get_agent(
-    agent_id: uuid.UUID,
-    user_id: uuid.UUID = Depends(get_current_user_id),
-    db: Session = Depends(get_db)
-):
-    """Получение агента памяти по ID"""
-    agent = get_memory_agent(db, agent_id)
-    
-    if not agent or agent.user_id != user_id:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Agent not found or access denied"
-        )
-    
-    return agent
-
-@router.put("/{agent_id}", response_model=schemas.MemoryAgent)
+@router.put("/{agent_id}", response_model=schemas.Agent)
 async def update_agent(
     agent_id: uuid.UUID,
-    agent_update: schemas.MemoryAgentUpdate,
+    agent_update: schemas.AgentUpdate,
     user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
@@ -78,8 +82,8 @@ async def update_agent(
         agent_id=agent_id,
         agent_update=agent_update,
         user_id=user_id
-    )
-    
+    ).to_dict()
+
     if not agent:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
