@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI):
 # Создаем FastAPI приложение
 app = FastAPI(
     title="Memory Service API",
-    description="Сервис для управления страницами памяти, агентами и заголовками",
+    description="Сервис для управления страницами памяти",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -52,20 +52,25 @@ async def root():
         "status": "running",
         "docs": "/docs",
         "endpoints": {
-            "agents": {
-                "list": "GET /agents",
-                "create": "POST /agents",
-                "get": "GET /agents/{agent_id}",
-                "update": "PUT /agents/{agent_id}",
-                "delete": "DELETE /agents/{agent_id}"
+            "memory_page": {
+                "p_list": "Get /public_memory_page_list",
+                "p_get": "Get /public_memory_page/{page_id}",
+                "list": "Get /memory_page_list",
+                "get": "Get /memory_page/{page_id}",
             },
-            "pages": {
-                "list": "GET /pages",
-                "public": "GET /pages/public",
-                "create": "POST /pages",
-                "get": "GET /pages/{page_id}",
-                "update": "PUT /pages/{page_id}",
-                "delete": "DELETE /pages/{page_id}"
+            "agent": {
+                "list": "GET /agent_list",
+                "get": "GET /agent/{agent_id}",
+                "create": "POST /agent",
+                "update": "PUT /agent/{agent_id}",
+                "delete": "DELETE /agent/{agent_id}"
+            },
+            "page": {
+                "list": "GET /page_list",
+                "create": "POST /page",
+                "get": "GET /page/{page_id}",
+                "update": "PUT /page/{page_id}",
+                "delete": "DELETE /page/{page_id}"
             },
             "health": "GET /health"
         }
