@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from .routers import agents, pages, titles, memory_pages, health  # Изменено здесь
+from .routers import agents, pages, health  # Изменено здесь
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI):
 # Создаем FastAPI приложение
 app = FastAPI(
     title="Memory Service API",
-    description="Сервис для управления страницами памяти, агентами и заголовками",
+    description="Сервис для управления страницами памяти",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -41,8 +41,6 @@ app.add_middleware(
 # Подключаем роутеры
 app.include_router(agents.router)
 app.include_router(pages.router)
-app.include_router(titles.router)
-app.include_router(memory_pages.router)  # Изменено здесь
 app.include_router(health.router)
 
 @app.get("/")
@@ -54,34 +52,25 @@ async def root():
         "status": "running",
         "docs": "/docs",
         "endpoints": {
-            "agents": {
-                "list": "GET /agents",
-                "create": "POST /agents",
-                "get": "GET /agents/{agent_id}",
-                "update": "PUT /agents/{agent_id}",
-                "delete": "DELETE /agents/{agent_id}"
+            "memory_page": {
+                "p_list": "Get /public_memory_page_list",
+                "p_get": "Get /public_memory_page/{page_id}",
+                "list": "Get /memory_page_list",
+                "get": "Get /memory_page/{page_id}",
             },
-            "pages": {
-                "list": "GET /pages",
-                "public": "GET /pages/public",
-                "create": "POST /pages",
-                "get": "GET /pages/{page_id}",
-                "update": "PUT /pages/{page_id}",
-                "delete": "DELETE /pages/{page_id}"
+            "agent": {
+                "list": "GET /agent_list",
+                "get": "GET /agent/{agent_id}",
+                "create": "POST /agent",
+                "update": "PUT /agent/{agent_id}",
+                "delete": "DELETE /agent/{agent_id}"
             },
-            "titles": {
-                "list": "GET /titles/page/{page_id}",
-                "create_single": "POST /titles",
-                "create_batch": "POST /titles/batch",
-                "get": "GET /titles/{title_id}",
-                "update": "PUT /titles/{title_id}",
-                "delete": "DELETE /titles/{title_id}"
-            },
-            "memory_pages": {  # Изменено здесь
-                "create_all": "POST /memory-pages/create",
-                "quick_create": "POST /memory-pages/quick-create",
-                "get_all": "GET /memory-pages/page/{page_id}",
-                "update_all": "PUT /memory-pages/page/{page_id}"
+            "page": {
+                "list": "GET /page_list",
+                "create": "POST /page",
+                "get": "GET /page/{page_id}",
+                "update": "PUT /page/{page_id}",
+                "delete": "DELETE /page/{page_id}"
             },
             "health": "GET /health"
         }
