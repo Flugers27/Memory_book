@@ -63,40 +63,4 @@ class MemoryPage(MemoryPageBase):
     created_at: datetime
     updated_at: datetime
 
-class MemoryPageWithTitles(MemoryPage):
-    memory_titles: List["MemoryTitles"] = []
 
-# ========== MEMORY TITLES SCHEMAS ==========
-class MemoryTitlesBase(MemoryBase):
-    head: str = Field(..., max_length=100, description="Заголовок")
-    body: Optional[str] = Field(None, description="Содержимое")
-    sort_order: int = Field(0, description="Порядок сортировки")
-    parent_id: Optional[uuid.UUID] = Field(None, description="ID родительского заголовка")
-    page_id: uuid.UUID = Field(..., description="ID страницы")
-
-class MemoryTitlesCreate(MemoryTitlesBase):
-    pass
-
-class MemoryTitlesUpdate(MemoryBase):
-    head: Optional[str] = Field(None, max_length=100)
-    body: Optional[str] = None
-    sort_order: Optional[int] = None
-
-class MemoryTitles(MemoryTitlesBase):
-    id_titles: uuid.UUID
-    created_at: datetime
-    expires_at: datetime
-
-class MemoryTitlesWithChildren(MemoryTitles):
-    children: List["MemoryTitles"] = []
-
-# ========== COMPOSITE SCHEMAS ==========
-class FullMemoryPageResponse(MemoryBase):
-    """Полная информация о странице с агентом и заголовками"""
-    memory_page: MemoryPageWithTitles
-    memory_agent: MemoryAgent
-    memory_titles: List[MemoryTitlesWithChildren] = []
-
-# Обновляем ссылки для рекурсивных типов
-MemoryPageWithTitles.update_forward_refs()
-MemoryTitlesWithChildren.update_forward_refs()
