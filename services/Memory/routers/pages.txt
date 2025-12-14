@@ -9,15 +9,16 @@ import uuid
 # Относительные импорты
 from ..config import get_db
 from .. import schemas
+from ..models import AgentBD
 from ..crud import (
     get_memory_page, get_memory_pages_by_user, create_memory_page,
     update_memory_page, delete_memory_page, get_public_memory_pages
 )
 from ..dependencies import get_current_user_id
 
-router = APIRouter(prefix="/pages", tags=["memory_pages"])
+router = APIRouter( tags=["pages"])
 
-@router.get("/", response_model=List[schemas.MemoryPage])
+@router.get("/page_list", response_model=List[schemas.Page])
 async def get_pages(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
@@ -37,29 +38,18 @@ async def get_pages(
     )
     return pages
 
-@router.get("/public", response_model=List[schemas.MemoryPage])
-async def get_public_pages(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(50, ge=1, le=100),
-    db: Session = Depends(get_db)
-):
-    """Получение списка публичных страниц памяти (не требует авторизации)"""
-    pages = get_public_memory_pages(db=db, skip=skip, limit=limit)
-    return pages
-
-@router.post("/", response_model=schemas.MemoryPage, status_code=status.HTTP_201_CREATED)
+@router.post("/page/add", response_model=schemas.Page, status_code=status.HTTP_201_CREATED)
 async def create_page(
-    page_data: schemas.MemoryPageCreate,
+    page_data: schemas.PageCreate,
     user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Создание новой страницы памяти"""
     # Проверяем что агент принадлежит пользователю (если указан)
     if page_data.memory_agent_id:
-        from ..models import MemoryAgent
-        agent = db.query(MemoryAgent).filter(
-            MemoryAgent.id_agent == page_data.memory_agent_id,
-            MemoryAgent.user_id == user_id
+        agent = db.query(AgentBD).filter(
+            AgentBD.id_agent == page_data.memory_agent_id,
+            AgentBD.user_id == user_id
         ).first()
         
         if not agent:
@@ -76,7 +66,7 @@ async def create_page(
     
     return page
 
-@router.get("/{page_id}", response_model=schemas.MemoryPage)
+@router.get("/page/{page_id}", response_model=schemas.Page)
 async def get_page(
     page_id: uuid.UUID,
     user_id: uuid.UUID = Depends(get_current_user_id),
@@ -100,10 +90,10 @@ async def get_page(
     
     return page
 
-@router.put("/{page_id}", response_model=schemas.MemoryPage)
+@router.put("/pade/update/{page_id}", response_model=schemas.Page)
 async def update_page(
     page_id: uuid.UUID,
-    page_update: schemas.MemoryPageUpdate,
+    page_update: schemas.PageUpdate,
     user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
@@ -123,7 +113,7 @@ async def update_page(
     
     return page
 
-@router.delete("/{page_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/page/del/{page_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_page(
     page_id: uuid.UUID,
     user_id: uuid.UUID = Depends(get_current_user_id),
@@ -140,4 +130,4 @@ async def delete_page(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Page not found or access denied"
-        )
+        )"""

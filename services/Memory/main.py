@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from .routers import agents, pages, health  # Изменено здесь
+from .routers import agents, memory_pages, health  # Изменено здесь  pages
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -40,7 +40,8 @@ app.add_middleware(
 
 # Подключаем роутеры
 app.include_router(agents.router)
-app.include_router(pages.router)
+app.include_router(memory_pages.router)
+#app.include_router(pages.router)
 app.include_router(health.router)
 
 @app.get("/")

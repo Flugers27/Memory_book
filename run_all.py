@@ -1,91 +1,131 @@
-# run_all.py
+# run_all.py в корне проекта
 import subprocess
-import time
 import sys
 import os
-from threading import Thread
+import time
+import signal
+import threading
+from pathlib import Path
 
-def run_service(command, name):
-    """Запускает сервис в отдельном потоке"""
-    print(f"🚀 Запуск {name}...")
-    try:
-        process = subprocess.Popen(
-            command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            encoding='utf-8'
-        )
+class ServiceManager:
+    def __init__(self):
+        self.processes = []
+        self.base_dir = Path(__file__).parent
         
-        # Выводим логи
-        for line in iter(process.stdout.readline, ''):
-            print(f"[{name}] {line}", end='')
+    def start_service(self, name: str, path: str, port: int):
+        """Запускает сервис в отдельном процессе"""
+        print(f"🚀 Starting {name} on port {port}...")
         
-        process.wait()
-    except Exception as e:
-        print(f"❌ Ошибка запуска {name}: {e}")
+        service_path = self.base_dir / path
+        log_file = self.base_dir / "logs" / f"{name.lower().replace(' ', '_')}.log"
+        
+        # Убедимся, что папка для логов существует
+        log_file.parent.mkdir(exist_ok=True)
+        
+        # Команда для запуска
+        cmd = [sys.executable, "run.py"]
+        
+        # Запускаем процесс
+        try:
+            with open(log_file, 'w') as log:
+                proc = subprocess.Popen(
+                    cmd,
+                    cwd=str(service_path),
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    creationflags=subprocess.CREATE_NEW_CONSOLE if sys.platform == "win32" else 0
+                )
+            
+            self.processes.append((name, proc))
+            return proc
+        except Exception as e:
+            print(f"❌ Failed to start {name}: {e}")
+            return None
+    
+    def stop_all(self):
+        """Останавливает все сервисы"""
+        print("\n🛑 Stopping all services...")
+        for name, proc in self.processes:
+            if proc and proc.poll() is None:
+                print(f"Stopping {name}...")
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+        print("✅ All services stopped.")
+    
+    def check_health(self):
+        """Проверяет здоровье сервисов"""
+        import requests
+        
+        services = [
+            ("Auth", "http://localhost:8001/health"),
+            ("Memory", "http://localhost:8002/health"),
+            ("Gateway", "http://localhost:8000/health")
+        ]
+        
+        print("\n📊 Service Health Check:")
+        print("-" * 40)
+        
+        for name, url in services:
+            try:
+                response = requests.get(url, timeout=2)
+                status = "✅ Healthy" if response.status_code == 200 else "❌ Unhealthy"
+                print(f"{name}: {status} ({url})")
+            except Exception as e:
+                print(f"{name}: ❌ Unreachable ({str(e)})")
 
 def main():
-    print("=" * 50)
-    print("🚀 Запуск всех сервисов Memory Book")
-    print("=" * 50)
+    manager = ServiceManager()
     
-    # Команды для запуска сервисов
-    services = [
-        {
-            "name": "Auth Service (8000)",
-            "command": "uvicorn services.Auth.main:app --host 0.0.0.0 --port 8000"
-        },
-        {
-            "name": "Memory Service (8001)", 
-            "command": "uvicorn services.Memory.main:app --host 0.0.0.0 --port 8001"
-        },
-        {
-            "name": "Gateway (8080)",
-            "command": "uvicorn gateway:app --host 0.0.0.0 --port 8080"
-        }
-    ]
-    
-    # Запускаем все сервисы в отдельных потоках
-    threads = []
-    for service in services:
-        thread = Thread(target=run_service, args=(service["command"], service["name"]))
-        thread.daemon = True
-        threads.append(thread)
-        thread.start()
-        time.sleep(2)  # Небольшая задержка между запусками
-    
-    print("\n" + "=" * 50)
-    print("✅ Все сервисы запущены!")
     print("=" * 50)
-    print("\n📊 Доступные сервисы:")
-    print("   • Auth Service:    http://localhost:8000")
-    print("   • Memory Service:  http://localhost:8001")  
-    print("   • Gateway:         http://localhost:8080")
-    print("\n📚 Документация:")
-    print("   • Auth Docs:       http://localhost:8000/docs")
-    print("   • Memory Docs:     http://localhost:8001/docs")
-    print("   • Gateway:         http://localhost:8080")
-    print("\n🛑 Для остановки нажмите Ctrl+C")
+    print("Memory Book API System")
     print("=" * 50)
     
-    # Держим скрипт запущенным
     try:
-        for thread in threads:
-            thread.join()
+        # Запускаем сервисы
+        manager.start_service("Auth Service", "services/Auth", 8001)
+        time.sleep(2)
+        
+        manager.start_service("Memory Service", "services/Memory", 8002)
+        time.sleep(2)
+        
+        print("\n⏳ Waiting for services to start...")
+        time.sleep(3)
+        
+        # Проверяем здоровье
+        manager.check_health()
+        
+        print("\n" + "=" * 50)
+        print("🚀 Starting API Gateway...")
+        print("=" * 50)
+        
+        # Запускаем Gateway в основном процессе
+        gateway_path = manager.base_dir / "gateway"
+        os.chdir(gateway_path)
+        
+        # Импортируем и запускаем Gateway
+        import sys
+        sys.path.insert(0, str(gateway_path))
+        
+        import uvicorn
+        from gateway.config import settings
+        
+        uvicorn.run(
+            "gateway.main:app",
+            host=settings.HOST,
+            port=settings.PORT,
+            reload=settings.DEBUG,
+            log_level="info"
+        )
+        
     except KeyboardInterrupt:
-        print("\n👋 Остановка всех сервисов...")
-        sys.exit(0)
+        print("\n\n🛑 Received interrupt signal")
+    except Exception as e:
+        print(f"\n❌ Error: {e}")
+    finally:
+        manager.stop_all()
 
 if __name__ == "__main__":
-    # Проверяем что мы в виртуальном окружении
-    if not os.path.exists("venv"):
-        print("❌ Виртуальное окружение не найдено!")
-        print("   Сначала выполните: python -m venv venv")
-        sys.exit(1)
-    
-    # Переходим в корень проекта
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    
     main()

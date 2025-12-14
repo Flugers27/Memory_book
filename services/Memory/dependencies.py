@@ -17,7 +17,7 @@ security = HTTPBearer(auto_error=False)
 
 def get_current_user_id(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
-) -> uuid.UUID:
+) -> str:
     """
     Получает ID пользователя из JWT токена.
     Валидирует токен локально, без обращения к Auth сервису.
@@ -44,7 +44,7 @@ def get_current_user_id(
             )
         
         # Преобразуем строку в UUID
-        return uuid.UUID(user_id_str)
+        return str(user_id_str)
         
     except jwt.ExpiredSignatureError:
         raise HTTPException(
