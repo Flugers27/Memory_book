@@ -48,7 +48,6 @@ def get_memory_agent_list_by_user(
         user_id=user_id,
         agent_list=agent_list
     )
-    
 
 def create_memory_agent(
     db: Session, 
