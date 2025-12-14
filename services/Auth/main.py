@@ -13,18 +13,37 @@ project_root = os.path.dirname(os.path.dirname(current_dir))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-# Импортируем из корневого config.py
+# Импортируем из КОРНЕВОГО config.py
 try:
-    from config import engine, User, RefreshToken, create_tables, CORS_ORIGINS
-    print("✅ Успешно импортировано из config.py")
+    from config import engine, create_tables, CORS_ORIGINS
+    print("✅ Успешно импортировано из корневого config.py")
 except ImportError as e:
-    print(f"❌ Ошибка импорта: {e}")
-    print(f"   Путь Python: {sys.path}")
+    print(f"❌ Ошибка импорта корневого config: {e}")
     raise
 
+# Импортируем из ЛОКАЛЬНОГО config.py в папке Auth
+try:
+    from services.Auth.config import config as auth_config
+    print("✅ Успешно импортировано из auth config")
+except ImportError as e:
+    print(f"❌ Ошибка импорта auth config: {e}")
+    # Создаем дефолтную конфигурацию
+    class AuthConfig:
+        JWT_SECRET_KEY = "default-secret-key-change-in-production"
+        JWT_ALGORITHM = "HS256"
+        ACCESS_TOKEN_EXPIRE_MINUTES = 30
+        REFRESH_TOKEN_EXPIRE_DAYS = 7
+    
+    auth_config = AuthConfig()
+    print("⚠️  Используется дефолтная конфигурация Auth")
+
 # Импортируем роутеры
-from .routers import auth, users, health
-from .config import config as auth_config
+try:
+    from services.Auth.routers import auth, users, health
+    print("✅ Успешно импортированы роутеры")
+except ImportError as e:
+    print(f"❌ Ошибка импорта роутеров: {e}")
+    raise
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -60,9 +79,9 @@ app.add_middleware(
 )
 
 # Подключаем роутеры
-app.include_router(auth.router)
-app.include_router(users.router)
-app.include_router(health.router)
+app.include_router(auth.router, prefix="/auth", tags=["authentication"])
+app.include_router(users.router, prefix="/users", tags=["users"])
+app.include_router(health.router, prefix="/health", tags=["health"])
 
 @app.get("/")
 async def root():
@@ -81,3 +100,7 @@ async def root():
             "health": "GET /health"
         }
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)

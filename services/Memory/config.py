@@ -12,7 +12,6 @@ class MemoryConfig:
     # Можно добавить специфичные настройки для этого сервиса
     PAGE_DEFAULT_LIMIT = int(os.getenv("PAGE_DEFAULT_LIMIT", 50))
     AGENT_DEFAULT_LIMIT = int(os.getenv("AGENT_DEFAULT_LIMIT", 50))
-    TITLE_DEFAULT_LIMIT = int(os.getenv("TITLE_DEFAULT_LIMIT", 100))
     
     # Настройки пагинации
     MAX_PAGE_SIZE = 100
