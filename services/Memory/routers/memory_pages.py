@@ -23,9 +23,8 @@ async def get_public_memory_pages_with_agents_list(
     db: Session = Depends(get_db)
 ):
     res = select_public_memory_page_list(db, skip=skip, limit=limit)
-
     res = schemas.PublicMemoryPageListResponse.from_public_memory_pages(res)
-    print(res)
+    
     return res
 
 @router.get("/public_memory_page/{agent_id}", response_model=schemas.PublicMemoryPageResponse)
@@ -70,12 +69,12 @@ async def get_user_memory_pages(
         skip=skip,
         limit=limit
     )
-    print(res)
+    
     res = schemas.MemoryPageListResponse.from_memory_pages(user_id, res)
     
     return res
 
-@router.get("/memory_page/{page_id}", response_model=schemas.MemoryPageResponse)
+@router.get("/memory_page/{agent_id}", response_model=schemas.MemoryPageResponse)
 async def get_user_memory_page(
     agent_id: uuid.UUID,
     user_id: uuid.UUID = Depends(get_current_user_id),
@@ -86,7 +85,7 @@ async def get_user_memory_page(
     Владелец может получить даже черновик
     """
     res = select_memory_page_by_user(db, user_id, agent_id)
-
+    
     if not res:
         raise HTTPException(
             status_code=404,

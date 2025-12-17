@@ -2,7 +2,7 @@
 Pydantic схемы для валидации данных Memory Service.
 """
 from pydantic import BaseModel, Field, Json
-from typing import Optional, List, Any
+from typing import Optional, List, Any, Dict
 from datetime import date, datetime
 from collections import defaultdict
 import uuid
@@ -17,6 +17,21 @@ class MemoryBase(BaseModel):
             date: lambda v: v.isoformat() if v else None,
             uuid.UUID: lambda v: str(v) if v else None,
         }
+
+class BiographyItem(BaseModel):
+    title: str = Field(..., description="Заголовок раздела")
+    info: str = Field("", description="Текстовая информация")
+    titles: List['BiographyItem'] = Field(
+        default_factory=list, 
+        description="Вложенные подразделы"
+    )
+    
+    class Config:
+        from_attributes = True
+
+
+# Для рекурсивной ссылки
+BiographyItem.update_forward_refs()
 
 
 # ========== AGENT SCHEMAS ==========
@@ -81,7 +96,7 @@ class AgentListResponse(MemoryBase):
 class PageBase(MemoryBase):
     """Базовая схема для страницы памяти"""
     epitaph: Optional[str] = Field(None, description="Эпитафия")
-    biography: Optional[Json] = Field(None, description="Биография в формате JSON")
+    biography: Optional[List[BiographyItem]] = Field(None, description="Биография в формате JSON")
     is_public: bool = Field(False, description="Публичный доступ")
     is_draft: bool = Field(False, description="Черновик")
 
@@ -93,10 +108,7 @@ class PageCreate(PageBase):
 
 class PageUpdate(PageBase):
     """Схема для обновления страницы"""
-    epitaph: Optional[str] = None
-    biography: Optional[Json] = None
-    is_public: Optional[bool] = None
-    is_draft: Optional[bool] = None
+    pass
 
 
 class PageInListResponse(PageBase):
@@ -157,11 +169,16 @@ class PublicMemoryPageResponse(PublicAgentResponse):
     def from_agent_and_page(cls, agent: Any, page: Optional[Any] = None) -> "PublicMemoryPageResponse":
         """Создает объект из модели агента и опционально страницы"""
         page_response = None
+
         if page:
+            biography_val = page.biography
+            if str(page.biography)[0] =="{":
+               biography_val = [page.biography]
+
             page_response = PublicPageResponse(
                 id_page=page.id_page,
                 epitaph=page.epitaph,
-                biography=page.biography,
+                biography=biography_val,
                 is_public=page.is_public,
                 is_draft=page.is_draft,
                 memory_agent_id=page.memory_agent_id,

@@ -6,6 +6,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+import json
 from datetime import datetime as dt
 
 from .config import Base
@@ -64,6 +65,7 @@ class PageBD(Base):
     
     def to_dict(self):
         """Преобразует объект в словарь"""
+
         return {
             'id_page': self.id_page,
             'epitaph': self.epitaph,
