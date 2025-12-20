@@ -44,7 +44,7 @@ class AgentBase(MemoryBase):
     place_of_birth: Optional[str] = Field(None, max_length=100, description="Место рождения")
     place_of_death: Optional[str] = Field(None, max_length=100, description="Место смерти")
     avatar_url: Optional[str] = Field(None, description="URL аватара")
-
+    is_human: bool = Field(True, description="Человек")
 
 class AgentCreate(AgentBase):
     """Схема для создания агента"""
@@ -103,7 +103,7 @@ class PageBase(MemoryBase):
 
 class PageCreate(PageBase):
     """Схема для создания страницы"""
-    memory_agent_id: uuid.UUID = Field(..., description="ID агента памяти")
+    agent_id: uuid.UUID = Field(..., description="ID агента памяти")
 
 
 class PageUpdate(PageBase):
@@ -119,7 +119,7 @@ class PageInListResponse(PageBase):
 
 class PageResponse(PageInListResponse):
     """Полная схема ответа для страницы"""
-    memory_agent_id: uuid.UUID
+    agent_id: uuid.UUID
     user_id: uuid.UUID
     created_at: datetime
 
@@ -127,11 +127,11 @@ class PageResponse(PageInListResponse):
 class PageListResponse(MemoryBase):
     """Схема списка страниц"""
     user_id: uuid.UUID
-    memory_agent_id: uuid.UUID
+    agent_id: uuid.UUID
     page_list: List[PageInListResponse] = []
     
     @classmethod
-    def from_pages(cls, user_id: uuid.UUID, memory_agent_id: uuid.UUID, pages: List[Any]) -> "PageListResponse":
+    def from_pages(cls, user_id: uuid.UUID, agent_id: uuid.UUID, pages: List[Any]) -> "PageListResponse":
         """Создает объект из списка моделей страниц"""
         page_list = [
             PageInListResponse(
@@ -144,14 +144,14 @@ class PageListResponse(MemoryBase):
             )
             for page in pages
         ]
-        return cls(user_id=user_id, memory_agent_id=memory_agent_id, page_list=page_list)
+        return cls(user_id=user_id, agent_id=agent_id, page_list=page_list)
 
 
 # ========== PUBLIC SCHEMAS ==========
 class PublicPageResponse(PageBase):
     """Публичная схема страницы (без user_id)"""
     id_page: uuid.UUID
-    memory_agent_id: uuid.UUID
+    agent_id: uuid.UUID
     created_at: datetime
     updated_at: datetime
 
@@ -181,7 +181,7 @@ class PublicMemoryPageResponse(PublicAgentResponse):
                 biography=biography_val,
                 is_public=page.is_public,
                 is_draft=page.is_draft,
-                memory_agent_id=page.memory_agent_id,
+                agent_id=page.agent_id,
                 created_at=page.created_at,
                 updated_at=page.updated_at,
             )
@@ -248,7 +248,7 @@ class MemoryPageResponse(MemoryBase):
                 biography=page.biography,
                 is_public=page.is_public,
                 is_draft=page.is_draft,
-                memory_agent_id=page.memory_agent_id,
+                agent_id=page.agent_id,
                 user_id=page.user_id,
                 created_at=page.created_at,
                 updated_at=page.updated_at,

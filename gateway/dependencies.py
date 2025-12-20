@@ -3,7 +3,6 @@
 """
 from fastapi import Depends, HTTPException, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from slowapi import Limiter
 from slowapi.util import get_remote_address
 import jwt
 import httpx
@@ -13,9 +12,8 @@ import time
 
 from .config import settings
 
-security = HTTPBearer()
-
-limiter = Limiter(key_func=get_remote_address)
+# Разрешаем отсутствие токена (auto_error=False)
+security = HTTPBearer(auto_error=False)
 
 # Настройки rate limiting по сервисам
 RATE_LIMITS = {
@@ -54,14 +52,12 @@ async def verify_token(
     token = credentials.credentials
     
     try:
-        # Вариант 1: Локальная проверка токена (быстрее)
+        # Локальная проверка токена
         payload = jwt.decode(
             token,
             settings.JWT_SECRET_KEY,
             algorithms=[settings.JWT_ALGORITHM]
         )
-        
-        # Проверяем тип токена
         if payload.get("type") != "access":
             return None
             
@@ -74,7 +70,7 @@ async def verify_token(
     except jwt.ExpiredSignatureError:
         return None
     except jwt.InvalidTokenError:
-        # Вариант 2: Проверка через Auth сервис (медленнее, но надежнее)
+        # Проверка через Auth сервис
         try:
             async with httpx.AsyncClient(timeout=5.0) as client:
                 response = await client.post(
@@ -82,7 +78,6 @@ async def verify_token(
                     json={"token": token},
                     headers={"Content-Type": "application/json"}
                 )
-                
                 if response.status_code == 200:
                     data = response.json()
                     if data.get("valid"):
@@ -95,6 +90,16 @@ async def verify_token(
             pass
         
         return None
+
+async def optional_auth(request: Request) -> Optional[Dict]:
+    """
+    Проверяет JWT токен только для приватных путей.
+    Для PUBLIC_PATHS возвращает None.
+    """
+    full_path = request.url.path.rstrip("/")
+    if any(full_path.startswith(p.rstrip("/")) for p in settings.PUBLIC_PATHS):
+        return None
+    return await verify_token()
 
 def rate_limit(max_requests: int = 60, window: int = 60):
     """
@@ -134,3 +139,27 @@ def rate_limit(max_requests: int = 60, window: int = 60):
             return await func(*args, **kwargs)
         return wrapper
     return decorator
+
+async def optional_auth(request: Request, credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)) -> Optional[Dict]:
+    """
+    Проверка токена JWT, если он есть. 
+    Если токена нет или он неверный — возвращает None.
+    """
+    if not credentials:
+        return None
+    token = credentials.credentials
+    try:
+        payload = jwt.decode(
+            token,
+            settings.JWT_SECRET_KEY,
+            algorithms=[settings.JWT_ALGORITHM]
+        )
+        if payload.get("type") != "access":
+            return None
+        return {
+            "user_id": payload.get("sub"),
+            "email": payload.get("email"),
+            "token": token
+        }
+    except Exception:
+        return None

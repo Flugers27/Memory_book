@@ -11,7 +11,7 @@ import time
 
 # Импорты из внутренних модулей
 from .config import settings
-from .dependencies import verify_token, rate_limit
+from .dependencies import verify_token, rate_limit, optional_auth
 from .middleware import LoggingMiddleware
 from .proxy import ServiceProxy
 
@@ -105,7 +105,7 @@ async def gateway_proxy(
     service: str,
     path: str,
     request: Request,
-    current_user: Optional[Dict] = Depends(verify_token)
+    current_user: Optional[Dict] = Depends(optional_auth)
 ):
     """
     Основной прокси-эндпоинт Gateway
@@ -122,8 +122,8 @@ async def gateway_proxy(
         raise HTTPException(status_code=404, detail=f"Service '{service}' not found")
     
     # Проверяем аутентификацию (если требуется)
-    full_path = f"/{service}/{path}"
-    requires_auth = not any(full_path.startswith(public_path) for public_path in settings.PUBLIC_PATHS)
+    full_path = f"/{service}/{path}".rstrip("/")
+    requires_auth = not any(full_path == public_path.rstrip("/") for public_path in settings.PUBLIC_PATHS)
     
     if requires_auth and not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")

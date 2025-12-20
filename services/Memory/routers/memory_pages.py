@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 import uuid
 
-from ..config import get_db
+from database.session import get_db
 from .. import schemas_new as schemas
 from ..crud import (
     select_memory_page_list_by_user, select_public_memory_page_list, select_public_memory_page, select_memory_page_by_user)  #get_memory_page

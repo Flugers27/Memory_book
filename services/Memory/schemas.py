@@ -27,7 +27,7 @@ class PageBase(MemoryBase):
     biography: Json = Field(None, description="Биография")
     is_public: bool = Field(False, description="Публичный доступ")
     is_draft: bool = Field(False, description="Черновик")
-    memory_agent_id: str = Field(..., description="ID агента памяти")
+    agent_id: str = Field(..., description="ID агента памяти")
 
 
 # ========== MEMORY RESPONSE SCHEMAS ==========
@@ -48,7 +48,7 @@ class PageResponse(MemoryBase):
     biography: Json = None
     is_public: bool
     is_draft: bool
-    memory_agent_id: str
+    agent_id: str
     user_id: str
     created_at: datetime
     updated_at: datetime
@@ -97,7 +97,7 @@ class PageInListResponse(MemoryBase):
 
 class PageListResponse(MemoryBase):
     user_id: Optional[str] = None
-    memory_agent_id: str 
+    agent_id: str 
     page_list: List[PageResponse]
 
 #class MemoryPageInListResponse(AgentInListResponse):
@@ -115,7 +115,7 @@ class PublicPageResponse(MemoryBase):
     biography: Json = None
     is_public: bool
     is_draft: bool
-    memory_agent_id: str
+    agent_id: str
     created_at: datetime
     updated_at: datetime
 
