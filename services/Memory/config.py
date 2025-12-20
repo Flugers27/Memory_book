@@ -2,46 +2,47 @@
 КОНФИГУРАЦИЯ СЕРВИСА ПАМЯТИ
 """
 import os
+import sys
+from datetime import timedelta
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+
+# Добавляем путь для импорта корневого конфига
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../'))
+
+from config import config as base_config
 
 load_dotenv()
 
 class MemoryConfig:
-    # Можно добавить специфичные настройки для этого сервиса
-    PAGE_DEFAULT_LIMIT = int(os.getenv("PAGE_DEFAULT_LIMIT", 50))
-    AGENT_DEFAULT_LIMIT = int(os.getenv("AGENT_DEFAULT_LIMIT", 50))
+    """Конфигурация сервиса памяти"""
     
-    # Настройки пагинации
+    # Наследуем базовые настройки
+    SECRET_KEY = base_config.SECRET_KEY
+    ALGORITHM = base_config.ALGORITHM
+    CORS_ORIGINS = base_config.CORS_ORIGINS
+    
+    # Специфичные для Memory настройки
+    SERVICE_PORT = int(os.getenv("MEMORY_PORT", 8002))
+    SERVICE_NAME = "memory-service"
+    
+    # Пагинация
+    DEFAULT_PAGE_SIZE = 20
     MAX_PAGE_SIZE = 100
     
-    # Настройки фильтрации
-    ALLOWED_SORT_FIELDS = ["created_at", "updated_at", "sort_order"]
+    # Файлы
+    UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER", "./uploads")
+    MAX_FILE_SIZE = 16 * 1024 * 1024  # 16MB
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+    
+    # URL других сервисов
+    AUTH_SERVICE_URL = os.getenv("AUTH_SERVICE_URL", "http://localhost:8001")
+    
+    # Время жизни кэша
+    CACHE_TTL = 300  # 5 минут
 
-# Настройки базы данных
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://wb:admin@localhost/memory_book_UAT")
-
-# Создаем движок базы данных
-engine = create_engine(DATABASE_URL)
-
-# Создаем фабрику сессий
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Базовый класс для моделей
-Base = declarative_base()
-
-# Dependency для получения сессии базы данных
-def get_db():
-    """
-    Зависимость для получения сессии базы данных.
-    Используется в Depends() в эндпоинтах.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    # Логирование
+    LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+    LOG_FILE = "logs/memory_service.log"
 
 # Создаем экземпляр конфигурации
 config = MemoryConfig()

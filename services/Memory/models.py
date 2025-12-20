@@ -9,10 +9,10 @@ import uuid
 import json
 from datetime import datetime as dt
 
-from .config import Base
+from database.base import Base
 
 class AgentBD(Base):
-    __tablename__ = "memory_agent"
+    __tablename__ = "agents"
     __table_args__ = {'extend_existing': True}
     
     id_agent = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -26,9 +26,14 @@ class AgentBD(Base):
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
     user_id = Column(String(36), nullable=False)
+    is_human = Column(Boolean, default=True)
 
     # Добавляем relationship
-    pages = relationship("PageBD", back_populates="agent", cascade="all, delete-orphan")
+    pages = relationship(
+        "PageBD", 
+        back_populates="agent",
+        foreign_keys="PageBD.agent_id"  # явно указываем foreign key
+    )
 
     def to_dict(self):
         """Преобразует объект в словарь"""
@@ -41,27 +46,32 @@ class AgentBD(Base):
             'place_of_birth' : self.place_of_birth,
             'place_of_death' : self.place_of_death,
             'avatar_url': self.avatar_url,
+            'is_human': self.is_human,
             'user_id': str(self.user_id)
         }
 
     
 
 class PageBD(Base):
-    __tablename__ = "memory_page"
+    __tablename__ = "pages"
     __table_args__ = {'extend_existing': True}
     
     id_page = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     epitaph = Column(Text, nullable=True)
     is_public = Column(Boolean, nullable=False, default=False)
     is_draft = Column(Boolean, nullable=False, default=False)
-    memory_agent_id = Column(String(36), ForeignKey('memory_agent.id_agent'), nullable=False)
+    agent_id = Column(String(36), ForeignKey('agents.id_agent'), nullable=False)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
     user_id = Column(String(36), nullable=False)
     biography = Column(JSON, nullable=True)
 
     # Добавляем relationship
-    agent = relationship("AgentBD", back_populates="pages")
+    agent = relationship(
+        "AgentBD", 
+        back_populates="pages",
+        foreign_keys=[agent_id]  # явно указываем foreign key
+    )
     
     def to_dict(self):
         """Преобразует объект в словарь"""
@@ -71,7 +81,7 @@ class PageBD(Base):
             'epitaph': self.epitaph,
             'is_public': self.is_public,
             'is_draft': self.is_draft,
-            'memory_agent_id': self.memory_agent_id,
+            'agent_id': self.agent_id,
             'user_id': self.user_id,
             'biography': self.biography,
             'created_at': self.created_at.isoformat() if self.created_at else None,

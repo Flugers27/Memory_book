@@ -96,7 +96,7 @@ def _demote_other_main_pages(
     """
     # Находим все опубликованные страницы агента, кроме текущей
     other_published_pages = db.query(PageBD).filter(
-        PageBD.memory_agent_id == str(agent_id),
+        PageBD.agent_id == str(agent_id),
         PageBD.id_page != current_page_id,
         PageBD.user_id == str(user_id),
         PageBD.is_draft == False  # Только опубликованные страницы
@@ -120,7 +120,7 @@ def select_page_list(db: Session, agent_id: str, skip: int = 0, limit: int = 50)
     
     try:
         result = db.query(PageBD) \
-            .filter(PageBD.memory_agent_id == agent_id)\
+            .filter(PageBD.agent_id == agent_id)\
             .order_by(desc(PageBD.updated_at))\
             .offset(skip)\
             .limit(limit)\
@@ -151,7 +151,7 @@ def create_page(
     db.refresh(page)
 
     if not page_data.is_draft:  # Если создали опубликованную
-        _demote_other_main_pages(db, page.memory_agent_id, user_id, page.id_page)
+        _demote_other_main_pages(db, page.agent_id, user_id, page.id_page)
 
     return page  # Возвращаем объект SQLAlchemy
 
@@ -176,7 +176,7 @@ def update_page_db(
     db.refresh(page)
 
     if not page_update.is_draft:  # Если создали опубликованную
-        _demote_other_main_pages(db, page.memory_agent_id, user_id, page.id_page)
+        _demote_other_main_pages(db, page.agent_id, user_id, page.id_page)
 
     return page  # Возвращаем объект SQLAlchemy
 
@@ -206,13 +206,13 @@ def select_public_memory_page_list(
     try:
         # Этот запрос возвращает кортежи (PageBD, AgentBD)
         result = db.query(AgentBD, PageBD) \
-            .join(AgentBD, AgentBD.id_agent == PageBD.memory_agent_id)\
+            .join(AgentBD, AgentBD.id_agent == PageBD.agent_id)\
             .filter(PageBD.is_public == True)\
             .order_by(desc(PageBD.updated_at))\
             .offset(skip)\
             .limit(limit)\
             .all()
-
+        
         return result
     except Exception as e:
         print(f"ERROR in select_public_memory_page_list: {e}")
@@ -229,7 +229,7 @@ def select_public_memory_page(
     try:
         # Этот запрос возвращает кортежи (PageBD, AgentBD)
         result = db.query(AgentBD, PageBD) \
-            .join(AgentBD, AgentBD.id_agent == PageBD.memory_agent_id)\
+            .join(AgentBD, AgentBD.id_agent == PageBD.agent_id)\
             .filter(and_(AgentBD.id_agent == agent_id, PageBD.is_public == True))\
             .first()
 
@@ -250,7 +250,7 @@ def select_memory_page_list_by_user(
     try:
         # Этот запрос возвращает кортежи (PageBD, AgentBD)
         result = db.query(AgentBD, PageBD) \
-            .outerjoin(PageBD, AgentBD.id_agent == PageBD.memory_agent_id)\
+            .outerjoin(PageBD, AgentBD.id_agent == PageBD.agent_id)\
             .filter(AgentBD.user_id == user_id)\
             .order_by(AgentBD.id_agent)\
             .offset(skip)\
@@ -267,7 +267,7 @@ def select_memory_page_by_user(db: Session, user_id: str, agent_id: str) -> Opti
     try:
         # Этот запрос возвращает кортежи (PageBD, AgentBD)
         result = db.query(AgentBD, PageBD) \
-            .outerjoin(PageBD, AgentBD.id_agent == PageBD.memory_agent_id)\
+            .outerjoin(PageBD, AgentBD.id_agent == PageBD.agent_id)\
             .filter(and_(AgentBD.user_id == user_id, AgentBD.id_agent == agent_id))\
             .order_by(AgentBD.id_agent)\
             .all()

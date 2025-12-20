@@ -15,3 +15,55 @@
 2025-12-15 02:20:08,233 - gateway.middleware - INFO - 127.0.0.1 - "GET /docs" 200 - 0.000s
 2025-12-15 02:20:08,306 - gateway.middleware - INFO - 127.0.0.1 - "GET /openapi.json" 200 - 0.004s
 2025-12-15 02:20:53,602 - gateway.middleware - INFO - 127.0.0.1 - "GET /health/all" 200 - 10.906s
+2025-12-21 01:25:13,744 - gateway.middleware - INFO - 127.0.0.1 - "GET /" 200 - 0.002s
+2025-12-21 01:25:37,064 - gateway.middleware - INFO - 127.0.0.1 - "GET /health" 200 - 0.001s
+2025-12-21 01:25:49,578 - httpx - INFO - HTTP Request: GET http://localhost:8001/health "HTTP/1.1 200 OK"
+2025-12-21 01:25:50,074 - httpx - INFO - HTTP Request: GET http://localhost:8002/health "HTTP/1.1 200 OK"
+2025-12-21 01:25:50,075 - gateway.middleware - INFO - 127.0.0.1 - "GET /health/all" 200 - 0.971s
+2025-12-21 01:26:50,738 - gateway.middleware - INFO - 127.0.0.1 - "GET /" 200 - 0.000s
+2025-12-21 01:26:50,801 - gateway.middleware - INFO - 127.0.0.1 - "GET /favicon.ico" 307 - 0.000s
+2025-12-21 01:26:50,808 - gateway.middleware - INFO - 127.0.0.1 - "GET /favicon.ico/" 401 - 0.001s
+2025-12-21 01:27:25,803 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 401 - 0.000s
+2025-12-21 01:28:06,642 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 401 - 0.000s
+2025-12-21 01:28:35,000 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 401 - 0.000s
+2025-12-21 01:32:18,912 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 401 - 0.001s
+2025-12-21 01:32:38,214 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 401 - 0.000s
+2025-12-21 01:40:59,209 - gateway.main - INFO - Gateway request: POST /auth/register
+2025-12-21 01:40:59,209 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 200 - 0.001s
+2025-12-21 01:43:50,050 - gateway.main - INFO - Gateway request: POST /auth/register
+2025-12-21 01:43:50,051 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 200 - 0.001s
+2025-12-21 01:46:29,050 - gateway.main - INFO - Gateway request: POST /auth/register
+2025-12-21 01:46:29,050 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 200 - 0.002s
+2025-12-21 01:54:13,092 - gateway.main - INFO - Gateway request: POST /auth/register
+2025-12-21 01:54:13,093 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/register" 200 - 0.001s
+2025-12-21 01:55:39,223 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 01:55:39,224 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 0.001s
+2025-12-21 02:00:35,533 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:00:35,533 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 0.002s
+2025-12-21 02:00:39,897 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:00:39,898 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 0.001s
+2025-12-21 02:02:40,652 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:02:41,243 - httpx - INFO - HTTP Request: POST http://localhost:8001/login "HTTP/1.1 404 Not Found"
+2025-12-21 02:02:41,244 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 404 - 0.594s
+2025-12-21 02:04:47,064 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:04:47,616 - httpx - INFO - HTTP Request: POST http://localhost:8001/login "HTTP/1.1 404 Not Found"
+2025-12-21 02:04:47,618 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 404 - 0.554s
+2025-12-21 02:07:24,656 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:07:25,219 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 422 Unprocessable Content"
+2025-12-21 02:07:25,220 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 422 - 0.567s
+2025-12-21 02:08:57,571 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:09:02,148 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 500 Internal Server Error"
+2025-12-21 02:09:02,149 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 500 - 4.578s
+2025-12-21 02:09:31,025 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:09:32,132 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 02:09:32,134 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 1.109s
+2025-12-21 02:10:50,950 - gateway.middleware - INFO - 127.0.0.1 - "GET /public_memory_page_list" 307 - 0.000s
+2025-12-21 02:11:32,998 - gateway.main - INFO - Gateway request: GET /memory_page/public_memory_page_list
+2025-12-21 02:11:32,998 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory_page/public_memory_page_list" 404 - 0.001s
+2025-12-21 02:13:33,158 - gateway.middleware - INFO - 127.0.0.1 - "GET /public_memory_page_list" 307 - 0.000s
+2025-12-21 02:13:37,720 - gateway.middleware - INFO - 127.0.0.1 - "GET /public_memory_page_list" 307 - 0.000s
+2025-12-21 02:15:35,478 - gateway.middleware - INFO - 127.0.0.1 - "GET /public_memory_page_list" 307 - 0.000s
+2025-12-21 02:21:28,533 - gateway.middleware - INFO - 127.0.0.1 - "GET /public_memory_page_list" 307 - 0.000s
+2025-12-21 02:26:37,382 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 02:26:38,493 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 02:26:38,495 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 1.118s

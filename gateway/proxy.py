@@ -3,6 +3,7 @@
 """
 import httpx
 from fastapi import Request, Response
+from fastapi.responses import JSONResponse
 from typing import Dict, Optional
 import logging
 import json
@@ -19,53 +20,36 @@ class ServiceProxy:
     def __init__(self):
         self.client = httpx.AsyncClient(timeout=settings.SERVICE_TIMEOUT)
     
-    @retry(
-            stop=stop_after_attempt(3),
-            wait=wait_exponential(multiplier=1, min=1, max=10),
-            retry=retry_if_exception_type((httpx.TimeoutException, httpx.NetworkError))
-        )
-    async def proxy_request(
-        self,
-        service: str,
-        path: str,
-        request: Request,
-        current_user: Optional[Dict] = None
-    ) -> Response:
-        """
-        Проксирует запрос к указанному сервису
-        """
-        # Получаем URL целевого сервиса
+    async def proxy_request(self, service: str, path: str, request: Request, current_user: Optional[Dict] = None) -> Response:
         service_url = settings.SERVICE_ROUTES.get(service)
         if not service_url:
             raise ValueError(f"Service '{service}' not configured")
         
-        # Формируем полный URL
-        target_url = f"{service_url}/{path}"
+        target_url = f"{service_url.rstrip('/')}/{path.lstrip('/')}"
+        if service_url.startswith("http"):
+            target_url = f"{service_url.rstrip('/')}/{service}/{path.lstrip('/')}"
         
-        # Подготавливаем заголовки
         headers = self._prepare_headers(request, current_user)
+
+        # Проверяем multipart
+        if 'multipart/form-data' in request.headers.get('content-type', ''):
+            return await self._proxy_multipart(request, target_url, headers, current_user)
         
-        # Подготавливаем тело запроса
-        body = await self._prepare_body(request)
-        
-        # Выполняем запрос
-        logger.debug(f"Proxying to {target_url}")
-        
-        response = await self.client.request(
-            method=request.method,
-            url=target_url,
-            headers=headers,
-            params=dict(request.query_params),
-            content=body,
-            follow_redirects=False
-        )
-        
-        # Возвращаем ответ
-        return Response(
-            content=response.content,
-            status_code=response.status_code,
-            headers=dict(response.headers)
-        )
+        # Для обычных JSON-запросов
+        body = await request.body()
+        async with httpx.AsyncClient(timeout=settings.SERVICE_TIMEOUT) as client:
+            resp = await client.request(
+                method=request.method,
+                url=target_url,
+                headers=headers,
+                params=dict(request.query_params),
+                content=body
+            )
+            # Возвращаем JSON, если возможно
+            try:
+                return JSONResponse(status_code=resp.status_code, content=resp.json())
+            except Exception:
+                return Response(content=resp.content, status_code=resp.status_code, headers=dict(resp.headers))
     
     def _prepare_headers(self, request: Request, current_user: Optional[Dict]) -> Dict:
         """
@@ -113,20 +97,6 @@ class ServiceProxy:
         """Закрывает HTTP клиент"""
         await self.client.aclose()
 
-    async def proxy_request(
-        self,
-        service: str,
-        path: str,
-        request: Request,
-        current_user: Optional[Dict] = None
-    ) -> Response:
-        # ... существующий код ...
-        
-        # Используем потоковую передачу для больших файлов
-        if 'multipart/form-data' in request.headers.get('content-type', ''):
-            return await self._proxy_multipart(request, target_url, headers, current_user)
-        
-        # ... остальной код ...
 
     async def _proxy_multipart(self, request: Request, target_url: str, 
                               headers: Dict, current_user: Optional[Dict]) -> Response:

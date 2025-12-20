@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 import uuid
 
-from ..config import get_db
+from database.session import get_db
 from .. import schemas_new as schemas
 from ..crud import (
     select_page_list, select_page_by_user, create_page, update_page_db, delete_page)  #get_memory_page
@@ -30,7 +30,7 @@ async def get_pages(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Page not found"
         )
-    res = schemas.PageListResponse.from_pages(user_id = user_id, memory_agent_id=agent_id, pages=res)
+    res = schemas.PageListResponse.from_pages(user_id = user_id, agent_id=agent_id, pages=res)
 
     if not res or res == []:
         raise HTTPException(
@@ -76,7 +76,7 @@ async def add_agent(
 
     return page.to_dict()  # Возвращаем объект SQLAlchemy
 
-@router.put("/pade/update/{page_id}", response_model=schemas.PageResponse)
+@router.put("/page/update/{page_id}", response_model=schemas.PageResponse)
 async def update_page(
     page_id: uuid.UUID,
     page_update: schemas.PageUpdate,

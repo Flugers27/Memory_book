@@ -4,17 +4,27 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+from .config import config
+import logging
 
 from .routers import agents, pages, memory_pages, health  # Изменено здесь  pages
+
+# Настройка логирования
+logging.basicConfig(
+    level=getattr(logging, config.LOG_LEVEL),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(config.LOG_FILE),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
     Контекст жизненного цикла приложения.
     """
-    from config import create_tables
-    # Создаем таблицы в базе данных (если еще не созданы)
-    create_tables()
     print("🚀 Сервис памяти запущен")
     
     yield  # Приложение работает
@@ -76,3 +86,15 @@ async def root():
             "health": "GET /health"
         }
     }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    logger.info(f"Starting API Gateway on {config.HOST}:{config.PORT}")
+    uvicorn.run(
+        "main:app",
+        host=config.HOST,
+        port=config.PORT,
+        reload=config.DEBUG,
+        log_level="info"
+    )

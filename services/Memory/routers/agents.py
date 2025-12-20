@@ -7,7 +7,7 @@ from typing import List
 import uuid
 
 # Простые относительные импорты - они будут работать, так как файл в папке routers
-from ..config import get_db
+from database.session import get_db
 #from .. import schemas
 from .. import schemas_new as schemas
 from ..crud import (
