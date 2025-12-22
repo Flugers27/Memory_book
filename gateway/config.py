@@ -29,6 +29,7 @@ class Settings:
     CORS_ORIGINS = [
         "http://localhost:3000",  # React frontend
         "http://localhost:8080",  # Vue frontend
+        "http://localhost:5173",
         "http://localhost:8000",  # Gateway itself
     ]
     

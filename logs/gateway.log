@@ -67,3 +67,48 @@
 2025-12-21 02:26:37,382 - gateway.main - INFO - Gateway request: POST /auth/login
 2025-12-21 02:26:38,493 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
 2025-12-21 02:26:38,495 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 1.118s
+2025-12-21 16:18:23,719 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 16:18:26,571 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 16:18:26,572 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 2.862s
+2025-12-21 16:18:49,719 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 16:18:50,678 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 16:18:50,680 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 0.962s
+2025-12-21 16:27:43,568 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 16:27:44,490 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 16:27:44,492 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 0.924s
+2025-12-21 16:36:54,691 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 16:36:55,772 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 16:36:55,773 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 1.083s
+2025-12-21 16:37:20,422 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /auth/login" 200 - 0.000s
+2025-12-21 16:37:20,424 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 16:37:21,293 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 16:37:21,295 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 0.871s
+2025-12-21 16:48:34,217 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/public_memory_page_list" 200 - 0.001s
+2025-12-21 16:48:34,220 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/public_memory_page_list" 200 - 0.004s
+2025-12-21 16:48:34,231 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:48:34,234 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.008s
+2025-12-21 16:48:34,240 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:48:34,242 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.003s
+2025-12-21 16:48:51,999 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /auth/login" 200 - 0.001s
+2025-12-21 16:48:52,004 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 16:48:55,616 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 16:48:55,627 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 3.624s
+2025-12-21 16:49:09,455 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:09,457 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.003s
+2025-12-21 16:49:09,462 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:09,472 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.011s
+2025-12-21 16:49:16,643 - gateway.main - INFO - Gateway request: POST /auth/login
+2025-12-21 16:49:19,488 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2025-12-21 16:49:19,497 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 2.855s
+2025-12-21 16:49:26,765 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:26,767 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.003s
+2025-12-21 16:49:26,771 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:26,778 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.007s
+2025-12-21 16:49:44,908 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:44,911 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.003s
+2025-12-21 16:49:44,917 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:44,919 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.002s
+2025-12-21 16:49:49,835 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:49,837 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.002s
+2025-12-21 16:49:49,841 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2025-12-21 16:49:49,845 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 401 - 0.004s
