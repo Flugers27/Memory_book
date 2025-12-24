@@ -86,6 +86,7 @@ class AgentListResponse(MemoryBase):
                 place_of_birth=agent.place_of_birth,
                 place_of_death=agent.place_of_death,
                 avatar_url=agent.avatar_url,
+                is_human=agent.is_human,
             )
             for agent in agents
         ]
@@ -159,6 +160,7 @@ class PublicPageResponse(PageBase):
 class PublicAgentResponse(AgentBase):
     """Публичная схема агента (без user_id)"""
     id_agent: uuid.UUID
+
     page: Optional[PublicPageResponse] = None
 
 
@@ -189,6 +191,7 @@ class PublicMemoryPageResponse(PublicAgentResponse):
         return cls(
             id_agent=agent.id_agent,
             full_name=agent.full_name,
+            is_human=agent.is_human,
             gender=agent.gender,
             birth_date=agent.birth_date,
             death_date=agent.death_date,
@@ -221,6 +224,7 @@ class MemoryPageResponse(MemoryBase):
     def from_models(cls, agent: Any, pages: List[Any]) -> "MemoryPageResponse":
         """Создает объект из модели агента и списка его страниц"""
         # Сначала создаем AgentResponse
+        print(agent.is_human)
         agent_response = AgentResponse(
             id_agent=agent.id_agent,
             full_name=agent.full_name,
@@ -231,6 +235,7 @@ class MemoryPageResponse(MemoryBase):
             place_of_death=agent.place_of_death,
             avatar_url=agent.avatar_url,
             user_id=agent.user_id,
+            is_human=agent.is_human,
             created_at=agent.created_at,
             updated_at=agent.updated_at,
         )
@@ -241,7 +246,7 @@ class MemoryPageResponse(MemoryBase):
         for page in pages:
             if not page:
                 return cls(agent=agent_response, pages=page_responses)
-
+            
             page_responses.append(PageResponse(
                 id_page=page.id_page,
                 epitaph=page.epitaph,
