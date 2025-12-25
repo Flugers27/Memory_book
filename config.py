@@ -28,10 +28,12 @@ class BaseConfig:
     GATEWAY_PORT: int = int(os.getenv("GATEWAY_PORT", 8000))
     AUTH_PORT: int = int(os.getenv("AUTH_PORT", 8001))
     MEMORY_PORT: int = int(os.getenv("MEMORY_PORT", 8002))
+    ACCESS_PORT: int = int(os.getenv("ACCESS_PORT", 8003))
 
     # URLs
     AUTH_SERVICE_URL: str = os.getenv("AUTH_SERVICE_URL", "http://localhost:8001")
     MEMORY_SERVICE_URL: str = os.getenv("MEMORY_SERVICE_URL", "http://localhost:8002")
+    ACCESS_SERVICE_URL: str = os.getenv("ACCESS_SERVICE_URL", "http://localhost:8003")
 
 
 config = BaseConfig()
