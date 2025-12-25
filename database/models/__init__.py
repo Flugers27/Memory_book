@@ -1,16 +1,16 @@
 """
 Пакет для работы с базой данных.
 """
-from .engine import engine, get_engine
-from .session import SessionLocal, get_db, get_session
-from .base import Base, BaseModel
+from ..engine import engine, get_engine
+from ..session import SessionLocal, get_db
+
 
 __all__ = [
     # Подключение
     'engine', 'get_engine',
     
     # Сессии
-    'SessionLocal', 'get_db', 'get_session',
+    'SessionLocal', 'get_db',
     
     # Базовые классы
     'Base', 'BaseModel',

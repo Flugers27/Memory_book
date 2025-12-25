@@ -1,56 +1,79 @@
 """
-Модели для сервиса памяти.
+SQLAlchemy модели для сервиса памяти (упрощенная версия)
 """
-from sqlalchemy import Column, String, Date, Text, Boolean, ForeignKey, Integer, JSON
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, String, Date, Text, Boolean, DateTime, JSON, ForeignKey
+from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
+import json
+from datetime import datetime as dt
 
-from ..base import BaseModel
+from database.base import Base
 
-class MemoryAgent(BaseModel):
-    __tablename__ = "memory_agent"
+class AgentBD(Base):
+    __tablename__ = "agents"
+    __table_args__ = {'extend_existing': True}
     
-    id_agent = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
+    id_agent = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     full_name = Column(String(255), nullable=False)
-    gender = Column(String(1), nullable=False)  # Добавляем gender
-    birth_date = Column(Date)
-    death_date = Column(Date)
-    place_of_birth = Column(String(100))
-    place_of_death = Column(String(100))
-    avatar_url = Column(Text)
-    user_id = Column(UUID(as_uuid=True), nullable=False, index=True)
+    gender = Column(String(1), nullable=False)
+    birth_date = Column(Date, nullable=True)
+    death_date = Column(Date, nullable=True)
+    place_of_birth = Column(String(500), nullable=True)
+    place_of_death = Column(String(500), nullable=True)
+    avatar_url = Column(Text, nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+    user_id = Column(String(36), nullable=False)
     is_human = Column(Boolean, default=True)
-    
-    # Relationships
-    pages = relationship("MemoryPage", back_populates="agent", cascade="all, delete-orphan")
 
-class MemoryPage(BaseModel):
-    __tablename__ = "memory_page"
-    
-    id_page = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
-    epitaph = Column(Text)
-    is_public = Column(Boolean, default=False, nullable=False)
-    is_draft = Column(Boolean, default=True, nullable=False)
-    memory_agent_id = Column(UUID(as_uuid=True), ForeignKey('memory_agent.id_agent'), nullable=False, index=True)
-    user_id = Column(UUID(as_uuid=True), nullable=False, index=True)
-    biography = Column(JSON)
-    is_human = Column(Boolean, default=True)
-    
-    # Relationships
-    agent = relationship("MemoryAgent", back_populates="pages")
-    titles = relationship("MemoryTitles", back_populates="page", cascade="all, delete-orphan")
+    # Добавляем relationship
+    pages = relationship("PageBD", back_populates="agent", cascade="all, delete-orphan")
 
-class MemoryTitles(BaseModel):
-    __tablename__ = "memory_titles"
+    def to_dict(self):
+        """Преобразует объект в словарь"""
+        return {
+            'id_agent': str(self.id_agent),
+            'full_name': self.full_name,
+            'gender': self.gender,
+            'birth_date': self.birth_date.isoformat() if self.birth_date else None,
+            'death_date': self.death_date.isoformat() if self.death_date else None,
+            'place_of_birth': self.place_of_birth,
+            'place_of_death': self.place_of_death,
+            'avatar_url': self.avatar_url,
+            'is_human': self.is_human,
+            'user_id': str(self.user_id)
+        }
+
+class PageBD(Base):
+    __tablename__ = "pages"
+    __table_args__ = {'extend_existing': True}
     
-    id_titles = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
-    head = Column(String(100), nullable=False)
-    body = Column(Text)
-    page_id = Column(UUID(as_uuid=True), ForeignKey('memory_page.id_page'), nullable=False, index=True)
-    expires_at = Column(DateTime(timezone=True), server_default=func.now())
-    sort_order = Column(Integer, default=0)
-    parent_id = Column(UUID(as_uuid=True), ForeignKey('memory_titles.id_titles'))
+    id_page = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    epitaph = Column(Text, nullable=True)
+    is_public = Column(Boolean, nullable=False, default=False)
+    is_draft = Column(Boolean, nullable=False, default=False)
+    agent_id = Column(String(36), ForeignKey('agents.id_agent'), nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+    user_id = Column(String(36), nullable=False)
+    biography = Column(JSON, nullable=True)
+
+    # Добавляем relationship
+    agent = relationship("AgentBD", back_populates="pages")
+    access = relationship("PageAccessControl", back_populates="page", cascade="all, delete-orphan")
     
-    # Relationships
-    page = relationship("MemoryPage", back_populates="titles")
-    parent = relationship("MemoryTitles", remote_side=[id_titles], backref="children")
+    def to_dict(self):
+        """Преобразует объект в словарь"""
+        return {
+            'id_page': self.id_page,
+            'epitaph': self.epitaph,
+            'is_public': self.is_public,
+            'is_draft': self.is_draft,
+            'agent_id': self.agent_id,
+            'user_id': self.user_id,
+            'biography': self.biography,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }

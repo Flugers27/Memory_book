@@ -57,6 +57,14 @@ def main():
         )
         processes.append(memory_proc)
         
+        # Запускаем Access Service
+        access_proc = start_service(
+            "Access Service",
+            "services/Acces_Memory",
+            8003
+        )
+        processes.append(access_proc)
+        
         # Даем время сервисам на запуск
         print("\n⏳ Waiting for services to start...")
         time.sleep(5)
