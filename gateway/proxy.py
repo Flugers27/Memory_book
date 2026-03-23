@@ -25,9 +25,17 @@ class ServiceProxy:
         if not service_url:
             raise ValueError(f"Service '{service}' not configured")
         
+        # Для Auth Service добавляем префикс "auth/" к path, потому что роутер имеет префикс /auth
+        if service == "auth" and not path.startswith("auth/"):
+            path = f"auth/{path}"
+        # Для Agent Service добавляем префикс "agent/"
+        if service == "agent" and not path.startswith("agent/"):
+            path = f"agent/{path}"
+        # Для Page Service добавляем префикс "page/"
+        if service == "page" and not path.startswith("page/"):
+            path = f"page/{path}"
+        
         target_url = f"{service_url.rstrip('/')}/{path.lstrip('/')}"
-        if service_url.startswith("http"):
-            target_url = f"{service_url.rstrip('/')}/{service}/{path.lstrip('/')}"
         
         headers = self._prepare_headers(request, current_user)
 
@@ -60,7 +68,7 @@ class ServiceProxy:
         # Копируем полезные заголовки из оригинального запроса
         for header_name in [
             'content-type', 'accept', 'accept-encoding',
-            'user-agent', 'cache-control', 'pragma'
+            'user-agent', 'cache-control', 'pragma', 'authorization'
         ]:
             if header_name in request.headers:
                 headers[header_name] = request.headers[header_name]

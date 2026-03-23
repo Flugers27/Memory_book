@@ -5,8 +5,13 @@ export const getPublicMemoryPages = async () => {
   return res.data.memory_page_list;
 };
 
-export const getMemoryPage = async (id: string) => {
-  const res = await api.get(`/memory/page/${id}`);
+export const getMemoryPage = async (agentId: string) => {
+  const res = await api.get(`/memory/public_memory_page/${agentId}`);
+  return res.data;
+};
+
+export const getPrivateMemoryPage = async (agentId: string) => {
+  const res = await api.get(`/memory/memory_page/${agentId}`);
   return res.data;
 };
 export const createMemory = async (data: any) => {
@@ -16,6 +21,6 @@ export const createMemory = async (data: any) => {
   return res.data;
 };
 export const getMyMemoryPages = async () => {
-  const res = await api.get("/memory/my_memory_pages");
+  const res = await api.get("/memory/memory_page_list");
   return res.data.memory_page_list;
 };

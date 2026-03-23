@@ -91,15 +91,40 @@ async def verify_token(
         
         return None
 
-async def optional_auth(request: Request) -> Optional[Dict]:
+async def optional_auth(request: Request, credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)) -> Optional[Dict]:
     """
     Проверяет JWT токен только для приватных путей.
     Для PUBLIC_PATHS возвращает None.
     """
+    import sys
     full_path = request.url.path.rstrip("/")
+    print(f"[DEBUG] optional_auth called: path={full_path}, credentials={credentials}", file=sys.stderr)
     if any(full_path.startswith(p.rstrip("/")) for p in settings.PUBLIC_PATHS):
+        print(f"[DEBUG] Path is public, returning None", file=sys.stderr)
         return None
-    return await verify_token()
+    
+    if not credentials:
+        print(f"[DEBUG] No credentials provided", file=sys.stderr)
+        return None
+    token = credentials.credentials
+    try:
+        payload = jwt.decode(
+            token,
+            settings.JWT_SECRET_KEY,
+            algorithms=[settings.JWT_ALGORITHM]
+        )
+        if payload.get("type") != "access":
+            print(f"[DEBUG] Token type not access", file=sys.stderr)
+            return None
+        print(f"[DEBUG] Token valid for user {payload.get('sub')}", file=sys.stderr)
+        return {
+            "user_id": payload.get("sub"),
+            "email": payload.get("email"),
+            "token": token
+        }
+    except Exception as e:
+        print(f"[DEBUG] Token decode error: {e}", file=sys.stderr)
+        return None
 
 def rate_limit(max_requests: int = 60, window: int = 60):
     """
@@ -139,27 +164,3 @@ def rate_limit(max_requests: int = 60, window: int = 60):
             return await func(*args, **kwargs)
         return wrapper
     return decorator
-
-async def optional_auth(request: Request, credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)) -> Optional[Dict]:
-    """
-    Проверка токена JWT, если он есть. 
-    Если токена нет или он неверный — возвращает None.
-    """
-    if not credentials:
-        return None
-    token = credentials.credentials
-    try:
-        payload = jwt.decode(
-            token,
-            settings.JWT_SECRET_KEY,
-            algorithms=[settings.JWT_ALGORITHM]
-        )
-        if payload.get("type") != "access":
-            return None
-        return {
-            "user_id": payload.get("sub"),
-            "email": payload.get("email"),
-            "token": token
-        }
-    except Exception:
-        return None

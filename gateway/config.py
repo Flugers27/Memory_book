@@ -48,6 +48,9 @@ class Settings:
         "/auth/redoc",
         "/auth/openapi.json",
         "/memory/public/",
+        "/memory/public_memory_page_list",
+        "/memory/public_memory_page/",
+        "/memory/public_memory_page",
         "/docs",
         "/redoc",
         "/openapi.json",
@@ -58,6 +61,8 @@ class Settings:
     SERVICE_ROUTES = {
         "auth": AUTH_SERVICE_URL,
         "memory": MEMORY_SERVICE_URL,
+        "agent": MEMORY_SERVICE_URL,
+        "page": MEMORY_SERVICE_URL,
     }
     
     # Логирование

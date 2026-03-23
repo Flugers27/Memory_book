@@ -287,3 +287,1044 @@ WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true
  LIMIT %(param_1)s
 2025-12-23 18:48:38,245 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] {'id_agent_1': '7f4af2a1-2dbd-4756-b2aa-258cc5262d3b', 'param_1': 1}
 2025-12-23 18:48:38,248 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 13:59:08,186 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 13:59:08,188 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 13:59:08,192 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 13:59:08,193 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 13:59:08,195 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 13:59:08,196 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 13:59:08,198 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 13:59:08,204 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 13:59:08,205 - sqlalchemy.engine.Engine - INFO - [generated in 0.00122s] {'param_1': 50, 'param_2': 0}
+2026-03-23 13:59:08,227 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:18:56,622 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 14:18:56,623 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:18:56,624 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 14:18:56,625 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:18:56,626 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 14:18:56,627 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:18:56,630 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:18:56,634 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:18:56,635 - sqlalchemy.engine.Engine - INFO - [generated in 0.00113s] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:18:56,645 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:20:40,376 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:20:40,377 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:20:40,378 - sqlalchemy.engine.Engine - INFO - [cached since 103.7s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:20:40,387 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:21:20,224 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 14:21:20,225 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:21:20,227 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 14:21:20,228 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:21:20,230 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 14:21:20,230 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:21:20,232 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:21:20,238 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:21:20,238 - sqlalchemy.engine.Engine - INFO - [generated in 0.00079s] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:21:20,252 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:21:33,875 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:21:33,876 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:21:33,876 - sqlalchemy.engine.Engine - INFO - [cached since 13.64s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:21:33,883 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:21:34,560 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:21:34,561 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:21:34,561 - sqlalchemy.engine.Engine - INFO - [cached since 14.32s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:21:34,569 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:21:41,879 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:21:41,880 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:21:41,881 - sqlalchemy.engine.Engine - INFO - [cached since 21.64s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:21:41,886 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:21:42,460 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:21:42,461 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:21:42,461 - sqlalchemy.engine.Engine - INFO - [cached since 22.22s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:21:42,468 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:22:18,350 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:22:18,352 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:22:18,353 - sqlalchemy.engine.Engine - INFO - [cached since 58.12s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:22:18,367 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:22:19,285 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:22:19,286 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:22:19,287 - sqlalchemy.engine.Engine - INFO - [cached since 59.05s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:22:19,297 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:22:40,749 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:22:40,750 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:22:40,750 - sqlalchemy.engine.Engine - INFO - [cached since 80.52s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:22:40,759 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:22:41,674 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:22:41,675 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:22:41,677 - sqlalchemy.engine.Engine - INFO - [cached since 81.44s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:22:41,687 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:31:24,841 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 14:31:24,842 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:31:24,844 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 14:31:24,844 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:31:24,846 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 14:31:24,846 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:31:24,848 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:31:24,854 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:31:24,855 - sqlalchemy.engine.Engine - INFO - [generated in 0.00102s] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:31:24,862 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:32:01,210 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:32:01,216 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:32:01,219 - sqlalchemy.engine.Engine - INFO - [generated in 0.00324s] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:32:01,238 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:32:02,228 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:32:02,230 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:32:02,231 - sqlalchemy.engine.Engine - INFO - [cached since 1.016s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:32:02,247 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:33:21,196 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:33:21,198 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:33:21,199 - sqlalchemy.engine.Engine - INFO - [cached since 116.3s ago] {'id_agent_1': '1', 'param_1': 1}
+2026-03-23 14:33:21,234 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:33:42,930 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:33:42,932 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:33:42,933 - sqlalchemy.engine.Engine - INFO - [cached since 138.1s ago] {'id_agent_1': '4ffe8792-6cff-4788-b83e-3ac6eb248b4b', 'param_1': 1}
+2026-03-23 14:33:42,940 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:33:53,895 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:33:53,897 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:33:53,898 - sqlalchemy.engine.Engine - INFO - [cached since 112.7s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:33:53,907 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:33:54,956 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:33:54,958 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:33:54,959 - sqlalchemy.engine.Engine - INFO - [cached since 113.7s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:33:54,971 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:35:59,717 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 14:35:59,718 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:35:59,720 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 14:35:59,721 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:35:59,725 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 14:35:59,726 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 14:35:59,729 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:35:59,737 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:35:59,739 - sqlalchemy.engine.Engine - INFO - [generated in 0.00190s] {'id_agent_1': '4ffe8792-6cff-4788-b83e-3ac6eb248b4b', 'param_1': 1}
+2026-03-23 14:35:59,752 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:36:28,063 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:36:28,064 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:36:28,066 - sqlalchemy.engine.Engine - INFO - [cached since 28.33s ago] {'id_agent_1': '4ffe8792-6cff-4788-b83e-3ac6eb248b4b', 'param_1': 1}
+2026-03-23 14:36:28,074 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:36:29,202 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:36:29,203 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:36:29,204 - sqlalchemy.engine.Engine - INFO - [cached since 29.47s ago] {'id_agent_1': '4ffe8792-6cff-4788-b83e-3ac6eb248b4b', 'param_1': 1}
+2026-03-23 14:36:29,210 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:36:31,380 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:36:31,385 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:36:31,386 - sqlalchemy.engine.Engine - INFO - [generated in 0.00129s] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:36:31,399 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:36:32,960 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:36:32,961 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:36:32,964 - sqlalchemy.engine.Engine - INFO - [cached since 1.579s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:36:32,975 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:36:33,215 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:36:33,216 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:36:33,217 - sqlalchemy.engine.Engine - INFO - [cached since 33.48s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:36:33,223 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:36:34,242 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:36:34,244 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:36:34,245 - sqlalchemy.engine.Engine - INFO - [cached since 34.51s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:36:34,250 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:38:05,931 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:38:05,933 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:38:05,934 - sqlalchemy.engine.Engine - INFO - [cached since 126.2s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:38:05,940 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:38:07,020 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:38:07,021 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:38:07,023 - sqlalchemy.engine.Engine - INFO - [cached since 127.3s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:38:07,028 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:44:24,488 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:44:24,489 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:44:24,490 - sqlalchemy.engine.Engine - INFO - [cached since 504.8s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:44:24,498 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:44:25,519 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:44:25,521 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:44:25,522 - sqlalchemy.engine.Engine - INFO - [cached since 505.8s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:44:25,527 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:45:37,517 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:45:37,519 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:45:37,521 - sqlalchemy.engine.Engine - INFO - [cached since 577.8s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:45:37,526 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:45:38,566 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:45:38,568 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:45:38,569 - sqlalchemy.engine.Engine - INFO - [cached since 578.8s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:45:38,574 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:45:43,959 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:45:43,961 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:45:43,962 - sqlalchemy.engine.Engine - INFO - [cached since 552.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:45:43,974 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:45:44,968 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:45:44,970 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:45:44,971 - sqlalchemy.engine.Engine - INFO - [cached since 553.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:45:44,983 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:10,326 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:10,327 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:46:10,328 - sqlalchemy.engine.Engine - INFO - [cached since 579s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:46:10,342 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:11,443 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:11,444 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:46:11,445 - sqlalchemy.engine.Engine - INFO - [cached since 580.1s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:46:11,460 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:15,716 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:15,718 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:46:15,719 - sqlalchemy.engine.Engine - INFO - [cached since 616s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:46:15,725 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:16,740 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:16,741 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:46:16,743 - sqlalchemy.engine.Engine - INFO - [cached since 617s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:46:16,747 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:27,166 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:27,168 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:46:27,169 - sqlalchemy.engine.Engine - INFO - [cached since 595.8s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:46:27,180 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:28,132 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:28,133 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:46:28,134 - sqlalchemy.engine.Engine - INFO - [cached since 596.8s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:46:28,145 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:30,995 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:30,997 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:46:30,998 - sqlalchemy.engine.Engine - INFO - [cached since 631.3s ago] {'id_agent_1': '62934e5c-dcf8-452c-8343-d628608edc7f', 'param_1': 1}
+2026-03-23 14:46:31,002 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:46:31,920 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:46:31,921 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:46:31,923 - sqlalchemy.engine.Engine - INFO - [cached since 632.2s ago] {'id_agent_1': '62934e5c-dcf8-452c-8343-d628608edc7f', 'param_1': 1}
+2026-03-23 14:46:31,929 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:31,988 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:31,990 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:47:31,991 - sqlalchemy.engine.Engine - INFO - [cached since 660.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:47:32,005 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:33,014 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:33,016 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:47:33,017 - sqlalchemy.engine.Engine - INFO - [cached since 661.7s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:47:33,029 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:34,648 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:34,650 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:47:34,651 - sqlalchemy.engine.Engine - INFO - [cached since 694.9s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:47:34,656 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:35,589 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:35,591 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:47:35,592 - sqlalchemy.engine.Engine - INFO - [cached since 695.9s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:47:35,597 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:43,583 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:43,585 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:47:43,586 - sqlalchemy.engine.Engine - INFO - [cached since 672.2s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:47:43,596 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:44,548 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:44,549 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:47:44,550 - sqlalchemy.engine.Engine - INFO - [cached since 673.2s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:47:44,563 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:47,944 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:47,946 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:47:47,947 - sqlalchemy.engine.Engine - INFO - [cached since 676.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:47:47,960 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:47:48,907 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:47:48,908 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:47:48,909 - sqlalchemy.engine.Engine - INFO - [cached since 677.5s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:47:48,921 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:29,953 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:29,955 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:29,956 - sqlalchemy.engine.Engine - INFO - [cached since 718.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:29,968 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:30,928 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:30,929 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:30,930 - sqlalchemy.engine.Engine - INFO - [cached since 719.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:30,942 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:35,191 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:35,192 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:48:35,193 - sqlalchemy.engine.Engine - INFO - [cached since 755.5s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:48:35,199 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:36,136 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:36,137 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:48:36,138 - sqlalchemy.engine.Engine - INFO - [cached since 756.4s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:48:36,143 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:38,985 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:38,987 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:38,988 - sqlalchemy.engine.Engine - INFO - [cached since 727.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:38,999 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:39,929 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:39,931 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:39,932 - sqlalchemy.engine.Engine - INFO - [cached since 728.6s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:39,946 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:42,183 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:42,184 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:48:42,186 - sqlalchemy.engine.Engine - INFO - [cached since 762.5s ago] {'id_agent_1': '7f4af2a1-2dbd-4756-b2aa-258cc5262d3b', 'param_1': 1}
+2026-03-23 14:48:42,192 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:43,102 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:43,104 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:48:43,105 - sqlalchemy.engine.Engine - INFO - [cached since 763.4s ago] {'id_agent_1': '7f4af2a1-2dbd-4756-b2aa-258cc5262d3b', 'param_1': 1}
+2026-03-23 14:48:43,110 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:45,171 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:45,173 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:45,175 - sqlalchemy.engine.Engine - INFO - [cached since 733.8s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:45,190 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:46,529 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:46,531 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:46,532 - sqlalchemy.engine.Engine - INFO - [cached since 735.2s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:46,551 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:48,117 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:48,119 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:48:48,120 - sqlalchemy.engine.Engine - INFO - [cached since 768.4s ago] {'id_agent_1': '451ac40e-4d4e-4bdb-90db-815a7f9571f9', 'param_1': 1}
+2026-03-23 14:48:48,126 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:49,044 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:49,045 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:48:49,047 - sqlalchemy.engine.Engine - INFO - [cached since 769.3s ago] {'id_agent_1': '451ac40e-4d4e-4bdb-90db-815a7f9571f9', 'param_1': 1}
+2026-03-23 14:48:49,052 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:58,779 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:58,781 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:58,782 - sqlalchemy.engine.Engine - INFO - [cached since 747.4s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:58,794 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:48:59,803 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:48:59,805 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:48:59,807 - sqlalchemy.engine.Engine - INFO - [cached since 748.4s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:48:59,824 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:49:04,287 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:49:04,289 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:49:04,290 - sqlalchemy.engine.Engine - INFO - [cached since 784.6s ago] {'id_agent_1': 'e36655d4-e5bc-403f-8079-451a26b97230', 'param_1': 1}
+2026-03-23 14:49:04,295 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:49:05,235 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:49:05,236 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:49:05,237 - sqlalchemy.engine.Engine - INFO - [cached since 785.5s ago] {'id_agent_1': 'e36655d4-e5bc-403f-8079-451a26b97230', 'param_1': 1}
+2026-03-23 14:49:05,242 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:50:23,313 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:50:23,316 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:50:23,318 - sqlalchemy.engine.Engine - INFO - [cached since 863.6s ago] {'id_agent_1': '4ffe8792-6cff-4788-b83e-3ac6eb248b4b', 'param_1': 1}
+2026-03-23 14:50:23,329 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:52:04,019 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:52:04,061 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:52:04,254 - sqlalchemy.engine.Engine - INFO - [cached since 932.9s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:52:04,802 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:52:55,468 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:52:55,469 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:52:55,471 - sqlalchemy.engine.Engine - INFO - [cached since 984.1s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:52:55,482 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:52:56,420 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:52:56,422 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:52:56,423 - sqlalchemy.engine.Engine - INFO - [cached since 985.1s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:52:56,433 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:53:02,907 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:53:02,909 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:53:02,910 - sqlalchemy.engine.Engine - INFO - [cached since 1023s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:53:02,915 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:53:03,836 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:53:03,838 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 14:53:03,839 - sqlalchemy.engine.Engine - INFO - [cached since 1024s ago] {'id_agent_1': '0f2ee258-5078-4d5a-b835-2a2f18007912', 'param_1': 1}
+2026-03-23 14:53:03,844 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:53:52,206 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:53:52,207 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:53:52,209 - sqlalchemy.engine.Engine - INFO - [cached since 1041s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:53:52,219 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 14:53:53,185 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 14:53:53,188 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 14:53:53,189 - sqlalchemy.engine.Engine - INFO - [cached since 1042s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 14:53:53,201 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:20:21,700 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:20:21,707 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:20:21,708 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:20:21,709 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:20:21,709 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:20:21,709 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:20:21,710 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:20:21,713 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:20:21,714 - sqlalchemy.engine.Engine - INFO - [generated in 0.00036s] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:20:21,722 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:20:22,439 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:20:22,440 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:20:22,442 - sqlalchemy.engine.Engine - INFO - [cached since 0.7283s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:20:22,452 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:31:39,720 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:31:39,721 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:31:39,721 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:31:39,722 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:31:39,722 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:31:39,722 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:31:39,723 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:31:39,727 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:31:39,727 - sqlalchemy.engine.Engine - INFO - [generated in 0.00063s] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:31:39,736 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:31:40,411 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:31:40,413 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:31:40,414 - sqlalchemy.engine.Engine - INFO - [cached since 0.6878s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:31:40,427 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:33:37,012 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:33:37,013 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:33:37,014 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:33:37,014 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:33:37,014 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:33:37,015 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:33:37,015 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:33:37,019 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:33:37,020 - sqlalchemy.engine.Engine - INFO - [generated in 0.00084s] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:33:37,034 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:33:37,725 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:33:37,725 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:33:37,726 - sqlalchemy.engine.Engine - INFO - [cached since 0.7071s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:33:37,735 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:36:09,890 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:36:09,893 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:36:09,900 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:36:09,906 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:36:09,909 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:36:09,916 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:36:09,919 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:36:09,949 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:36:09,951 - sqlalchemy.engine.Engine - INFO - [generated in 0.00171s] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:36:09,971 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:36:10,872 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:36:10,874 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:36:10,875 - sqlalchemy.engine.Engine - INFO - [cached since 0.926s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:36:10,909 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:36:12,181 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:36:12,188 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:36:12,190 - sqlalchemy.engine.Engine - INFO - [generated in 0.00154s] {'id_agent_1': '4ffe8792-6cff-4788-b83e-3ac6eb248b4b', 'param_1': 1}
+2026-03-23 15:36:12,198 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:36:12,840 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:36:12,842 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:36:12,849 - sqlalchemy.engine.Engine - INFO - [cached since 0.6606s ago] {'id_agent_1': '4ffe8792-6cff-4788-b83e-3ac6eb248b4b', 'param_1': 1}
+2026-03-23 15:36:12,863 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:38:11,370 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:38:11,371 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:38:11,371 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:38:11,372 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:38:11,372 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:38:11,372 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:38:11,373 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:38:11,375 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:38:11,376 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] {'param_1': 50, 'param_2': 0}
+2026-03-23 15:38:11,380 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:41:31,560 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:41:31,571 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:41:31,574 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:41:31,574 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:41:31,577 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:41:31,577 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:41:31,579 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:41:31,592 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:41:31,593 - sqlalchemy.engine.Engine - INFO - [generated in 0.00133s] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:41:31,610 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:41:32,212 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:41:32,214 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:41:32,215 - sqlalchemy.engine.Engine - INFO - [cached since 0.6225s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:41:32,219 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:41:37,403 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:41:37,405 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:41:37,406 - sqlalchemy.engine.Engine - INFO - [generated in 0.00119s] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:41:37,413 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:41:38,075 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:41:38,076 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:41:38,076 - sqlalchemy.engine.Engine - INFO - [cached since 0.6712s ago] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:41:38,087 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:43:47,163 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:43:47,164 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:43:47,166 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:43:47,166 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:43:47,167 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:43:47,167 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:43:47,168 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:43:47,172 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:43:47,172 - sqlalchemy.engine.Engine - INFO - [generated in 0.00082s] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:43:47,179 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:43:47,719 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:43:47,720 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:43:47,720 - sqlalchemy.engine.Engine - INFO - [cached since 0.5484s ago] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:43:47,722 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:44:51,429 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:44:51,429 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:44:51,430 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:44:51,430 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:44:51,430 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:44:51,431 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:44:51,431 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:44:51,435 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:44:51,436 - sqlalchemy.engine.Engine - INFO - [generated in 0.00063s] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:44:51,443 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:44:51,887 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:44:51,888 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:44:51,889 - sqlalchemy.engine.Engine - INFO - [cached since 0.4533s ago] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:44:51,892 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:48:06,196 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:48:06,196 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:48:06,197 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:48:06,197 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:48:06,198 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:48:06,198 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:48:06,198 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:48:06,202 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:48:06,203 - sqlalchemy.engine.Engine - INFO - [generated in 0.00115s] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:48:06,224 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:48:06,911 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:48:06,913 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:48:06,935 - sqlalchemy.engine.Engine - INFO - [cached since 0.7336s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:48:06,952 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:48:08,771 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:48:08,774 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:48:08,776 - sqlalchemy.engine.Engine - INFO - [generated in 0.00172s] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:48:08,795 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:48:09,461 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:48:09,462 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 15:48:09,463 - sqlalchemy.engine.Engine - INFO - [cached since 0.6886s ago] {'id_agent_1': 'undefined', 'param_1': 1}
+2026-03-23 15:48:09,470 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:52:29,278 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:52:29,280 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:52:29,282 - sqlalchemy.engine.Engine - INFO - [cached since 263.1s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:52:29,295 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:52:29,891 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:52:29,891 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:52:29,892 - sqlalchemy.engine.Engine - INFO - [cached since 263.7s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:52:29,894 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:54:26,584 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-03-23 15:54:26,584 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:54:26,586 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-03-23 15:54:26,586 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:54:26,587 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-03-23 15:54:26,587 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-03-23 15:54:26,588 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:54:26,594 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:54:26,595 - sqlalchemy.engine.Engine - INFO - [generated in 0.00082s] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:54:26,601 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:54:27,280 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:54:27,283 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:54:27,284 - sqlalchemy.engine.Engine - INFO - [cached since 0.6899s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:54:27,286 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:54:35,685 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:54:35,690 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:54:35,692 - sqlalchemy.engine.Engine - INFO - [cached since 9.098s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:54:35,704 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:54:36,382 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:54:36,383 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:54:36,384 - sqlalchemy.engine.Engine - INFO - [cached since 9.79s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:54:36,391 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:57:21,116 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:57:21,118 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:57:21,119 - sqlalchemy.engine.Engine - INFO - [cached since 174.5s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:57:21,122 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 15:57:21,946 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 15:57:21,947 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 15:57:21,948 - sqlalchemy.engine.Engine - INFO - [cached since 175.4s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 15:57:21,951 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:00:41,417 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:00:41,419 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:00:41,420 - sqlalchemy.engine.Engine - INFO - [cached since 374.8s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:00:41,423 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:01:10,248 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:01:10,249 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:01:10,250 - sqlalchemy.engine.Engine - INFO - [cached since 403.7s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:01:10,253 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:01:10,882 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:01:10,883 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:01:10,884 - sqlalchemy.engine.Engine - INFO - [cached since 404.3s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:01:10,889 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:03:42,535 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:03:42,537 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:03:42,539 - sqlalchemy.engine.Engine - INFO - [cached since 555.9s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:03:42,550 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:03:43,223 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:03:43,225 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:03:43,227 - sqlalchemy.engine.Engine - INFO - [cached since 556.6s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:03:43,234 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:07:25,748 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:07:25,749 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:07:25,749 - sqlalchemy.engine.Engine - INFO - [cached since 779.2s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:07:25,751 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:07:26,378 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:07:26,380 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:07:26,381 - sqlalchemy.engine.Engine - INFO - [cached since 779.8s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:07:26,387 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:07:44,109 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:07:44,110 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:07:44,111 - sqlalchemy.engine.Engine - INFO - [cached since 797.5s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:07:44,115 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:07:44,786 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:07:44,787 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:07:44,788 - sqlalchemy.engine.Engine - INFO - [cached since 798.2s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:07:44,791 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:10:12,853 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:10:12,856 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:10:12,856 - sqlalchemy.engine.Engine - INFO - [generated in 0.00062s] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('4ffe8792-6cff-4788-b83e-3ac6eb248b4b')}
+2026-03-23 16:10:12,860 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:10:13,413 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:10:13,414 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:10:13,415 - sqlalchemy.engine.Engine - INFO - [cached since 0.5593s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('4ffe8792-6cff-4788-b83e-3ac6eb248b4b')}
+2026-03-23 16:10:13,419 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:06,825 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:06,827 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:11:06,827 - sqlalchemy.engine.Engine - INFO - [cached since 1000s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:11:06,831 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:07,790 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:07,791 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:11:07,791 - sqlalchemy.engine.Engine - INFO - [cached since 1001s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:11:07,795 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:08,056 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:08,059 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:11:08,060 - sqlalchemy.engine.Engine - INFO - [generated in 0.00116s] {'param_1': 50, 'param_2': 0}
+2026-03-23 16:11:08,069 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:08,688 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:08,690 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:11:08,691 - sqlalchemy.engine.Engine - INFO - [cached since 0.6318s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 16:11:08,709 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:11,978 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:11,979 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:11:11,980 - sqlalchemy.engine.Engine - INFO - [cached since 59.12s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('37d5fee7-f3b3-493c-baea-d9a55199e306')}
+2026-03-23 16:11:11,982 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:12,640 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:12,642 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:11:12,643 - sqlalchemy.engine.Engine - INFO - [cached since 59.79s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('37d5fee7-f3b3-493c-baea-d9a55199e306')}
+2026-03-23 16:11:12,646 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:15,516 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:15,517 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:11:15,517 - sqlalchemy.engine.Engine - INFO - [cached since 7.458s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 16:11:15,525 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:16,150 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:16,151 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:11:16,151 - sqlalchemy.engine.Engine - INFO - [cached since 8.092s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 16:11:16,157 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:18,596 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:18,597 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:11:18,598 - sqlalchemy.engine.Engine - INFO - [cached since 65.74s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('451ac40e-4d4e-4bdb-90db-815a7f9571f9')}
+2026-03-23 16:11:18,600 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:11:19,280 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:11:19,281 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:11:19,282 - sqlalchemy.engine.Engine - INFO - [cached since 66.43s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('451ac40e-4d4e-4bdb-90db-815a7f9571f9')}
+2026-03-23 16:11:19,284 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:13:14,801 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:13:14,802 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 16:13:14,802 - sqlalchemy.engine.Engine - INFO - [generated in 0.00072s] {'id_agent_1': '451ac40e-4d4e-4bdb-90db-815a7f9571f9', 'param_1': 1}
+2026-03-23 16:13:14,806 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:13:50,965 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:13:50,977 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 16:13:50,979 - sqlalchemy.engine.Engine - INFO - [cached since 36.18s ago] {'id_agent_1': '451ac40e-4d4e-4bdb-90db-815a7f9571f9', 'param_1': 1}
+2026-03-23 16:13:50,993 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:13:51,748 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:13:51,749 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 16:13:51,749 - sqlalchemy.engine.Engine - INFO - [cached since 36.95s ago] {'id_agent_1': '451ac40e-4d4e-4bdb-90db-815a7f9571f9', 'param_1': 1}
+2026-03-23 16:13:51,753 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:13:54,312 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:13:54,313 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:13:54,314 - sqlalchemy.engine.Engine - INFO - [cached since 166.3s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 16:13:54,331 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:13:55,036 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:13:55,037 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE pages.is_public = true ORDER BY pages.updated_at DESC 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:13:55,037 - sqlalchemy.engine.Engine - INFO - [cached since 167s ago] {'param_1': 50, 'param_2': 0}
+2026-03-23 16:13:55,044 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:13:56,575 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:13:56,576 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 16:13:56,577 - sqlalchemy.engine.Engine - INFO - [cached since 41.78s ago] {'id_agent_1': '62934e5c-dcf8-452c-8343-d628608edc7f', 'param_1': 1}
+2026-03-23 16:13:56,580 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:13:57,258 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:13:57,259 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM pages JOIN agents ON agents.id_agent = pages.agent_id 
+WHERE agents.id_agent = %(id_agent_1)s AND pages.is_public = true 
+ LIMIT %(param_1)s
+2026-03-23 16:13:57,259 - sqlalchemy.engine.Engine - INFO - [cached since 42.46s ago] {'id_agent_1': '62934e5c-dcf8-452c-8343-d628608edc7f', 'param_1': 1}
+2026-03-23 16:13:57,262 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:14:02,596 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:14:02,622 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:14:02,623 - sqlalchemy.engine.Engine - INFO - [cached since 1176s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:14:02,629 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:14:03,352 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:14:03,352 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s ORDER BY agents.id_agent 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-03-23 16:14:03,352 - sqlalchemy.engine.Engine - INFO - [cached since 1177s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'param_1': 50, 'param_2': 0}
+2026-03-23 16:14:03,354 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:14:04,657 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:14:04,666 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:14:04,670 - sqlalchemy.engine.Engine - INFO - [cached since 231.8s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('4ffe8792-6cff-4788-b83e-3ac6eb248b4b')}
+2026-03-23 16:14:04,676 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-03-23 16:14:05,296 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-03-23 16:14:05,297 - sqlalchemy.engine.Engine - INFO - SELECT agents.id_agent AS agents_id_agent, agents.full_name AS agents_full_name, agents.gender AS agents_gender, agents.birth_date AS agents_birth_date, agents.death_date AS agents_death_date, agents.place_of_birth AS agents_place_of_birth, agents.place_of_death AS agents_place_of_death, agents.avatar_url AS agents_avatar_url, agents.created_at AS agents_created_at, agents.updated_at AS agents_updated_at, agents.user_id AS agents_user_id, agents.is_human AS agents_is_human, pages.id_page AS pages_id_page, pages.epitaph AS pages_epitaph, pages.is_public AS pages_is_public, pages.is_draft AS pages_is_draft, pages.agent_id AS pages_agent_id, pages.created_at AS pages_created_at, pages.updated_at AS pages_updated_at, pages.user_id AS pages_user_id, pages.biography AS pages_biography 
+FROM agents LEFT OUTER JOIN pages ON agents.id_agent = pages.agent_id 
+WHERE agents.user_id = %(user_id_1)s AND agents.id_agent = %(id_agent_1)s::UUID ORDER BY agents.id_agent
+2026-03-23 16:14:05,299 - sqlalchemy.engine.Engine - INFO - [cached since 232.4s ago] {'user_id_1': 'e9121b33-1d8d-4ae3-8796-7b2804033c44', 'id_agent_1': UUID('4ffe8792-6cff-4788-b83e-3ac6eb248b4b')}
+2026-03-23 16:14:05,305 - sqlalchemy.engine.Engine - INFO - ROLLBACK

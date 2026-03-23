@@ -7,6 +7,7 @@ import PublicMemoryList from "./pages/PublicMemoryList";
 import MemoryPage from "./pages/MemoryPage";
 import CreateMemory from "./pages/CreateMemory";
 import MyMemoryList from "./pages/MyMemoryList";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -17,9 +18,11 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/public" element={<PublicMemoryList />} />
+        <Route path="/public/:id" element={<MemoryPage />} />
         <Route path="/memory/:id" element={<MemoryPage />} />
         <Route path="/create" element={<CreateMemory />} />
         <Route path="/my-pages" element={<MyMemoryList />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
