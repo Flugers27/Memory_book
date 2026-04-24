@@ -1,4 +1,4 @@
-// File: c:\Users\ALIENWARE\Desktop\Project\Memory_book\memory_front\app\pages\page.tsx
+// File: C:\Users\ALIENWARE\Desktop\Project\Memory_book\memory_front\app\pages\page.tsx
 import * as entry from '../../../../app/pages/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

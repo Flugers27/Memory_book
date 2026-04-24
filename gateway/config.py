@@ -28,9 +28,12 @@ class Settings:
     # Настройки безопасности
     CORS_ORIGINS = [
         "http://localhost:3000",  # React frontend
+        "http://127.0.0.1:3000",  # React frontend (IP)
         "http://localhost:8080",  # Vue frontend
         "http://localhost:5173",
         "http://localhost:8000",  # Gateway itself
+        "http://172.27.136.127:3000",  # Frontend on network IP (port 3000)
+        "http://172.27.136.127:3001",  # Frontend on network IP (port 3001)
     ]
     
     # Rate limiting
