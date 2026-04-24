@@ -2059,3 +2059,50 @@
 2026-03-23 17:51:00,664 - gateway.main - ERROR - Service auth error: All connection attempts failed
 2026-03-23 17:51:00,664 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/refresh" 502 - 3.142s
 2026-03-23 17:51:00,665 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/refresh" 502 - 2.847s
+2026-03-23 17:52:03,121 - gateway.main - INFO - Gateway request: POST /auth/login
+2026-03-23 17:52:04,179 - httpx - INFO - HTTP Request: POST http://localhost:8001/auth/login "HTTP/1.1 200 OK"
+2026-03-23 17:52:04,180 - gateway.middleware - INFO - 127.0.0.1 - "POST /auth/login" 200 - 1.062s
+2026-03-23 17:52:24,002 - gateway.main - INFO - Gateway request: GET /memory/memory_page_list
+2026-03-23 17:52:24,576 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page_list "HTTP/1.1 200 OK"
+2026-03-23 17:52:24,578 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page_list" 200 - 0.577s
+2026-03-23 17:52:24,582 - gateway.main - INFO - Gateway request: GET /memory/memory_page_list
+2026-03-23 17:52:25,155 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page_list "HTTP/1.1 200 OK"
+2026-03-23 17:52:25,158 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page_list" 200 - 0.577s
+2026-03-23 17:53:02,273 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.001s
+2026-03-23 17:53:02,275 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.002s
+2026-03-23 17:53:02,281 - gateway.main - INFO - Gateway request: GET /memory/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b
+2026-03-23 17:53:02,862 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b "HTTP/1.1 200 OK"
+2026-03-23 17:53:02,864 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.584s
+2026-03-23 17:53:02,869 - gateway.main - INFO - Gateway request: GET /memory/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b
+2026-03-23 17:53:03,449 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b "HTTP/1.1 200 OK"
+2026-03-23 17:53:03,450 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.583s
+2026-03-23 17:53:35,948 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/public_memory_page_list" 200 - 0.000s
+2026-03-23 17:53:35,959 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/public_memory_page_list" 200 - 0.000s
+2026-03-23 17:53:35,970 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2026-03-23 17:53:36,604 - httpx - INFO - HTTP Request: GET http://localhost:8002/public_memory_page_list "HTTP/1.1 200 OK"
+2026-03-23 17:53:36,606 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 200 - 0.637s
+2026-03-23 17:53:36,609 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page_list
+2026-03-23 17:53:37,110 - httpx - INFO - HTTP Request: GET http://localhost:8002/public_memory_page_list "HTTP/1.1 200 OK"
+2026-03-23 17:53:37,114 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page_list" 200 - 0.505s
+2026-03-23 17:54:45,149 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.001s
+2026-03-23 17:54:45,150 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.002s
+2026-03-23 17:54:45,464 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b
+2026-03-23 17:54:46,068 - httpx - INFO - HTTP Request: GET http://localhost:8002/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b "HTTP/1.1 200 OK"
+2026-03-23 17:54:46,071 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.608s
+2026-03-23 17:54:46,075 - gateway.main - INFO - Gateway request: GET /memory/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b
+2026-03-23 17:54:46,650 - httpx - INFO - HTTP Request: GET http://localhost:8002/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b "HTTP/1.1 200 OK"
+2026-03-23 17:54:46,654 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/public_memory_page/4ffe8792-6cff-4788-b83e-3ac6eb248b4b" 200 - 0.580s
+2026-03-23 17:54:51,313 - gateway.main - INFO - Gateway request: GET /memory/memory_page_list
+2026-03-23 17:54:51,903 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page_list "HTTP/1.1 200 OK"
+2026-03-23 17:54:51,906 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page_list" 200 - 0.593s
+2026-03-23 17:54:51,912 - gateway.main - INFO - Gateway request: GET /memory/memory_page_list
+2026-03-23 17:54:52,488 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page_list "HTTP/1.1 200 OK"
+2026-03-23 17:54:52,492 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page_list" 200 - 0.581s
+2026-03-23 17:54:57,139 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964" 200 - 0.000s
+2026-03-23 17:54:57,144 - gateway.middleware - INFO - 127.0.0.1 - "OPTIONS /memory/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964" 200 - 0.000s
+2026-03-23 17:54:57,146 - gateway.main - INFO - Gateway request: GET /memory/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964
+2026-03-23 17:54:57,723 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964 "HTTP/1.1 200 OK"
+2026-03-23 17:54:57,725 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964" 200 - 0.580s
+2026-03-23 17:54:57,728 - gateway.main - INFO - Gateway request: GET /memory/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964
+2026-03-23 17:54:58,293 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964 "HTTP/1.1 200 OK"
+2026-03-23 17:54:58,296 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page/0b4032df-a633-4784-a0fc-b8fba7bb3964" 200 - 0.569s
