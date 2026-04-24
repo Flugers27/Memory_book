@@ -10,7 +10,7 @@ function getCookie(name: string) {
 
 const api = axios.create({
   baseURL: "http://localhost:8000",
-  withCredentials: true, // важно для отправки куки
+  withCredentials: true, // важно для отправки куки.
 });
 
 // Берём CSRF-токен из куки и добавляем в заголовки
