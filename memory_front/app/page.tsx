@@ -1,65 +1,105 @@
-import Image from "next/image";
+import { BookOpen, Shield, Users, Heart } from "lucide-react";
+import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="space-y-12">
+      {/* Герой секция */}
+      <section className="text-center py-12 px-4 max-w-4xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Сохраните память о близких навсегда
+        </h1>
+        <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+          Memory Book — это сервис для создания страниц памяти об ушедших членах семьи и питомцах. 
+          Храните фотографии, истории, даты и делитесь светлыми воспоминаниями.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/pages"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-8 py-3 text-lg font-semibold text-white hover:bg-indigo-700 transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <BookOpen className="w-5 h-5" />
+            Смотреть страницы памяти
+          </Link>
+          <Link
+            href="/register"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 px-8 py-3 text-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
           >
-            Documentation
-          </a>
+            <Users className="w-5 h-5" />
+            Присоединиться
+          </Link>
         </div>
-      </main>
+      </section>
+
+      {/* Особенности */}
+      <section className="py-12">
+        <h2 className="text-3xl font-bold text-center mb-12">Почему выбирают Memory Book?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+            <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-6">
+              <Heart className="w-6 h-6 text-indigo-600" />
+            </div>
+            <h3 className="text-xl font-bold mb-4">Вечная память</h3>
+            <p className="text-gray-600">
+              Создайте страницу с биографией, фотографиями и важными датами. Сохраните память для будущих поколений.
+            </p>
+          </div>
+          <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-6">
+              <Users className="w-6 h-6 text-green-600" />
+            </div>
+            <h3 className="text-xl font-bold mb-4">Совместный доступ</h3>
+            <p className="text-gray-600">
+              Пригласите родственников дополнять страницу. Управляйте правами доступа — только чтение или редактирование.
+            </p>
+          </div>
+          <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+            <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-6">
+              <Shield className="w-6 h-6 text-purple-600" />
+            </div>
+            <h3 className="text-xl font-bold mb-4">Конфиденциальность</h3>
+            <p className="text-gray-600">
+              Вы решаете, сделать страницу публичной или приватной. Все данные надёжно защищены.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl p-10 text-center text-white">
+        <h2 className="text-3xl font-bold mb-6">Начните бесплатно сегодня</h2>
+        <p className="text-xl mb-8 opacity-90">
+          Создайте первую страницу памяти за 5 минут. Никаких скрытых платежей.
+        </p>
+        <Link
+          href="/register"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-10 py-4 text-lg font-bold text-indigo-600 hover:bg-gray-100 transition-colors"
+        >
+          Создать аккаунт
+        </Link>
+      </section>
+
+      {/* Статистика */}
+      <section className="py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div className="text-4xl font-bold text-indigo-600">5K+</div>
+            <div className="text-gray-600">страниц памяти</div>
+          </div>
+          <div>
+            <div className="text-4xl font-bold text-indigo-600">2K+</div>
+            <div className="text-gray-600">семей</div>
+          </div>
+          <div>
+            <div className="text-4xl font-bold text-indigo-600">99.9%</div>
+            <div className="text-gray-600">доступность</div>
+          </div>
+          <div>
+            <div className="text-4xl font-bold text-indigo-600">24/7</div>
+            <div className="text-gray-600">поддержка</div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
