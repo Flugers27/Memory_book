@@ -129,7 +129,8 @@ async def refresh_token(
         payload = verify_token(token_data.refresh_token, "refresh")
         user_id = uuid.UUID(payload.get("sub"))
 
-        if not verify_refresh_token(db, token_data.refresh_token, user_id):
+        device_info = request.headers.get("User-Agent", "") if request else ""
+        if not verify_refresh_token(db, token_data.refresh_token, user_id, device_info):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
 
         user = get_user_by_id(db, user_id)

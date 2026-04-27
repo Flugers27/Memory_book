@@ -11,11 +11,32 @@ const api = axios.create({
   },
 })
 
+// Функция проверки публичного URL
+const isPublicUrl = (url: string): boolean => {
+  const publicPatterns = [
+    '/auth/login',
+    '/auth/register',
+    '/auth/refresh',
+    '/auth/validate',
+    '/memory/public_memory_page_list',
+    '/memory/public_memory_page/',
+    '/memory/public/',
+    '/memory/agent/',
+    '/memory/page_list/',
+    '/docs',
+    '/redoc',
+    '/openapi.json',
+    '/health'
+  ]
+  return publicPatterns.some(pattern => url.startsWith(pattern))
+}
+
 // Интерцептор для добавления токена и логирования
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('access_token')
-    if (token) {
+    // Не добавляем токен для публичных эндпоинтов
+    if (token && config.url && !isPublicUrl(config.url)) {
       config.headers.Authorization = `Bearer ${token}`
     }
     console.log(`[API Request] ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`, config.params ? { params: config.params } : '')
@@ -36,7 +57,8 @@ api.interceptors.response.use(
       console.error('[API Error]', error.message, error.response?.status, error.config?.url)
     }
     const originalRequest = error.config
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Пропускаем обработку 401 для публичных URL
+    if (error.response?.status === 401 && !originalRequest._retry && originalRequest.url && !isPublicUrl(originalRequest.url)) {
       originalRequest._retry = true
       try {
         const refreshToken = localStorage.getItem('refresh_token')
@@ -91,15 +113,27 @@ export const memoryAPI = {
   // Алиас для обратной совместимости
   getPage: (agent_id: string) =>
     api.get(`/memory/memory_page/${agent_id}`).then((res) => res.data),
+  // Получить агента по ID
+  getAgent: (agent_id: string) =>
+    api.get(`/memory/agent/${agent_id}`).then((res) => res.data),
+  // Обновить агента
+  updateAgent: (agent_id: string, data: any) =>
+    api.put(`/memory/agent/update/${agent_id}`, data).then((res) => res.data),
+  // Получить список страниц агента
+  getPageList: (agent_id: string, params?: { skip?: number; limit?: number }) =>
+    api.get(`/memory/page_list/${agent_id}`, { params }).then((res) => res.data),
+  // Создать агента (требует авторизации)
+  createAgent: (data: any) =>
+    api.post('/memory/agent/add', data).then((res) => res.data),
   // Создать страницу (требует авторизации)
   createPage: (data: any) =>
-    api.post('/memory/memory_page', data).then((res) => res.data),
+    api.post('/memory/page/add', data).then((res) => res.data),
   // Обновить страницу
-  updatePage: (agent_id: string, data: any) =>
-    api.put(`/memory/memory_page/${agent_id}`, data).then((res) => res.data),
+  updatePage: (page_id: string, data: any) =>
+    api.put(`/memory/page/update/${page_id}`, data).then((res) => res.data),
   // Удалить страницу
-  deletePage: (agent_id: string) =>
-    api.delete(`/memory/memory_page/${agent_id}`).then((res) => res.data),
+  deletePage: (page_id: string) =>
+    api.delete(`/memory/page/del/${page_id}`).then((res) => res.data),
 }
 
 export const accessAPI = {

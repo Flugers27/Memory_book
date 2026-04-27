@@ -29,6 +29,7 @@ class Settings:
     CORS_ORIGINS = [
         "http://localhost:3000",  # React frontend
         "http://127.0.0.1:3000",  # React frontend (IP)
+        "http://localhost:3001",  # React frontend (port 3001)
         "http://localhost:8080",  # Vue frontend
         "http://localhost:5173",
         "http://localhost:8000",  # Gateway itself
@@ -54,6 +55,8 @@ class Settings:
         "/memory/public_memory_page_list",
         "/memory/public_memory_page/",
         "/memory/public_memory_page",
+        "/memory/agent/",
+        "/memory/page_list/",
         "/docs",
         "/redoc",
         "/openapi.json",

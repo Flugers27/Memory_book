@@ -845,3 +845,454 @@ WHERE users.email = %(email_1)s
 2026-04-24 20:30:42,256 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
 2026-04-24 20:30:42,259 - sqlalchemy.engine.Engine - INFO - [cached since 2095s ago] {'id_user_token': UUID('081fb367-3b39-4f2a-aeaa-74e94689a106'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$9v7f23sPYYxRyrlXai3FOA$ql42Xb7/yTgsZn+o3FFrvF5JBICDBfJPNkT1eCHIyvM', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 1, 17, 30, 42, 255824)}
 2026-04-24 20:30:42,262 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:10:20,270 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 10:10:20,273 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 10:10:20,276 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 10:10:20,277 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 10:10:20,279 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 10:10:20,280 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 10:10:20,282 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:10:20,290 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 10:10:20,290 - sqlalchemy.engine.Engine - INFO - [generated in 0.00097s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 10:10:20,732 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 10:10:20,732 - sqlalchemy.engine.Engine - INFO - [generated in 0.00090s] {'last_login_at': datetime.datetime(2026, 4, 27, 7, 10, 20, 725816), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:10:20,763 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:10:21,249 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:10:21,252 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 10:10:21,252 - sqlalchemy.engine.Engine - INFO - [generated in 0.00077s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:10:21,273 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 10:10:21,274 - sqlalchemy.engine.Engine - INFO - [generated in 0.00102s] {'id_user_token': UUID('172e7dc2-4b74-4cc8-b3e4-bf2fa6a79bde'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$7/1/b62VUup9D4FQilGKsQ$d07pPs5279R4JYPpHswseUwJwQpJ8mRTtMFE2Qy8OkY', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 7, 10, 21, 270114)}
+2026-04-27 10:10:21,282 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:10:53,154 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:10:53,155 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 10:10:53,156 - sqlalchemy.engine.Engine - INFO - [cached since 32.87s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 10:10:53,579 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 10:10:53,580 - sqlalchemy.engine.Engine - INFO - [cached since 32.85s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 7, 10, 53, 578902), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:10:53,582 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:10:53,988 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:10:53,989 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 10:10:53,990 - sqlalchemy.engine.Engine - INFO - [cached since 32.74s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:10:53,992 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 10:10:53,993 - sqlalchemy.engine.Engine - INFO - [cached since 32.72s ago] {'id_user_token': UUID('c34a5f01-d824-4dbc-99fc-442e194d444f'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$eq+VUqpV6l0rBSAEwPi/1w$bNsEVhH8V6R5lN2br4c1LBaB7JSKdg4l3snfleQmXnY', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 7, 10, 53, 991617)}
+2026-04-27 10:10:53,994 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:33:48,344 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:33:48,351 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 10:33:48,356 - sqlalchemy.engine.Engine - INFO - [cached since 1408s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 10:33:50,475 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 10:33:50,478 - sqlalchemy.engine.Engine - INFO - [cached since 1410s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 7, 33, 50, 474145), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:33:50,486 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:33:51,839 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:33:51,842 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 10:33:51,844 - sqlalchemy.engine.Engine - INFO - [cached since 1411s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:33:51,850 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 10:33:51,853 - sqlalchemy.engine.Engine - INFO - [cached since 1411s ago] {'id_user_token': UUID('13000de8-7d7b-44e3-8eba-b1094e73c3ca'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$nLNW6h3jvJcSgvD+X6u1Fg$9W9aOsi4Cxm6PkABnwhFo1NZeicuPPKPWjFEFilFOew', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 7, 33, 51, 849251)}
+2026-04-27 10:33:51,858 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:49:08,101 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:49:08,114 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 10:49:08,126 - sqlalchemy.engine.Engine - INFO - [cached since 2328s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 10:49:10,029 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 10:49:10,034 - sqlalchemy.engine.Engine - INFO - [cached since 2329s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 7, 49, 10, 28665), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:49:10,047 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 10:49:12,101 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 10:49:12,103 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 10:49:12,104 - sqlalchemy.engine.Engine - INFO - [cached since 2331s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 10:49:12,109 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 10:49:12,112 - sqlalchemy.engine.Engine - INFO - [cached since 2331s ago] {'id_user_token': UUID('ae34022f-6932-445f-b9e6-cb0677a48ce8'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$e8+Z876X8n6vVYrxXkvpfQ$8hyUlpr20LbycEQsu/UWkoAcS1jilM2CkucCtI8gsN8', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 7, 49, 12, 108551)}
+2026-04-27 10:49:12,116 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 11:18:51,268 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 11:18:51,269 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 11:18:51,270 - sqlalchemy.engine.Engine - INFO - [cached since 4111s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 11:18:52,558 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 11:18:52,562 - sqlalchemy.engine.Engine - INFO - [cached since 4112s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 8, 18, 52, 557905), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 11:18:52,566 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 11:18:53,879 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 11:18:53,886 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 11:18:53,888 - sqlalchemy.engine.Engine - INFO - [cached since 4113s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 11:18:53,898 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 11:18:53,900 - sqlalchemy.engine.Engine - INFO - [cached since 4113s ago] {'id_user_token': UUID('a62766f2-e0d5-4b57-b026-f05d6090746b'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$8z6HcG6N0TrHuHcuJURozQ$XqEPHUS6X1Y36Y9YI9Nz0I0tTrecI9hQlxdj+WPNVkc', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 8, 18, 53, 896559)}
+2026-04-27 11:18:53,908 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 11:24:15,920 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 11:24:16,074 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 11:24:16,164 - sqlalchemy.engine.Engine - INFO - [cached since 4436s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 11:24:24,679 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 11:24:24,685 - sqlalchemy.engine.Engine - INFO - [cached since 4444s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 8, 24, 24, 677847), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 11:24:24,699 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 11:24:26,365 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 11:24:26,365 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 11:24:26,366 - sqlalchemy.engine.Engine - INFO - [cached since 4445s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 11:24:26,367 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 11:24:26,367 - sqlalchemy.engine.Engine - INFO - [cached since 4445s ago] {'id_user_token': UUID('c9a79705-95d4-4a6e-8483-914c29ff07be'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$Q+hdy7nXupdSijGmNOb8nw$ez1VymYt0+zmuZJkZnZIInO8tSC+wzctJ8Ey7JgZK2I', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 8, 24, 26, 366820)}
+2026-04-27 11:24:26,368 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:02:09,963 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:02:09,967 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 12:02:09,969 - sqlalchemy.engine.Engine - INFO - [cached since 6710s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 12:02:12,236 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 12:02:12,238 - sqlalchemy.engine.Engine - INFO - [cached since 6712s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 9, 2, 12, 233804), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:02:12,243 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:02:14,264 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:02:14,266 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 12:02:14,267 - sqlalchemy.engine.Engine - INFO - [cached since 6713s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:02:14,271 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 12:02:14,273 - sqlalchemy.engine.Engine - INFO - [cached since 6713s ago] {'id_user_token': UUID('6670979c-3cae-4e9c-a2f1-f68985619a15'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$UcqZ01rLOcc4x1gLwVjLWQ$kUnQskuzSosgWdgCRCwFmtomGOKEjbyNs1Ohh3ajcvI', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 9, 2, 14, 269791)}
+2026-04-27 12:02:14,280 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:03:14,290 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:03:14,293 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 12:03:14,296 - sqlalchemy.engine.Engine - INFO - [cached since 6774s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 12:03:19,339 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 12:03:19,464 - sqlalchemy.engine.Engine - INFO - [cached since 6779s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 9, 3, 19, 338220), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:03:19,549 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:03:25,228 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:03:25,235 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 12:03:25,251 - sqlalchemy.engine.Engine - INFO - [cached since 6784s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:03:25,282 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 12:03:25,328 - sqlalchemy.engine.Engine - INFO - [cached since 6784s ago] {'id_user_token': UUID('ee76df76-154a-4256-8f3c-370f7d6bc1b5'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$eK815rx3LqXUmtOaM+b8fw$trKXOD8qqeAdA2GgQH9yfyPq1iUKSIKkfCjtnMZGRU0', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 9, 3, 25, 280798)}
+2026-04-27 12:03:25,376 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:03:54,164 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 12:03:54,167 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 12:03:54,173 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 12:03:54,175 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 12:03:54,181 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 12:03:54,183 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 12:03:54,188 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:03:54,204 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 12:03:54,207 - sqlalchemy.engine.Engine - INFO - [generated in 0.00247s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 12:03:57,848 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 12:03:57,890 - sqlalchemy.engine.Engine - INFO - [generated in 0.04242s] {'last_login_at': datetime.datetime(2026, 4, 27, 9, 3, 57, 831080), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:03:57,915 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:03:58,116 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:03:58,116 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 12:03:58,117 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:03:58,121 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 12:03:58,121 - sqlalchemy.engine.Engine - INFO - [generated in 0.00055s] {'id_user_token': UUID('bdb3d044-7cbe-473d-9905-be203536b15b'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$wPjf21urVeo9J+ScU4oRog$GtHAg+BzQi7eLX5+W0nO4UOim9KY/sm3ZLhkn1d4RrE', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 9, 3, 58, 119780)}
+2026-04-27 12:03:58,123 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:06:48,948 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:06:48,953 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 12:06:48,962 - sqlalchemy.engine.Engine - INFO - [cached since 174.8s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 12:06:51,451 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 12:06:51,452 - sqlalchemy.engine.Engine - INFO - [cached since 173.6s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 9, 6, 51, 450874), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:06:51,454 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:06:51,642 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:06:51,642 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 12:06:51,643 - sqlalchemy.engine.Engine - INFO - [cached since 173.5s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:06:51,644 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 12:06:51,644 - sqlalchemy.engine.Engine - INFO - [cached since 173.5s ago] {'id_user_token': UUID('db89e4b0-52e2-49c8-a152-e1f55994983e'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$VkoJYSxlzJnTGoOw9p4zpg$pOK5ep8prViC2MN1P9BY6bzAaUf6HTCLAelRPQ5Lyns', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 9, 6, 51, 643933)}
+2026-04-27 12:06:51,645 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:08:23,827 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:08:23,829 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 12:08:23,831 - sqlalchemy.engine.Engine - INFO - [cached since 269.6s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 12:08:29,169 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 12:08:29,171 - sqlalchemy.engine.Engine - INFO - [cached since 271.3s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 9, 8, 29, 167474), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:08:29,184 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:08:33,119 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:08:33,120 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 12:08:33,121 - sqlalchemy.engine.Engine - INFO - [cached since 275s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:08:33,124 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 12:08:33,127 - sqlalchemy.engine.Engine - INFO - [cached since 275s ago] {'id_user_token': UUID('7d0770c3-5619-45ec-a223-9c9ac53e2c54'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$NEbIWau19r73fs/Z21tLiQ$NOeSY2CaG4Iyzl6JgLaZgmj966vwZWGM3AH+Q1mhYk8', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 9, 8, 33, 123495)}
+2026-04-27 12:08:33,134 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:12:32,755 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:12:32,756 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 12:12:32,756 - sqlalchemy.engine.Engine - INFO - [cached since 518.6s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 12:12:32,996 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 12:12:32,997 - sqlalchemy.engine.Engine - INFO - [cached since 515.1s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 9, 12, 32, 996408), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:12:32,998 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:12:33,173 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:12:33,174 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 12:12:33,174 - sqlalchemy.engine.Engine - INFO - [cached since 515.1s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:12:33,175 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 12:12:33,175 - sqlalchemy.engine.Engine - INFO - [cached since 515.1s ago] {'id_user_token': UUID('d64270f5-b542-4faf-9080-454857a954c0'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$wxjjXGstBYBwrjVGCGHMeQ$u9Sj5baoaRfORYxftUDwTmQOEmBC4ubmTD0ZL6TyuMY', 'device_info': 'curl/8.18.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 9, 12, 33, 174975)}
+2026-04-27 12:12:33,176 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:31:39,323 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:31:39,327 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 12:31:39,329 - sqlalchemy.engine.Engine - INFO - [cached since 1665s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 12:31:41,569 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 12:31:41,578 - sqlalchemy.engine.Engine - INFO - [cached since 1664s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 9, 31, 41, 569000), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:31:41,594 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 12:31:42,434 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 12:31:42,435 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 12:31:42,435 - sqlalchemy.engine.Engine - INFO - [cached since 1664s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 12:31:42,436 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 12:31:42,436 - sqlalchemy.engine.Engine - INFO - [cached since 1664s ago] {'id_user_token': UUID('da77d7fa-a469-4560-9d4e-4e6ffc8bdf90'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$nTMmxJjTGuNcK0XIGcPYmw$M5T7NVR/4Z+vkYDLGwAoA/3tyaXOibTJrutxQZoSx3o', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 9, 31, 42, 435885)}
+2026-04-27 12:31:42,437 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 13:38:41,357 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 13:38:41,359 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 13:38:41,359 - sqlalchemy.engine.Engine - INFO - [cached since 5687s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 13:38:41,886 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 13:38:41,887 - sqlalchemy.engine.Engine - INFO - [cached since 5684s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 10, 38, 41, 885982), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 13:38:41,889 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 13:38:42,479 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 13:38:42,480 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 13:38:42,481 - sqlalchemy.engine.Engine - INFO - [cached since 5684s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 13:38:42,484 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 13:38:42,484 - sqlalchemy.engine.Engine - INFO - [cached since 5684s ago] {'id_user_token': UUID('e6ec5de5-1c6e-40db-8b93-7b3e2ca27c46'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$BuA8x5hzTiklxNibEwJAyA$6yCHOB7pmMS+Tz85IEIQQXvWSw66BW/nMzbVelO3Esg', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 10, 38, 42, 483612)}
+2026-04-27 13:38:42,487 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 13:58:02,281 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 13:58:02,282 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 13:58:02,285 - sqlalchemy.engine.Engine - INFO - [cached since 6848s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 13:58:02,664 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 13:58:02,664 - sqlalchemy.engine.Engine - INFO - [cached since 6845s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 10, 58, 2, 664053), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 13:58:02,665 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 13:58:03,114 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 13:58:03,115 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 13:58:03,115 - sqlalchemy.engine.Engine - INFO - [cached since 6845s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 13:58:03,129 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 13:58:03,131 - sqlalchemy.engine.Engine - INFO - [cached since 6845s ago] {'id_user_token': UUID('6c00e6da-c007-42a9-9977-f38daf5a4628'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$bu0dQ8i5N4aQMmas1Zqz1g$96IBvo/CzDOplCtNed5pmr38DHD1NZdxJGI4cfadqbU', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 10, 58, 3, 127999)}
+2026-04-27 13:58:03,132 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:42:15,865 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 17:42:15,880 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:42:15,906 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 17:42:15,932 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:42:16,003 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 17:42:16,060 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:42:16,076 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:42:16,117 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 17:42:16,123 - sqlalchemy.engine.Engine - INFO - [generated in 0.00639s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 17:42:19,393 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 17:42:19,397 - sqlalchemy.engine.Engine - INFO - [generated in 0.00509s] {'last_login_at': datetime.datetime(2026, 4, 27, 14, 42, 19, 382677), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:42:19,427 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:42:21,956 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:42:21,963 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 17:42:21,977 - sqlalchemy.engine.Engine - INFO - [generated in 0.01510s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:42:22,024 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 17:42:22,044 - sqlalchemy.engine.Engine - INFO - [generated in 0.02042s] {'id_user_token': UUID('54b52340-d4bc-4b6f-8ad9-b12353e94e41'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$WguBECJkLEUoRciZk/J+Lw$AbN57PC0jhUF0HnZoOLesx2TN0EHfQ6r0P+VW645QwY', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 14, 42, 22, 11368)}
+2026-04-27 17:42:22,071 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:49:15,241 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 17:49:15,242 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:49:15,246 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 17:49:15,247 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:49:15,251 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 17:49:15,253 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:49:15,260 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:49:15,274 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 17:49:15,276 - sqlalchemy.engine.Engine - INFO - [generated in 0.00190s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 17:49:16,594 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 17:49:16,595 - sqlalchemy.engine.Engine - INFO - [generated in 0.00130s] {'last_login_at': datetime.datetime(2026, 4, 27, 14, 49, 16, 587287), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:49:16,599 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:49:18,379 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:49:18,383 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 17:49:18,386 - sqlalchemy.engine.Engine - INFO - [generated in 0.00253s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:49:18,408 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 17:49:18,410 - sqlalchemy.engine.Engine - INFO - [generated in 0.00237s] {'id_user_token': UUID('01871c87-cc1f-4295-8ab3-79a06e22a165'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$ipEyhnCuFaIUwhhDyPkfAw$NdVoPxKCOqt76nUtdEuoveefHIOFCLmmWvyzoNJkCwY', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 14, 49, 18, 396539)}
+2026-04-27 17:49:18,416 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:49:24,472 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:49:24,474 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 17:49:24,475 - sqlalchemy.engine.Engine - INFO - [cached since 9.201s ago] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 17:49:25,994 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 17:49:25,995 - sqlalchemy.engine.Engine - INFO - [cached since 9.401s ago] {'last_login_at': datetime.datetime(2026, 4, 27, 14, 49, 25, 993772), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:49:26,002 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:49:27,388 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:49:27,389 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 17:49:27,390 - sqlalchemy.engine.Engine - INFO - [cached since 9.007s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:49:27,394 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 17:49:27,395 - sqlalchemy.engine.Engine - INFO - [cached since 8.988s ago] {'id_user_token': UUID('f60bad15-ed43-4179-8023-c9e588fc99ae'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$TgkhpPRea02pFQLAWAuhdA$ZWLfMgBo3vX6j3HFDZRJY3SMArmYYMrezoiBfIQdRAs', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 14, 49, 27, 393715)}
+2026-04-27 17:49:27,399 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:50:44,712 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 17:50:44,720 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:50:44,737 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 17:50:44,759 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:50:44,782 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 17:50:44,788 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:50:44,795 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:50:44,830 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 17:50:44,839 - sqlalchemy.engine.Engine - INFO - [generated in 0.00873s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 17:50:48,293 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 17:50:48,294 - sqlalchemy.engine.Engine - INFO - [generated in 0.00059s] {'last_login_at': datetime.datetime(2026, 4, 27, 14, 50, 48, 291626), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:50:48,296 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:50:48,539 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:50:48,540 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 17:50:48,540 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:50:48,546 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 17:50:48,546 - sqlalchemy.engine.Engine - INFO - [generated in 0.00062s] {'id_user_token': UUID('44dd3a39-2441-403c-8e97-844b62345843'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$31sLQQjBmNNa6/2/N0YohQ$XUsQ7u8rAQExDDB7cnZg1j8zrcZ3z1SJBy20Pt3YLkY', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 14, 50, 48, 544417)}
+2026-04-27 17:50:48,548 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:55:09,710 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 17:55:09,710 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:55:09,712 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 17:55:09,712 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:55:09,713 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 17:55:09,715 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 17:55:09,717 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:55:09,719 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 17:55:09,720 - sqlalchemy.engine.Engine - INFO - [generated in 0.00067s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 17:55:10,190 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 17:55:10,191 - sqlalchemy.engine.Engine - INFO - [generated in 0.00063s] {'last_login_at': datetime.datetime(2026, 4, 27, 14, 55, 10, 188075), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:55:10,194 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 17:55:10,691 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 17:55:10,692 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 17:55:10,693 - sqlalchemy.engine.Engine - INFO - [generated in 0.00063s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 17:55:10,701 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 17:55:10,701 - sqlalchemy.engine.Engine - INFO - [generated in 0.00061s] {'id_user_token': UUID('802f5b1f-1569-4523-989c-d73db76e0ad5'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$cs7Z+59zjrF2LkXIWesdYw$bAGeGcRnEEbfnRiTiFfUihYIrUmikgUNGD/peb3IGOU', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 14, 55, 10, 698949)}
+2026-04-27 17:55:10,703 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 18:03:33,996 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 18:03:33,998 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 18:03:34,000 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 18:03:34,004 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 18:03:34,005 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 18:03:34,007 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 18:03:34,011 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 18:03:34,015 - sqlalchemy.engine.Engine - INFO - SELECT sys.refresh_tokens.id_user_token AS sys_refresh_tokens_id_user_token, sys.refresh_tokens.user_id AS sys_refresh_tokens_user_id, sys.refresh_tokens.token_hash AS sys_refresh_tokens_token_hash, sys.refresh_tokens.device_info AS sys_refresh_tokens_device_info, sys.refresh_tokens.ip_address AS sys_refresh_tokens_ip_address, sys.refresh_tokens.expires_at AS sys_refresh_tokens_expires_at, sys.refresh_tokens.created_at AS sys_refresh_tokens_created_at 
+FROM sys.refresh_tokens 
+WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID AND sys.refresh_tokens.device_info = %(device_info_1)s AND sys.refresh_tokens.expires_at > %(expires_at_1)s 
+ LIMIT %(param_1)s
+2026-04-27 18:03:34,016 - sqlalchemy.engine.Engine - INFO - [generated in 0.00081s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'device_info_1': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'expires_at_1': datetime.datetime(2026, 4, 27, 15, 3, 33, 946772), 'param_1': 1}
+2026-04-27 18:03:34,755 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id_user = %(id_user_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-27 18:03:34,755 - sqlalchemy.engine.Engine - INFO - [generated in 0.00061s] {'id_user_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'param_1': 1}
+2026-04-27 18:03:35,530 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 18:03:35,531 - sqlalchemy.engine.Engine - INFO - [generated in 0.00066s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 18:03:35,533 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 18:03:35,535 - sqlalchemy.engine.Engine - INFO - [generated in 0.00163s] {'id_user_token': UUID('26b720ff-763d-495d-962d-35f1b9b5a6be'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$ptT6/1/Lec9ZSymllPL+Pw$gEAQIer5W0uxajyxtYp7xFERw/lchJP12d4ScbbTO6g', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 15, 3, 35, 532021)}
+2026-04-27 18:03:35,537 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 18:03:35,539 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 18:03:35,540 - sqlalchemy.engine.Engine - INFO - SELECT sys.refresh_tokens.id_user_token AS sys_refresh_tokens_id_user_token, sys.refresh_tokens.user_id AS sys_refresh_tokens_user_id, sys.refresh_tokens.token_hash AS sys_refresh_tokens_token_hash, sys.refresh_tokens.device_info AS sys_refresh_tokens_device_info, sys.refresh_tokens.ip_address AS sys_refresh_tokens_ip_address, sys.refresh_tokens.expires_at AS sys_refresh_tokens_expires_at, sys.refresh_tokens.created_at AS sys_refresh_tokens_created_at 
+FROM sys.refresh_tokens 
+WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID AND sys.refresh_tokens.device_info = %(device_info_1)s AND sys.refresh_tokens.expires_at > %(expires_at_1)s 
+ LIMIT %(param_1)s
+2026-04-27 18:03:35,541 - sqlalchemy.engine.Engine - INFO - [cached since 1.525s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'device_info_1': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'expires_at_1': datetime.datetime(2026, 4, 27, 15, 3, 35, 539263), 'param_1': 1}
+2026-04-27 18:03:36,233 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-27 18:03:47,604 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 18:03:47,607 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 18:03:47,613 - sqlalchemy.engine.Engine - INFO - [generated in 0.00577s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 18:03:48,055 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 18:03:48,055 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {'last_login_at': datetime.datetime(2026, 4, 27, 15, 3, 48, 54403), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 18:03:48,061 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 18:03:48,512 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 18:03:48,513 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 18:03:48,513 - sqlalchemy.engine.Engine - INFO - [cached since 12.98s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 18:03:48,514 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 18:03:48,514 - sqlalchemy.engine.Engine - INFO - [cached since 12.98s ago] {'id_user_token': UUID('85e5d087-5c36-48d2-a280-85ebbfd2d40c'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$tnaOkfJeKwWAkFJK6d07Bw$edjhSPrg67MNTcM5OEVGasG4+0RqOoHfqdsC36Q9/b0', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 15, 3, 48, 513701)}
+2026-04-27 18:03:48,515 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 18:15:07,414 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 18:15:07,416 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 18:15:07,418 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 18:15:07,422 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 18:15:07,423 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 18:15:07,424 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 18:15:07,425 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 18:15:07,430 - sqlalchemy.engine.Engine - INFO - SELECT sys.refresh_tokens.id_user_token AS sys_refresh_tokens_id_user_token, sys.refresh_tokens.user_id AS sys_refresh_tokens_user_id, sys.refresh_tokens.token_hash AS sys_refresh_tokens_token_hash, sys.refresh_tokens.device_info AS sys_refresh_tokens_device_info, sys.refresh_tokens.ip_address AS sys_refresh_tokens_ip_address, sys.refresh_tokens.expires_at AS sys_refresh_tokens_expires_at, sys.refresh_tokens.created_at AS sys_refresh_tokens_created_at 
+FROM sys.refresh_tokens 
+WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID AND sys.refresh_tokens.expires_at > %(expires_at_1)s 
+ LIMIT %(param_1)s
+2026-04-27 18:15:07,431 - sqlalchemy.engine.Engine - INFO - [generated in 0.00066s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'expires_at_1': datetime.datetime(2026, 4, 27, 15, 15, 7, 379378), 'param_1': 1}
+2026-04-27 18:15:07,990 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id_user = %(id_user_1)s::UUID 
+ LIMIT %(param_1)s
+2026-04-27 18:15:07,990 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] {'id_user_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'param_1': 1}
+2026-04-27 18:15:08,444 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 18:15:08,445 - sqlalchemy.engine.Engine - INFO - [generated in 0.00067s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 18:15:08,447 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 18:15:08,447 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] {'id_user_token': UUID('69d2b5c8-e5f0-4e6e-b955-fbb89a67abf7'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$rPV+L8W411rL+V8rJQSAcA$PIrryn9O5rAKDBZ37W5Ifqa9mLoRlYJHi+SXl3m3/eY', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 15, 15, 8, 446188)}
+2026-04-27 18:15:08,449 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 18:15:08,454 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 18:15:08,455 - sqlalchemy.engine.Engine - INFO - SELECT sys.refresh_tokens.id_user_token AS sys_refresh_tokens_id_user_token, sys.refresh_tokens.user_id AS sys_refresh_tokens_user_id, sys.refresh_tokens.token_hash AS sys_refresh_tokens_token_hash, sys.refresh_tokens.device_info AS sys_refresh_tokens_device_info, sys.refresh_tokens.ip_address AS sys_refresh_tokens_ip_address, sys.refresh_tokens.expires_at AS sys_refresh_tokens_expires_at, sys.refresh_tokens.created_at AS sys_refresh_tokens_created_at 
+FROM sys.refresh_tokens 
+WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID AND sys.refresh_tokens.expires_at > %(expires_at_1)s 
+ LIMIT %(param_1)s
+2026-04-27 18:15:08,455 - sqlalchemy.engine.Engine - INFO - [cached since 1.025s ago] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'expires_at_1': datetime.datetime(2026, 4, 27, 15, 15, 8, 454120), 'param_1': 1}
+2026-04-27 18:15:08,911 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-27 21:53:52,253 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 21:53:52,255 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 21:53:52,257 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 21:53:52,257 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 21:53:52,258 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 21:53:52,259 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 21:53:52,260 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 21:53:52,266 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 21:53:52,267 - sqlalchemy.engine.Engine - INFO - [generated in 0.00072s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 21:53:52,676 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 21:53:52,676 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] {'last_login_at': datetime.datetime(2026, 4, 27, 18, 53, 52, 674355), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 21:53:52,684 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 21:53:53,149 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 21:53:53,150 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 21:53:53,151 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 21:53:53,156 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 21:53:53,157 - sqlalchemy.engine.Engine - INFO - [generated in 0.00064s] {'id_user_token': UUID('b0f0ae75-191a-4560-8342-50a516873076'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$w1hrbW3Nuff+v1dq7R1DKA$AoQx4WZAgSDlSIUh0RfIR18JDAeX/pNd7w9SnIW1y2o', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 18, 53, 53, 155096)}
+2026-04-27 21:53:53,159 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 22:50:27,295 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-27 22:50:27,295 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 22:50:27,297 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-27 22:50:27,297 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 22:50:27,298 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-27 22:50:27,299 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2026-04-27 22:50:27,299 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 22:50:27,303 - sqlalchemy.engine.Engine - INFO - SELECT users.id_user AS users_id_user, users.email AS users_email, users.username AS users_username, users.full_name AS users_full_name, users.password_hash AS users_password_hash, users.is_active AS users_is_active, users.is_verified AS users_is_verified, users.role_id AS users_role_id, users.last_login_at AS users_last_login_at, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-04-27 22:50:27,303 - sqlalchemy.engine.Engine - INFO - [generated in 0.00069s] {'email_1': 'test@example.com', 'param_1': 1}
+2026-04-27 22:50:27,723 - sqlalchemy.engine.Engine - INFO - UPDATE users SET last_login_at=%(last_login_at)s, updated_at=now() WHERE users.id_user = %(users_id_user)s::UUID
+2026-04-27 22:50:27,723 - sqlalchemy.engine.Engine - INFO - [generated in 0.00055s] {'last_login_at': datetime.datetime(2026, 4, 27, 19, 50, 27, 721445), 'users_id_user': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 22:50:27,726 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-27 22:50:28,133 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-27 22:50:28,134 - sqlalchemy.engine.Engine - INFO - DELETE FROM sys.refresh_tokens WHERE sys.refresh_tokens.user_id = %(user_id_1)s::UUID
+2026-04-27 22:50:28,135 - sqlalchemy.engine.Engine - INFO - [generated in 0.00043s] {'user_id_1': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44')}
+2026-04-27 22:50:28,139 - sqlalchemy.engine.Engine - INFO - INSERT INTO sys.refresh_tokens (id_user_token, user_id, token_hash, device_info, ip_address, expires_at) VALUES (%(id_user_token)s::UUID, %(user_id)s::UUID, %(token_hash)s, %(device_info)s, %(ip_address)s, %(expires_at)s) RETURNING sys.refresh_tokens.created_at
+2026-04-27 22:50:28,140 - sqlalchemy.engine.Engine - INFO - [generated in 0.00038s] {'id_user_token': UUID('ea42438a-38ce-4124-8d30-1921c6cee9b8'), 'user_id': UUID('e9121b33-1d8d-4ae3-8796-7b2804033c44'), 'token_hash': '$argon2id$v=19$m=102400,t=12,p=8$ujdmTInRmjOG0Pofg7BWag$xSCBVceG2NfbMwXiN86Eqy5vfVgNQb/OEwwwLmWOMDU', 'device_info': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'ip_address': '127.0.0.1', 'expires_at': datetime.datetime(2026, 5, 4, 19, 50, 28, 138526)}
+2026-04-27 22:50:28,142 - sqlalchemy.engine.Engine - INFO - COMMIT

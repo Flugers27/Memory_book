@@ -1,8 +1,4 @@
 {
-  "/pages/page": "app/pages/page.js",
-  "/pages/create/page": "app/pages/create/page.js",
-  "/page": "app/page.js",
-  "/pages/[id]/page": "app/pages/[id]/page.js",
-  "/register/page": "app/register/page.js",
-  "/my-pages/page": "app/my-pages/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js"
 }

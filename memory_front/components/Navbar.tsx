@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, BookOpen, PlusCircle, User, LogIn, UserPlus } from 'lucide-react'
+import { Home, BookOpen, PlusCircle, User, LogIn, UserPlus, Book } from 'lucide-react'
 import { useAuthStore } from '@/lib/store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { authAPI } from '@/lib/api'
 
 export default function Navbar() {
@@ -28,6 +28,22 @@ export default function Navbar() {
       })
     }
   }, [setUser, clearUser])
+
+  const [bookTheme, setBookTheme] = useState(false)
+
+  useEffect(() => {
+    // Отключаем книжную тему по умолчанию, даже если ранее была включена
+    localStorage.removeItem('bookTheme')
+    setBookTheme(false)
+  }, [])
+
+  const toggleBookTheme = () => {
+    const newValue = !bookTheme
+    setBookTheme(newValue)
+    localStorage.setItem('bookTheme', newValue.toString())
+    // Перезагружаем страницу для применения темы (можно обойтись без перезагрузки, но для простоты)
+    window.location.reload()
+  }
 
   const handleLogout = () => {
     authAPI.logout().finally(() => {
@@ -75,6 +91,16 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex items-center space-x-4">
+            {/* Кнопка переключения темы книги */}
+            <button
+              onClick={toggleBookTheme}
+              className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-colors ${bookTheme ? 'bg-amber-100 text-amber-800 border border-amber-300' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+              title={bookTheme ? 'Переключить на обычный дизайн' : 'Переключить на дизайн книги'}
+            >
+              <Book className="w-4 h-4" />
+              <span className="hidden md:inline">{bookTheme ? 'Книга' : 'Книга'}</span>
+            </button>
+
             {user ? (
               <>
                 <span className="text-sm text-gray-600">{user.email}</span>

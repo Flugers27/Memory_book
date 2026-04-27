@@ -1,8 +1,8 @@
 // File: C:\Users\ALIENWARE\Desktop\Project\Memory_book\memory_front\app\profile\page.tsx
-import * as entry from '../../../../app/profile/page.js'
+import * as entry from '../../../../app/user/profile/page.jsx'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/profile/page.js')
+type TEntry = typeof import('../../../../app/user/profile/page.jsx')
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }

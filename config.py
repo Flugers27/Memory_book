@@ -18,7 +18,7 @@ class BaseConfig:
     # CORS
     CORS_ORIGINS: list[str] = os.getenv(
         "CORS_ORIGINS",
-        "http://localhost:3000,http://localhost:8000"
+        "http://localhost:3000,http://localhost:8000,http://localhost:3001"
     ).split(",")
 
     # Environment

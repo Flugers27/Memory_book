@@ -115,9 +115,9 @@ def verify_refresh_token(
     user_id: uuid.UUID,
     device_info: str | None
 ) -> bool:
+    # Ищем токен по user_id и сроку действия, игнорируя device_info
     token = db.query(RefreshToken).filter(
         RefreshToken.user_id == user_id,
-        RefreshToken.device_info == device_info,
         RefreshToken.expires_at > datetime.utcnow()
     ).first()
 
