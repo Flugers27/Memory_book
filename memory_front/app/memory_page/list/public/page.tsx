@@ -214,7 +214,7 @@ export default function PagesList() {
                 <div className="flex justify-between items-center text-sm text-gray-500">
                   <span>{new Date(page.created_at).toLocaleDateString('ru-RU')}</span>
                   <Link
-                    href={`/public_memory_page/${page.id}`}
+                    href={`/memory_page/public/${page.agent_id}`}
                     className="text-indigo-600 hover:text-indigo-800 font-medium"
                   >
                     Подробнее →

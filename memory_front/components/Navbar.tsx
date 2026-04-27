@@ -54,14 +54,14 @@ export default function Navbar() {
 
   const navItems = [
     { href: '/', label: 'Главная', icon: <Home className="w-4 h-4" /> },
-    { href: '/pages', label: 'Страницы памяти', icon: <BookOpen className="w-4 h-4" /> },
+    { href: '/memory_page/list/public', label: 'Страницы памяти', icon: <BookOpen className="w-4 h-4" /> },
   ]
 
   if (user) {
     navItems.push(
-      { href: '/my-pages', label: 'Мои страницы памяти', icon: <BookOpen className="w-4 h-4" /> },
-      { href: '/pages/create', label: 'Создать страницу', icon: <PlusCircle className="w-4 h-4" /> },
-      { href: '/profile', label: 'Профиль', icon: <User className="w-4 h-4" /> }
+      { href: '/memory_page/list/my', label: 'Мои страницы памяти', icon: <BookOpen className="w-4 h-4" /> },
+      { href: '/memory_page/my/create', label: 'Создать страницу', icon: <PlusCircle className="w-4 h-4" /> },
+      { href: '/user/profile', label: 'Профиль', icon: <User className="w-4 h-4" /> }
     )
   }
 
@@ -114,14 +114,14 @@ export default function Navbar() {
             ) : (
               <>
                 <Link
-                  href="/login"
+                  href="/user/login"
                   className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-gray-700 hover:text-indigo-700 transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Вход</span>
                 </Link>
                 <Link
-                  href="/register"
+                  href="/user/register"
                   className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
                 >
                   <UserPlus className="w-4 h-4" />
