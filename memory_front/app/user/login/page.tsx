@@ -57,7 +57,7 @@ export default function LoginPage() {
       }
       
       toast.success('Вход выполнен успешно!')
-      router.push('/pages')
+      router.push('/')
     } catch (error: any) {
       toast.error(error.response?.data?.detail || 'Ошибка входа. Проверьте данные.')
     } finally {

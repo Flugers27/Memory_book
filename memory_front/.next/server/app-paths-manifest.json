@@ -1,8 +1,10 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
   "/memory_page/list/public/page": "app/memory_page/list/public/page.js",
-  "/memory_page/public/[id]/page": "app/memory_page/public/[id]/page.js",
+  "/memory_page/my/[id]/page": "app/memory_page/my/[id]/page.js",
+  "/user/login/page": "app/user/login/page.js",
   "/memory_page/list/my/page": "app/memory_page/list/my/page.js",
-  "/user/login/page": "app/user/login/page.js"
+  "/memory_page/public/[id]/page": "app/memory_page/public/[id]/page.js",
+  "/memory_page/my/create/page": "app/memory_page/my/create/page.js",
+  "/page": "app/page.js"
 }

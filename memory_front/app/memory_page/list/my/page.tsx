@@ -152,7 +152,7 @@ export default function MyPagesList() {
           <h1 className="text-3xl font-bold text-gray-900">Мои страницы памяти</h1>
           <p className="text-gray-600 mt-2">Для просмотра своих страниц необходимо войти в систему.</p>
           <Link
-            href="/login"
+            href="/user/login"
             className="mt-6 inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
           >
             Войти
@@ -170,7 +170,7 @@ export default function MyPagesList() {
           <p className="text-gray-600">Все ваши страницы памяти, включая приватные и черновики</p>
         </div>
         <Link
-          href="/pages/create"
+          href="/memory_page/my/create"
           className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2"
         >
           <FileEdit className="w-4 h-4" />
@@ -215,7 +215,7 @@ export default function MyPagesList() {
         <div className="text-center py-12 border-2 border-dashed rounded-xl">
           <p className="text-gray-500 text-lg">У вас ещё нет страниц памяти</p>
           <Link
-            href="/pages/create"
+            href="/memory_page/my/create"
             className="mt-4 inline-block text-indigo-600 hover:text-indigo-800 font-medium"
           >
             Создайте первую страницу
@@ -251,7 +251,7 @@ export default function MyPagesList() {
                 <div className="flex justify-between items-center text-sm text-gray-500">
                   <span>{new Date(page.created_at).toLocaleDateString('ru-RU')}</span>
                   <Link
-                    href={`/pages/${page.id}`}
+                    href={`/memory_page/my/${page.agent_id}`}
                     className="text-indigo-600 hover:text-indigo-800 font-medium"
                   >
                     Подробнее →

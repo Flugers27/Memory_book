@@ -31,7 +31,7 @@ export default function RegisterPage() {
       localStorage.setItem('refresh_token', refresh_token)
       setUser({ id: user.id, email: user.email })
       toast.success('Регистрация успешна!')
-      router.push('/pages')
+      router.push('/')
     } catch (error: any) {
       toast.error(error.response?.data?.detail || 'Ошибка регистрации.')
     } finally {
@@ -124,7 +124,7 @@ export default function RegisterPage() {
       <div className="mt-8 text-center">
         <p className="text-gray-600">
           Уже есть аккаунт?{' '}
-          <Link href="/login" className="text-indigo-600 hover:text-indigo-800 font-medium">
+          <Link href="/user/login" className="text-indigo-600 hover:text-indigo-800 font-medium">
             Войти
           </Link>
         </p>

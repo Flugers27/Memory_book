@@ -37,7 +37,15 @@ async def get_public_memory_page_with_agent(
     Только не черновик (is_draft=False) и публичная (is_public=True)
     """
 
-    agent, page = select_public_memory_page(db, agent_id)
+    result = select_public_memory_page(db, agent_id)
+    
+    if not result:
+        raise HTTPException(
+            status_code=404,
+            detail="Публичная страница памяти не найдена или недоступна"
+        )
+    
+    agent, page = result
 
     if not page:
         raise HTTPException(

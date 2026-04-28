@@ -123,70 +123,50 @@ export default function PageDetail() {
     const fetchData = async () => {
       try {
         setLoading(true)
-        // ПЕРВЫЙ ПРИОРИТЕТ: попытка получить публичную страницу
-        try {
-          const data = await memoryAPI.getPublicPage(pageId)
-          // Преобразуем данные публичной страницы
-          const item = data.memory_page || data
-          const pageData = item.page || item
-          let biography = pageData.biography || item.biography || ''
-          if (Array.isArray(biography)) {
-            const first = biography[0]
-            if (first?.info) biography = first.info
-            else if (first?.title) biography = first.title
-            else biography = JSON.stringify(biography)
-          }
-          const detail: PageDetail = {
-            id: pageData.id_page || item.id_agent || pageId,
-            title: item.full_name || 'Без названия',
-            epitaph: pageData.epitaph || item.epitaph || '',
-            biography,
-            is_public: pageData.is_public ?? item.is_public ?? true,
-            is_draft: pageData.is_draft ?? item.is_draft ?? false,
-            created_at: pageData.created_at || item.created_at || '',
-            updated_at: pageData.updated_at || item.updated_at || '',
-            agent_id: item.id_agent || item.agent_id,
-            full_name: item.full_name || '',
-            gender: item.gender || '',
-            birth_date: item.birth_date,
-            death_date: item.death_date,
-            place_of_birth: item.place_of_birth,
-            place_of_death: item.place_of_death,
-            is_human: item.is_human ?? true,
-            avatar_url: item.avatar_url,
-          }
-          setPage(detail)
-          setAgent(item)
-          setPages([pageData])
-          setSelectedPage(pageData)
-          setError(null)
-          return // Успешно, выходим
-        } catch (publicErr: any) {
-          // Если публичная страница не найдена (404) или другая ошибка, продолжаем
-          console.log('Public page not found, trying authenticated endpoints if user exists')
-        }
+        setError(null)
 
-        // Если пользователь авторизован, пробуем получить через защищенные эндпоинты
+        // ОПТИМИЗИРОВАННАЯ ЛОГИКА: только один запрос
         if (user) {
+          // Для авторизованных пользователей: GET /memory/page_list/{agent_id}
           try {
-            const agentData = await memoryAPI.getAgent(pageId)
-            setAgent(agentData)
-            let pagesList = []
-            try {
-              const pagesData = await memoryAPI.getPageList(pageId)
-              pagesList = pagesData.pages || []
-            } catch (err: any) {
-              if (err.response?.status !== 404) {
-                console.error('Error fetching pages:', err)
-              }
-            }
+            const pagesData = await memoryAPI.getPageList(pageId)
+            const pagesList = pagesData.pages || []
+            
+            // Получаем информацию об агенте из ответа (если есть)
+            const agentInfo = pagesData.agent || {}
+            setAgent(agentInfo)
             setPages(pagesList)
+            
+            // Выбираем приоритетную страницу
             const priorityPage = selectPriorityPage(pagesList)
             setSelectedPage(priorityPage || null)
-            setError(null)
+            
+            // Создаем детализированную информацию о странице
+            if (priorityPage) {
+              const detail: PageDetail = {
+                id: priorityPage.id_page || pageId,
+                title: agentInfo.full_name || priorityPage.epitaph || 'Без названия',
+                epitaph: priorityPage.epitaph || '',
+                biography: normalizeBiography(priorityPage.biography || ''),
+                is_public: priorityPage.is_public ?? true,
+                is_draft: priorityPage.is_draft ?? false,
+                created_at: priorityPage.created_at || '',
+                updated_at: priorityPage.updated_at || '',
+                agent_id: priorityPage.agent_id || pageId,
+                full_name: agentInfo.full_name || '',
+                gender: agentInfo.gender || '',
+                birth_date: agentInfo.birth_date,
+                death_date: agentInfo.death_date,
+                place_of_birth: agentInfo.place_of_birth,
+                place_of_death: agentInfo.place_of_death,
+                is_human: agentInfo.is_human ?? true,
+                avatar_url: agentInfo.avatar_url,
+              }
+              setPage(detail)
+            }
           } catch (err: any) {
-            console.error('Error fetching agent or pages:', err)
-            // Если и это не удалось, пробуем получить через getUserPage (старый метод)
+            console.error('Error fetching page list:', err)
+            // Fallback для обратной совместимости
             try {
               const data = await memoryAPI.getUserPage(pageId)
               const item = data.memory_page || data
@@ -215,15 +195,52 @@ export default function PageDetail() {
               setAgent(item)
               setPages([pageData])
               setSelectedPage(pageData)
-              setError(null)
             } catch (fallbackErr) {
               console.error('Fallback also failed:', fallbackErr)
               setError('Не удалось загрузить страницу памяти. Возможно, она не существует или у вас нет доступа.')
             }
           }
         } else {
-          // Пользователь не авторизован и публичная страница не найдена
-          setError('Страница памяти не найдена или недоступна. Возможно, требуется авторизация.')
+          // Для неавторизованных пользователей: GET /memory/public_memory_page/{agent_id}
+          try {
+            const data = await memoryAPI.getPublicPage(pageId)
+            const item = data.memory_page || data
+            const pageData = item.page || item
+            let biography = pageData.biography || item.biography || ''
+            if (Array.isArray(biography)) {
+              const first = biography[0]
+              if (first?.info) biography = first.info
+              else if (first?.title) biography = first.title
+              else biography = JSON.stringify(biography)
+            }
+            const detail: PageDetail = {
+              id: pageData.id_page || item.id_agent || pageId,
+              title: item.full_name || 'Без названия',
+              epitaph: pageData.epitaph || item.epitaph || '',
+              biography,
+              is_public: pageData.is_public ?? item.is_public ?? true,
+              is_draft: pageData.is_draft ?? item.is_draft ?? false,
+              created_at: pageData.created_at || item.created_at || '',
+              updated_at: pageData.updated_at || item.updated_at || '',
+              agent_id: item.id_agent || item.agent_id,
+              full_name: item.full_name || '',
+              gender: item.gender || '',
+              birth_date: item.birth_date,
+              death_date: item.death_date,
+              place_of_birth: item.place_of_birth,
+              place_of_death: item.place_of_death,
+              is_human: item.is_human ?? true,
+              avatar_url: item.avatar_url,
+            }
+            setPage(detail)
+            setAgent(item)
+            setPages([pageData])
+            setSelectedPage(pageData)
+            setError(null)
+          } catch (publicErr: any) {
+            console.error('Error fetching public page:', publicErr)
+            setError('Страница памяти не найдена или недоступна. Возможно, требуется авторизация.')
+          }
         }
       } catch (err: any) {
         console.error('Unexpected error:', err)
@@ -294,6 +311,54 @@ export default function PageDetail() {
     return String(bio)
   }
 
+  // Функция для рендеринга структурированной биографии
+  const renderBiography = (bio: any): React.ReactNode => {
+    if (!bio) return null
+    if (typeof bio === 'string') return <p className="text-gray-700 whitespace-pre-line">{bio}</p>
+    if (Array.isArray(bio)) {
+      return (
+        <div className="space-y-6">
+          {bio.map((item, idx) => (
+            <div key={idx} className="space-y-4">
+              {item.title && <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>}
+              {item.info && <p className="text-gray-700">{item.info}</p>}
+              {Array.isArray(item.titles) && item.titles.length > 0 && (
+                <div className="ml-6 space-y-3">
+                  {item.titles.map((sub: any, subIdx: number) => (
+                    <div key={subIdx}>
+                      {sub.title && <h4 className="text-lg font-medium text-gray-800">{sub.title}</h4>}
+                      {sub.info && <p className="text-gray-700">{sub.info}</p>}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )
+    }
+    if (typeof bio === 'object') {
+      // Одиночный объект
+      return (
+        <div className="space-y-4">
+          {bio.title && <h3 className="text-xl font-semibold text-gray-900">{bio.title}</h3>}
+          {bio.info && <p className="text-gray-700">{bio.info}</p>}
+          {Array.isArray(bio.titles) && bio.titles.length > 0 && (
+            <div className="ml-6 space-y-3">
+              {bio.titles.map((sub: any, subIdx: number) => (
+                <div key={subIdx}>
+                  {sub.title && <h4 className="text-lg font-medium text-gray-800">{sub.title}</h4>}
+                  {sub.info && <p className="text-gray-700">{sub.info}</p>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )
+    }
+    return <p className="text-gray-700">{String(bio)}</p>
+  }
+
   if (loading) {
     return (
       <div className="text-center py-12">
@@ -310,7 +375,7 @@ export default function PageDetail() {
       id: selectedPage?.id_page || agent?.id_agent || pageId,
       title: agent?.full_name || 'Без названия',
       epitaph: selectedPage?.epitaph || '',
-      biography: normalizeBiography(selectedPage?.biography) || '',
+      biography: selectedPage?.biography || '',
       is_public: selectedPage?.is_public ?? false,
       is_draft: selectedPage?.is_draft ?? false,
       created_at: selectedPage?.created_at || agent?.created_at || new Date().toISOString(),
@@ -645,7 +710,7 @@ export default function PageDetail() {
           <div className="bg-white rounded-xl shadow-sm border p-6">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Биография</h2>
             <div className="prose max-w-none">
-              <p className="text-gray-700 whitespace-pre-line">{displayPage.biography}</p>
+              {renderBiography(displayPage.biography)}
             </div>
           </div>
 

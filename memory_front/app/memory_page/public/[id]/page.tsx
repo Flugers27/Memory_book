@@ -294,6 +294,54 @@ export default function PageDetail() {
     return String(bio)
   }
 
+  // Функция для рендеринга структурированной биографии
+  const renderBiography = (bio: any): React.ReactNode => {
+    if (!bio) return null
+    if (typeof bio === 'string') return <p className="text-gray-700 whitespace-pre-line">{bio}</p>
+    if (Array.isArray(bio)) {
+      return (
+        <div className="space-y-6">
+          {bio.map((item, idx) => (
+            <div key={idx} className="space-y-4">
+              {item.title && <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>}
+              {item.info && <p className="text-gray-700">{item.info}</p>}
+              {Array.isArray(item.titles) && item.titles.length > 0 && (
+                <div className="ml-6 space-y-3">
+                  {item.titles.map((sub: any, subIdx: number) => (
+                    <div key={subIdx}>
+                      {sub.title && <h4 className="text-lg font-medium text-gray-800">{sub.title}</h4>}
+                      {sub.info && <p className="text-gray-700">{sub.info}</p>}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )
+    }
+    if (typeof bio === 'object') {
+      // Одиночный объект
+      return (
+        <div className="space-y-4">
+          {bio.title && <h3 className="text-xl font-semibold text-gray-900">{bio.title}</h3>}
+          {bio.info && <p className="text-gray-700">{bio.info}</p>}
+          {Array.isArray(bio.titles) && bio.titles.length > 0 && (
+            <div className="ml-6 space-y-3">
+              {bio.titles.map((sub: any, subIdx: number) => (
+                <div key={subIdx}>
+                  {sub.title && <h4 className="text-lg font-medium text-gray-800">{sub.title}</h4>}
+                  {sub.info && <p className="text-gray-700">{sub.info}</p>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )
+    }
+    return <p className="text-gray-700">{String(bio)}</p>
+  }
+
   if (loading) {
     return (
       <div className="text-center py-12">
@@ -310,7 +358,7 @@ export default function PageDetail() {
       id: selectedPage?.id_page || agent?.id_agent || pageId,
       title: agent?.full_name || 'Без названия',
       epitaph: selectedPage?.epitaph || '',
-      biography: normalizeBiography(selectedPage?.biography) || '',
+      biography: selectedPage?.biography || '',
       is_public: selectedPage?.is_public ?? false,
       is_draft: selectedPage?.is_draft ?? false,
       created_at: selectedPage?.created_at || agent?.created_at || new Date().toISOString(),
@@ -645,7 +693,7 @@ export default function PageDetail() {
           <div className="bg-white rounded-xl shadow-sm border p-6">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Биография</h2>
             <div className="prose max-w-none">
-              <p className="text-gray-700 whitespace-pre-line">{displayPage.biography}</p>
+              {renderBiography(displayPage.biography)}
             </div>
           </div>
 
