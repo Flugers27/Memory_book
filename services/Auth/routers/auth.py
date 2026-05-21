@@ -10,7 +10,7 @@ import uuid
 
 from database.session import get_db
 
-from services.Auth.models import User, RefreshToken, UserRole
+from database.models.auth import User, RefreshToken, UserRole
 from services.Auth import schemas
 from ..utils import send_verification_email
 from services.Auth.auth_logic import (

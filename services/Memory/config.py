@@ -43,6 +43,13 @@ class MemoryConfig:
     # Логирование
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
     LOG_FILE = "logs/memory_service.log"
+    
+    # Хост и порт для запуска сервера
+    HOST = os.getenv("HOST", "0.0.0.0")
+    PORT = SERVICE_PORT
+    
+    # Отладка (наследуем из базового конфига)
+    DEBUG = base_config.DEBUG
 
 # Создаем экземпляр конфигурации
 config = MemoryConfig()

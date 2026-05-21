@@ -18,6 +18,7 @@ class UserCreate(UserBase):
     """Схема для создания пользователя"""
     email: EmailStr
     password: str = Field(..., min_length=3, max_length=100)
+    avatar_id: Optional[str] = None
     
     @validator('password')
     def validate_password(cls, v):
@@ -44,6 +45,7 @@ class UserResponse(UserBase):
     last_login_at: Optional[datetime] = None
     created_at: datetime
     updated_at: datetime
+    avatar_id: Optional[str] = None
     
     # Конфигурация для Pydantic v2
     model_config = ConfigDict(from_attributes=True)

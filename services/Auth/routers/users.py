@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../../'))
 from database.session import get_db
 
 # Импортируем из текущего сервиса
-from ..models import User
+from database.models.auth import User
 from .. import schemas
 from ..dependencies import get_current_active_user
 from ..auth_logic import verify_password
@@ -137,7 +137,7 @@ async def get_user_tokens(
     db: Session = Depends(get_db)
 ):
     """Получение списка активных refresh токенов пользователя"""
-    from ..models import RefreshToken
+    from database.models.auth import RefreshToken
     from datetime import datetime
     
     tokens = db.query(RefreshToken).filter(
@@ -163,7 +163,7 @@ async def revoke_all_tokens(
     db: Session = Depends(get_db)
 ):
     """Отзыв всех refresh токенов пользователя"""
-    from ..models import RefreshToken
+    from database.models.auth import RefreshToken
     
     db.query(RefreshToken).filter(
         RefreshToken.user_id == current_user.id_user

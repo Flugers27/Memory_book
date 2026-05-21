@@ -26,6 +26,7 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     username = Column(String, unique=True)
     full_name = Column(String)
+    avatar_id = Column(String(36), nullable=False)
 
     password_hash = Column(String, nullable=False)
 
@@ -45,7 +46,8 @@ class User(Base):
             'full_name': self.full_name,
             'is_active': self.is_active,
             'is_verified': self.is_verified,
-            'role_id': self.role_id
+            'role_id': self.role_id,
+             'avatar_id': self.avatar_id
             # 'last_login_at': self.last_login_at.isoformat() if self.last_login_at else None,
             # 'created_at': self.created_at.isoformat(),
             # 'updated_at': self.updated_at.isoformat()

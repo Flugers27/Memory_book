@@ -7,7 +7,7 @@ from typing import Optional
 import uuid
 from fastapi import HTTPException, status
 
-from .models import User
+from database.models.auth import User
 from . import schemas
 from .utils import get_password_hash
 

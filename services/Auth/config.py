@@ -38,6 +38,13 @@ class AuthConfig:
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
     LOG_FILE = "logs/auth_service.log"
     
+    # Хост и порт для запуска сервера
+    HOST = os.getenv("HOST", "0.0.0.0")
+    PORT = SERVICE_PORT
+    
+    # Отладка (наследуем из базового конфига)
+    DEBUG = base_config.DEBUG
+    
     @property
     def ACCESS_TOKEN_EXPIRE(self) -> timedelta:
         return timedelta(minutes=self.ACCESS_TOKEN_EXPIRE_MINUTES)

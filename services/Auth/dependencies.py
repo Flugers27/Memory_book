@@ -17,7 +17,7 @@ from database.session import get_db
 # Импортируем из текущего сервиса
 from .auth_logic import verify_token
 from .crud import get_user_by_id
-from .models import User
+from database.models.auth import User
 
 # Схема OAuth2 для получения токена из заголовков
 oauth2_scheme = OAuth2PasswordBearer(

@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from typing import Optional, List, Dict, Any
 import uuid
 from . import schemas
-from .models import AgentBD, PageBD
+from database.models.memory import AgentBD, PageBD
 #from config import, PageBD, MemoryTitles
 
 # ========== CRUD FOR AGENT ==========

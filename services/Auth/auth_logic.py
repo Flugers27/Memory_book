@@ -6,7 +6,7 @@ from passlib.context import CryptContext
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from .models import User, RefreshToken
+from database.models.auth import User, RefreshToken
 from .config import config
 from .utils import get_password_hash, verify_password
 
