@@ -43,6 +43,13 @@ export default function PageDetail() {
   const [editAgent, setEditAgent] = useState<any>(null)
   const [editPage, setEditPage] = useState<any>(null)
   const [updating, setUpdating] = useState(false)
+  const [creatingNewPage, setCreatingNewPage] = useState(false)
+  const [newPageData, setNewPageData] = useState({
+    epitaph: '',
+    biography: '',
+    is_public: false,
+    is_draft: true
+  })
 
   const handleEditClick = () => {
     const newEditing = !editing
@@ -101,17 +108,75 @@ export default function PageDetail() {
       if (editPage && selectedPage?.id_page) {
         await memoryAPI.updatePage(selectedPage.id_page, editPage)
       }
-      // Перезагружаем данные
-      const agentData = await memoryAPI.getAgent(pageId)
-      const pagesData = await memoryAPI.getPageList(pageId)
+      // Перезагружаем данные с использованием единого метода
+      const data = await memoryAPI.getUserPage(pageId)
+      const agentData = data.agent || {}
+      const pagesList = data.pages || []
       setAgent(agentData)
-      setPages(pagesData.pages || [])
-      const priorityPage = selectPriorityPage(pagesData.pages || [])
+      setPages(pagesList)
+      const priorityPage = selectPriorityPage(pagesList)
       setSelectedPage(priorityPage || null)
       alert('Страница памяти полностью обновлена')
     } catch (err) {
       console.error('Ошибка обновления страницы памяти:', err)
       alert('Не удалось обновить страницу памяти')
+    } finally {
+      setUpdating(false)
+    }
+  }
+
+  const handleCreateNewPage = async () => {
+    if (!agent?.id_agent) {
+      alert('Агент не найден')
+      return
+    }
+    try {
+      setUpdating(true)
+      // Подготавливаем biography в формате, который ожидает бэкенд
+      let biographyData: any[] = []
+      if (newPageData.biography.trim()) {
+        biographyData = [
+          {
+            title: 'Биография',
+            info: newPageData.biography,
+            titles: []
+          }
+        ]
+      }
+      
+      const pageData = {
+        agent_id: agent.id_agent,
+        epitaph: newPageData.epitaph || null,
+        biography: biographyData,
+        is_public: newPageData.is_public,
+        is_draft: newPageData.is_draft
+      }
+      console.log('Creating new page with data:', pageData)
+      const createdPage = await memoryAPI.createPage(pageData)
+      console.log('Created page response:', createdPage)
+      
+      // Обновляем список страниц
+      const data = await memoryAPI.getUserPage(pageId)
+      const agentData = data.agent || {}
+      const pagesList = data.pages || []
+      setAgent(agentData)
+      setPages(pagesList)
+      const priorityPage = selectPriorityPage(pagesList)
+      setSelectedPage(priorityPage || null)
+      
+      // Сбрасываем форму
+      setCreatingNewPage(false)
+      setNewPageData({
+        epitaph: '',
+        biography: '',
+        is_public: false,
+        is_draft: true
+      })
+      alert('Новая страница успешно создана')
+    } catch (err: any) {
+      console.error('Ошибка создания страницы:', err)
+      console.error('Детали ошибки:', err.response?.data)
+      alert(`Не удалось создать страницу: ${err.response?.data?.detail || err.message}`)
     } finally {
       setUpdating(false)
     }
@@ -124,21 +189,26 @@ export default function PageDetail() {
       try {
         setLoading(true)
         setError(null)
+        console.log('Fetching data for pageId:', pageId, 'user:', user)
 
-        // ОПТИМИЗИРОВАННАЯ ЛОГИКА: только один запрос
+        // ОПТИМИЗИРОВАННАЯ ЛОГИКА: получаем страницу памяти и агента
         if (user) {
-          // Для авторизованных пользователей: GET /memory/page_list/{agent_id}
+          console.log('User is authenticated, trying getUserPage')
+          // Для авторизованных пользователей: GET /memory/memory_page/{agent_id}
           try {
-            const pagesData = await memoryAPI.getPageList(pageId)
-            const pagesList = pagesData.pages || []
+            const data = await memoryAPI.getUserPage(pageId)
+            console.log('getUserPage response:', data)
+            const agentInfo = data.agent || {}
+            const pagesList = data.pages || []
             
-            // Получаем информацию об агенте из ответа (если есть)
-            const agentInfo = pagesData.agent || {}
+            console.log('Agent info:', agentInfo, 'Pages count:', pagesList.length)
+            
             setAgent(agentInfo)
             setPages(pagesList)
             
             // Выбираем приоритетную страницу
             const priorityPage = selectPriorityPage(pagesList)
+            console.log('Priority page:', priorityPage)
             setSelectedPage(priorityPage || null)
             
             // Создаем детализированную информацию о странице
@@ -163,40 +233,36 @@ export default function PageDetail() {
                 avatar_url: agentInfo.avatar_url,
               }
               setPage(detail)
-            }
-          } catch (err: any) {
-            console.error('Error fetching page list:', err)
-            // Fallback для обратной совместимости
-            try {
-              const data = await memoryAPI.getUserPage(pageId)
-              const item = data.memory_page || data
-              const pageData = item.page || item
-              let biography = normalizeBiography(pageData.biography || item.biography || '')
+            } else {
+              // Если страниц нет, создаем пустую детальную информацию на основе агента
               const detail: PageDetail = {
-                id: pageData.id_page || item.id_agent || pageId,
-                title: item.full_name || 'Без названия',
-                epitaph: pageData.epitaph || item.epitaph || '',
-                biography,
-                is_public: pageData.is_public ?? item.is_public ?? true,
-                is_draft: pageData.is_draft ?? item.is_draft ?? false,
-                created_at: pageData.created_at || item.created_at || '',
-                updated_at: pageData.updated_at || item.updated_at || '',
-                agent_id: item.id_agent || item.agent_id,
-                full_name: item.full_name || '',
-                gender: item.gender || '',
-                birth_date: item.birth_date,
-                death_date: item.death_date,
-                place_of_birth: item.place_of_birth,
-                place_of_death: item.place_of_death,
-                is_human: item.is_human ?? true,
-                avatar_url: item.avatar_url,
+                id: pageId,
+                title: agentInfo.full_name || 'Без названия',
+                epitaph: '',
+                biography: '',
+                is_public: false,
+                is_draft: false,
+                created_at: '',
+                updated_at: '',
+                agent_id: pageId,
+                full_name: agentInfo.full_name || '',
+                gender: agentInfo.gender || '',
+                birth_date: agentInfo.birth_date,
+                death_date: agentInfo.death_date,
+                place_of_birth: agentInfo.place_of_birth,
+                place_of_death: agentInfo.place_of_death,
+                is_human: agentInfo.is_human ?? true,
+                avatar_url: agentInfo.avatar_url,
               }
               setPage(detail)
-              setAgent(item)
-              setPages([pageData])
-              setSelectedPage(pageData)
-            } catch (fallbackErr) {
-              console.error('Fallback also failed:', fallbackErr)
+            }
+            setError(null)
+          } catch (err: any) {
+            console.error('Error fetching user page:', err)
+            console.error('Error details:', err.response?.status, err.response?.data)
+            if (err.response?.status === 401) {
+              setError('Требуется авторизация. Пожалуйста, войдите в систему.')
+            } else {
               setError('Не удалось загрузить страницу памяти. Возможно, она не существует или у вас нет доступа.')
             }
           }
@@ -414,20 +480,45 @@ export default function PageDetail() {
     }
   }
 
-  if (error || (!agent && !page)) {
+  if (error) {
     return (
       <div className="space-y-6">
         <Link
-          href="/pages"
+          href="/memory_page/list/my"
           className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Назад к списку
         </Link>
         <div className="text-center py-12 border-2 border-dashed rounded-xl">
-          <p className="text-gray-500 text-lg">{error || 'Страница не найдена'}</p>
+          <p className="text-gray-500 text-lg">{error}</p>
           <Link
-            href="/pages"
+            href="/memory_page/list/my"
+            className="mt-4 inline-block text-indigo-600 hover:text-indigo-800 font-medium"
+          >
+            Вернуться к списку страниц
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  // Если нет данных, но и ошибки нет, показываем пустые блоки
+  const hasData = agent || page || selectedPage
+  if (!hasData && !loading) {
+    return (
+      <div className="space-y-6">
+        <Link
+          href="/memory_page/list/my"
+          className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Назад к списку
+        </Link>
+        <div className="text-center py-12 border-2 border-dashed rounded-xl">
+          <p className="text-gray-500 text-lg">Данные страницы памяти отсутствуют</p>
+          <Link
+            href="/memory_page/list/my"
             className="mt-4 inline-block text-indigo-600 hover:text-indigo-800 font-medium"
           >
             Вернуться к списку страниц
@@ -443,7 +534,7 @@ export default function PageDetail() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-center gap-4">
           <Link
-            href="/pages"
+            href="/memory_page/list/my"
             className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -667,51 +758,256 @@ export default function PageDetail() {
         </>
       ) : (
         <>
-          {/* Информация об агенте */}
+          {/* Блок Агент */}
           <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Информация</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Агент</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="flex items-center gap-3">
                 <User className="w-5 h-5 text-gray-500" />
                 <div>
+                  <p className="text-sm text-gray-500">Полное имя</p>
+                  <p className="font-medium">{agent?.full_name || 'Не указано'}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <User className="w-5 h-5 text-gray-500" />
+                <div>
                   <p className="text-sm text-gray-500">Пол</p>
-                  <p className="font-medium">{displayPage.gender === 'M' ? 'Мужской' : displayPage.gender === 'F' ? 'Женский' : 'Не указан'}</p>
+                  <p className="font-medium">{agent?.gender === 'M' ? 'Мужской' : agent?.gender === 'F' ? 'Женский' : 'Не указан'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-gray-500" />
                 <div>
                   <p className="text-sm text-gray-500">Дата рождения</p>
-                  <p className="font-medium">{displayPage.birth_date ? new Date(displayPage.birth_date).toLocaleDateString('ru-RU') : 'Не указана'}</p>
+                  <p className="font-medium">{agent?.birth_date ? new Date(agent.birth_date).toLocaleDateString('ru-RU') : 'Не указана'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-gray-500" />
                 <div>
                   <p className="text-sm text-gray-500">Дата смерти</p>
-                  <p className="font-medium">{displayPage.death_date ? new Date(displayPage.death_date).toLocaleDateString('ru-RU') : 'Не указана'}</p>
+                  <p className="font-medium">{agent?.death_date ? new Date(agent.death_date).toLocaleDateString('ru-RU') : 'Не указана'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-gray-500" />
                 <div>
                   <p className="text-sm text-gray-500">Место рождения</p>
-                  <p className="font-medium">{displayPage.place_of_birth || 'Не указано'}</p>
+                  <p className="font-medium">{agent?.place_of_birth || 'Не указано'}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-5 h-5 text-gray-500" />
+                <div>
+                  <p className="text-sm text-gray-500">Место смерти</p>
+                  <p className="font-medium">{agent?.place_of_death || 'Не указано'}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <User className="w-5 h-5 text-gray-500" />
+                <div>
+                  <p className="text-sm text-gray-500">Тип</p>
+                  <p className="font-medium">{agent?.is_human ? 'Человек' : 'Питомец'}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <User className="w-5 h-5 text-gray-500" />
+                <div>
+                  <p className="text-sm text-gray-500">ID агента</p>
+                  <p className="font-medium text-sm">{agent?.id_agent || 'Не указан'}</p>
                 </div>
               </div>
             </div>
-            <div className="mt-6">
-              <p className="text-sm text-gray-500">Тип</p>
-              <p className="font-medium">{displayPage.is_human ? 'Человек' : 'Питомец'}</p>
-            </div>
           </div>
 
-          {/* Биография */}
-          <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Биография</h2>
-            <div className="prose max-w-none">
-              {renderBiography(displayPage.biography)}
+          {/* Навигация по страницам */}
+          {pages.length > 1 && (
+            <div className="bg-white rounded-xl shadow-sm border p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Выбор страницы</h3>
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={() => {
+                    const currentIndex = pages.findIndex(p => p.id_page === selectedPage?.id_page)
+                    const prevIndex = currentIndex > 0 ? currentIndex - 1 : pages.length - 1
+                    setSelectedPage(pages[prevIndex])
+                  }}
+                  className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+                >
+                  ← Предыдущая
+                </button>
+                <div className="text-center">
+                  <p className="font-medium">
+                    Страница {pages.findIndex(p => p.id_page === selectedPage?.id_page) + 1} из {pages.length}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    {selectedPage?.is_public ? 'Публичная' : 'Приватная'}
+                    {selectedPage?.is_draft ? ' (Черновик)' : ''}
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    const currentIndex = pages.findIndex(p => p.id_page === selectedPage?.id_page)
+                    const nextIndex = currentIndex < pages.length - 1 ? currentIndex + 1 : 0
+                    setSelectedPage(pages[nextIndex])
+                  }}
+                  className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+                >
+                  Следующая →
+                </button>
+              </div>
+              <div className="mt-4">
+                <select
+                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  value={selectedPage?.id_page}
+                  onChange={(e) => {
+                    const pageId = e.target.value
+                    const page = pages.find(p => p.id_page === pageId)
+                    setSelectedPage(page)
+                  }}
+                >
+                  {pages.map(p => (
+                    <option key={p.id_page} value={p.id_page}>
+                      {p.is_public ? 'Публичная' : 'Приватная'} {p.is_draft ? '(Черновик)' : ''} - {p.epitaph?.substring(0, 50) || 'Без эпиграфа'}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
+          )}
+
+          {/* Блок Страница */}
+          <div className="bg-white rounded-xl shadow-sm border p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-semibold text-gray-900">Страница памяти</h2>
+              {!creatingNewPage && (
+                <button
+                  onClick={() => setCreatingNewPage(true)}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                >
+                  + Создать описание
+                </button>
+              )}
+            </div>
+            
+            {creatingNewPage ? (
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-gray-900">Создание новой страницы</h3>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Эпитафия
+                  </label>
+                  <textarea
+                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    rows={3}
+                    value={newPageData.epitaph}
+                    onChange={(e) => setNewPageData({...newPageData, epitaph: e.target.value})}
+                    placeholder="Введите эпитафию..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Биография
+                  </label>
+                  <textarea
+                    className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    rows={6}
+                    value={newPageData.biography}
+                    onChange={(e) => setNewPageData({...newPageData, biography: e.target.value})}
+                    placeholder="Введите биографию..."
+                  />
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="is_public"
+                      checked={newPageData.is_public}
+                      onChange={(e) => setNewPageData({...newPageData, is_public: e.target.checked})}
+                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <label htmlFor="is_public" className="text-sm font-medium text-gray-700">
+                      Публичная страница
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="is_draft"
+                      checked={newPageData.is_draft}
+                      onChange={(e) => setNewPageData({...newPageData, is_draft: e.target.checked})}
+                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <label htmlFor="is_draft" className="text-sm font-medium text-gray-700">
+                      Черновик
+                    </label>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <button
+                    onClick={handleCreateNewPage}
+                    disabled={updating}
+                    className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50"
+                  >
+                    {updating ? 'Создание...' : 'Добавить'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCreatingNewPage(false)
+                      setNewPageData({
+                        epitaph: '',
+                        biography: '',
+                        is_public: false,
+                        is_draft: true
+                      })
+                    }}
+                    className="px-6 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </div>
+            ) : selectedPage ? (
+              <>
+                <div className="mb-6">
+                  <h3 className="text-lg font-medium text-gray-800 mb-2">Эпитафия</h3>
+                  <p className="text-xl italic text-gray-700">"{selectedPage.epitaph || 'Нет эпитафии'}"</p>
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-lg font-medium text-gray-800 mb-2">Биография</h3>
+                  <div className="prose max-w-none">
+                    {renderBiography(selectedPage.biography)}
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-sm text-gray-500">Статус</p>
+                    <p className="font-medium">
+                      {selectedPage.is_public ? 'Публичная' : 'Приватная'}
+                      {selectedPage.is_draft ? ' (Черновик)' : ''}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Дата создания</p>
+                    <p className="font-medium">
+                      {selectedPage.created_at ? new Date(selectedPage.created_at).toLocaleDateString('ru-RU') : 'Не указана'}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Дата обновления</p>
+                    <p className="font-medium">
+                      {selectedPage.updated_at ? new Date(selectedPage.updated_at).toLocaleDateString('ru-RU') : 'Не указана'}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">ID страницы</p>
+                    <p className="font-medium text-sm">{selectedPage.id_page}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <p className="text-gray-500">Нет данных о странице</p>
+            )}
           </div>
 
           {/* Метаданные */}

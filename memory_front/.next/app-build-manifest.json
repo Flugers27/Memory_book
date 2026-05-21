@@ -6,15 +6,10 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/memory_page/my/create/page": [
+    "/memory_page/my/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/memory_page/my/create/page.js"
-    ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/memory_page/my/[id]/page.js"
     ],
     "/memory_page/list/public/page": [
       "static/chunks/webpack.js",
@@ -26,25 +21,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/user/login/page.js"
     ],
-    "/memory_page/public/[id]/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/memory_page/public/[id]/page.js"
+      "static/chunks/app/page.js"
     ],
     "/memory_page/list/my/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/memory_page/list/my/page.js"
     ],
-    "/memory_page/my/[id]/page": [
+    "/memory_page/public/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/memory_page/my/[id]/page.js"
+      "static/chunks/app/memory_page/public/[id]/page.js"
     ],
-    "/_not-found/page": [
+    "/memory_page/my/create/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/memory_page/my/create/page.js"
     ]
   }
 }

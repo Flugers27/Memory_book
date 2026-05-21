@@ -32,9 +32,18 @@ const isPublicUrl = (url: string): boolean => {
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('access_token')
+    console.log(`[API Request Debug] URL: ${config.url}, Token: "${token ? token.substring(0, 10) + '...' : 'null'}", isPublic: ${config.url ? isPublicUrl(config.url) : 'unknown'}`)
     // Не добавляем токен для публичных эндпоинтов
     if (token && config.url && !isPublicUrl(config.url)) {
       config.headers.Authorization = `Bearer ${token}`
+      console.log(`[API Request Debug] Added Authorization header for ${config.url}`)
+    } else if (!token && config.url && !isPublicUrl(config.url)) {
+      console.warn(`[API Request Debug] No token found for private endpoint: ${config.url}`)
+      // Если пользователь есть в store, но токена нет, возможно нужно выйти
+      const userStr = localStorage.getItem('auth-storage')
+      if (userStr) {
+        console.warn(`[API Request Debug] User exists in store but no token. Store: ${userStr}`)
+      }
     }
     console.log(`[API Request] ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`, config.params ? { params: config.params } : '')
   }
@@ -45,13 +54,13 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => {
     if (typeof window !== 'undefined') {
-      console.log(`[API Response] ${response.status} ${response.config.method?.toUpperCase()} ${response.config.url}`)
+      console.log(`[API Response] ${response.status} ${response.config.method?.toUpperCase()} ${response.config.url}`, response.data)
     }
     return response
   },
   async (error) => {
     if (typeof window !== 'undefined') {
-      console.error('[API Error]', error.message, error.response?.status, error.config?.url)
+      console.error('[API Error]', error.message, error.response?.status, error.config?.url, error.response?.data)
     }
     const originalRequest = error.config
     // Пропускаем обработку 401 для публичных URL
@@ -68,7 +77,7 @@ api.interceptors.response.use(
       } catch (refreshError) {
         localStorage.removeItem('access_token')
         localStorage.removeItem('refresh_token')
-        window.location.href = '/login'
+        window.location.href = '/user/login'
         return Promise.reject(refreshError)
       }
     }

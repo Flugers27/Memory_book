@@ -53,6 +53,23 @@ export default function CreatePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Клиентская валидация
+    if (!agentForm.full_name.trim()) {
+      toast.error('Пожалуйста, введите полное имя агента')
+      return
+    }
+    
+    if (!pageForm.epitaph.trim()) {
+      toast.error('Пожалуйста, введите эпитафию')
+      return
+    }
+    
+    if (!pageForm.biography.trim()) {
+      toast.error('Пожалуйста, введите биографию')
+      return
+    }
+    
     setLoading(true)
     try {
       // Маппинг пола в один символ для базы данных
@@ -63,30 +80,44 @@ export default function CreatePage() {
         '': null
       }
       
+      // Обработка дат: пустые строки должны быть null
+      const parseDate = (dateStr: string): string | null => {
+        if (!dateStr || dateStr.trim() === '') return null
+        // Проверяем, что дата в правильном формате YYYY-MM-DD
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/
+        if (!dateRegex.test(dateStr)) {
+          console.warn(`Date format might be incorrect: ${dateStr}`)
+        }
+        return dateStr
+      }
+      
       // Подготовка данных агента
       const agentData = {
-        full_name: agentForm.full_name,
+        full_name: agentForm.full_name.trim(),
         gender: genderMap[agentForm.gender] || null,
-        birth_date: agentForm.birth_date || null,
-        death_date: agentForm.death_date || null,
-        place_of_birth: agentForm.place_of_birth || null,
-        place_of_death: agentForm.place_of_death || null,
-        avatar_url: agentForm.avatar_url || null,
+        birth_date: parseDate(agentForm.birth_date),
+        death_date: parseDate(agentForm.death_date),
+        place_of_birth: agentForm.place_of_birth?.trim() || null,
+        place_of_death: agentForm.place_of_death?.trim() || null,
+        avatar_url: agentForm.avatar_url?.trim() || null,
         is_human: agentForm.is_human,
       }
 
+      console.log('Sending agent data:', JSON.stringify(agentData, null, 2))
+
       // 1. Создаем агента
       const agentResponse = await memoryAPI.createAgent(agentData)
+      console.log('Agent created:', agentResponse)
       const agentId = agentResponse.id_agent
       
       // 2. Создаем страницу с agent_id
       const pageData = {
-        epitaph: pageForm.epitaph,
+        epitaph: pageForm.epitaph.trim(),
         // biography должен быть массивом BiographyItem
-        biography: pageForm.biography ? [
+        biography: pageForm.biography.trim() ? [
           {
             title: 'Биография',
-            info: pageForm.biography,
+            info: pageForm.biography.trim(),
             titles: []
           }
         ] : [],
@@ -94,29 +125,51 @@ export default function CreatePage() {
         is_draft: pageForm.is_draft,
         agent_id: agentId,
       }
+
+      console.log('Sending page data:', JSON.stringify(pageData, null, 2))
       
-      await memoryAPI.createPage(pageData)
+      const pageResponse = await memoryAPI.createPage(pageData)
+      console.log('Page created:', pageResponse)
       
       toast.success('Страница памяти успешно создана!')
-      router.push('/pages')
+      // Даем пользователю время увидеть сообщение об успехе
+      setTimeout(() => {
+        router.push('/memory_page/list/my')
+      }, 1500)
     } catch (error: any) {
       console.error('Error creating memory page:', error)
+      console.error('Error response:', error.response?.data)
+      console.error('Error status:', error.response?.status)
+      console.error('Error headers:', error.response?.headers)
       
       // Улучшенная обработка ошибок валидации
       if (error.response?.status === 422) {
         const errors = error.response.data?.detail
+        console.error('Validation errors:', errors)
         if (Array.isArray(errors)) {
-          const errorMessages = errors.map((err: any) =>
-            `${err.loc?.join('.')}: ${err.msg}`
-          ).join(', ')
-          toast.error(`Ошибка валидации: ${errorMessages}`)
+          const errorMessages = errors.map((err: any) => {
+            const field = err.loc?.join('.') || 'unknown'
+            return `${field}: ${err.msg}`
+          }).join('\n')
+          toast.error(`Ошибка валидации:\n${errorMessages}`)
         } else if (typeof errors === 'string') {
           toast.error(`Ошибка валидации: ${errors}`)
+        } else if (errors && typeof errors === 'object') {
+          // Если errors - объект с полями
+          const errorMessages = Object.entries(errors).map(([key, value]) =>
+            `${key}: ${value}`
+          ).join('\n')
+          toast.error(`Ошибка валидации:\n${errorMessages}`)
         } else {
           toast.error('Ошибка валидации данных. Проверьте заполнение полей.')
         }
+      } else if (error.response?.status === 500) {
+        toast.error('Внутренняя ошибка сервера. Попробуйте позже.')
+      } else if (error.response?.status === 401) {
+        toast.error('Сессия истекла. Пожалуйста, войдите снова.')
+        router.push('/user/login')
       } else {
-        toast.error(error.response?.data?.detail || 'Ошибка создания страницы.')
+        toast.error(error.response?.data?.detail || error.message || 'Ошибка создания страницы.')
       }
     } finally {
       setLoading(false)
