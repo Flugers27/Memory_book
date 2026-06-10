@@ -14,16 +14,20 @@ from database.models.auth import User, RefreshToken, UserRole
 from services.Auth import schemas
 from ..utils import send_verification_email
 from services.Auth.auth_logic import (
-    create_verification_token, verify_verification_token,
+    create_password_reset_token,
+    create_verification_token,
+    verify_password_reset_token,
+    verify_verification_token,
     authenticate_user,
     create_access_token,
     create_refresh_token,
     save_refresh_token,
     verify_refresh_token,
     verify_token,
-    get_password_hash
+    get_password_hash,
+    revoke_token,
 )
-from services.Auth.crud import get_user_by_id, create_user
+from services.Auth.crud import get_user_by_id, create_user, update_user_password, get_user_by_email
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
@@ -176,6 +180,7 @@ async def logout(
         payload = verify_token(token_data.refresh_token, "refresh")
         user_id = uuid.UUID(payload.get("sub"))
 
+        revoke_token(token_data.refresh_token)
         db.query(RefreshToken).filter(RefreshToken.user_id == user_id).delete()
         db.commit()
         return {"message": "Successfully logged out"}
@@ -185,6 +190,67 @@ async def logout(
     except Exception as e:
         print(f"⚠️ Ошибка при выходе: {str(e)}")
         return {"message": "Successfully logged out"}
+
+
+@router.get("/verify-email")
+async def verify_email(token: str, db: Session = Depends(get_db)):
+    """Подтверждение email через JWT-токен."""
+    try:
+        user_id = verify_verification_token(token)
+        user = get_user_by_id(db, user_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        if user.is_verified:
+            return {"message": "Email already verified"}
+
+        user.is_verified = True
+        db.commit()
+        return {"message": "Email verified successfully"}
+    except HTTPException:
+        raise
+
+
+@router.post("/password-reset/request")
+async def request_password_reset(
+    data: schemas.PasswordResetRequest,
+    db: Session = Depends(get_db),
+):
+    """Запрос на сброс пароля. В dev-режиме возвращает токен для проверки."""
+    user = get_user_by_email(db, data.email)
+    if user is None:
+        return {"message": "If the email exists, a reset token was generated"}
+
+    reset_token = create_password_reset_token(user.id_user, user.email)
+    return {
+        "message": "Password reset token generated",
+        "token": reset_token,
+        "email": user.email,
+    }
+
+
+@router.post("/password-reset/confirm")
+async def confirm_password_reset(
+    data: schemas.PasswordResetConfirm,
+    db: Session = Depends(get_db),
+):
+    """Подтверждение сброса пароля и установка нового пароля."""
+    try:
+        user_id = verify_password_reset_token(data.token)
+    except HTTPException:
+        raise
+
+    user = get_user_by_id(db, user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    if not update_user_password(db, user.id_user, data.new_password):
+        raise HTTPException(status_code=500, detail="Failed to update password")
+
+    db.query(RefreshToken).filter(RefreshToken.user_id == user.id_user).delete()
+    db.commit()
+
+    return {"message": "Password updated successfully"}
 
 
 @router.post("/validate", response_model=schemas.TokenValidationResponse)

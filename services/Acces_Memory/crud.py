@@ -13,6 +13,26 @@ from database.models.auth import User
 from . import schemas
 
 
+def normalize_uuid(value: Any) -> uuid.UUID:
+    """Приводит строковый UUID и UUID-объект к единому типу UUID."""
+    if isinstance(value, uuid.UUID):
+        return value
+
+    if value is None:
+        raise ValueError("UUID value is required")
+
+    return uuid.UUID(str(value))
+
+
+def can_manage_access(page_owner_id: Any, current_user_id: Any, granted_by_id: Any) -> bool:
+    """Проверяет, может ли пользователь управлять доступом к странице."""
+    owner_id = normalize_uuid(page_owner_id)
+    current_user = normalize_uuid(current_user_id)
+    grantor_id = normalize_uuid(granted_by_id) if granted_by_id is not None else None
+
+    return current_user == owner_id or (grantor_id is not None and current_user == grantor_id)
+
+
 def get_access_by_id(db: Session, access_id: uuid.UUID) -> Optional[PageAccessControl]:
     """Получить запись доступа по ID."""
     return db.query(PageAccessControl).filter(PageAccessControl.id_access == access_id).first()

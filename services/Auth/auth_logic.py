@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Optional
+import hashlib
 import uuid
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -15,6 +16,28 @@ from .crud import get_user_by_email, get_user_by_username
 from argon2 import PasswordHasher
 
 ph = PasswordHasher()
+
+_REVOKED_TOKENS: set[str] = set()
+
+
+def _token_fingerprint(token: str) -> str:
+    """Возвращает устойчивый идентификатор JWT для списка отозванных токенов."""
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def revoke_token(token: str) -> None:
+    """Отзывает JWT: добавляет его в локальный blacklist на время работы процесса."""
+    try:
+        jwt.decode(token, config.SECRET_KEY, algorithms=[config.ALGORITHM], options={"verify_exp": False})
+    except JWTError as exc:
+        raise HTTPException(status_code=401, detail="Invalid token") from exc
+
+    _REVOKED_TOKENS.add(_token_fingerprint(token))
+
+
+def is_token_revoked(token: str) -> bool:
+    """Проверяет, был ли JWT отозван в текущем процессе."""
+    return _token_fingerprint(token) in _REVOKED_TOKENS
 
 # pwd_context = CryptContext(
 #     schemes=["argon2"],
@@ -60,6 +83,8 @@ def create_refresh_token(user_id: uuid.UUID, email: str) -> str:
 def verify_token(token: str, token_type: str) -> dict:
     try:
         payload = jwt.decode(token, config.SECRET_KEY, algorithms=[config.ALGORITHM])
+        if is_token_revoked(token):
+            raise HTTPException(status_code=401, detail="Token revoked")
         if payload.get("type") != token_type:
             raise HTTPException(status_code=401, detail="Invalid token type")
         return payload
@@ -134,6 +159,30 @@ def create_verification_token(user_id: uuid.UUID, expires_minutes: int = 60) -> 
         "exp": datetime.utcnow() + timedelta(minutes=expires_minutes)
     }
     return jwt.encode(payload, config.SECRET_KEY, algorithm=config.ALGORITHM)
+
+
+def create_password_reset_token(user_id: uuid.UUID, email: str, expires_minutes: int = 30) -> str:
+    payload = {
+        "sub": str(user_id),
+        "email": email,
+        "type": "password_reset",
+        "exp": datetime.utcnow() + timedelta(minutes=expires_minutes)
+    }
+    return jwt.encode(payload, config.SECRET_KEY, algorithm=config.ALGORITHM)
+
+
+def verify_password_reset_token(token: str) -> uuid.UUID:
+    try:
+        payload = jwt.decode(token, config.SECRET_KEY, algorithms=[config.ALGORITHM])
+        if payload.get("type") != "password_reset":
+            raise HTTPException(status_code=400, detail="Invalid token type")
+        if is_token_revoked(token):
+            raise HTTPException(status_code=401, detail="Token revoked")
+        return uuid.UUID(payload.get("sub"))
+    except jwt.ExpiredSignatureError as exc:
+        raise HTTPException(status_code=400, detail="Token expired") from exc
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail="Invalid token") from exc
 
 def verify_verification_token(token: str) -> uuid.UUID:
     try:

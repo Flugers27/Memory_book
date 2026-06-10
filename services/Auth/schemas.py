@@ -64,18 +64,22 @@ class PasswordUpdate(BaseModel):
     """Схема для обновления пароля"""
     current_password: str
     new_password: str = Field(..., min_length=3, max_length=100)
-    
-    @validator('new_password')
-    def validate_new_password(cls, v):
-        # if len(v) < 8:
-        #     raise ValueError('Password must be at least 8 characters long')
-        # if not any(c.isupper() for c in v):
-        #     raise ValueError('Password must contain at least one uppercase letter')
-        # if not any(c.islower() for c in v):
-        #     raise ValueError('Password must contain at least one lowercase letter')
-        # if not any(c.isdigit() for c in v):
-        #     raise ValueError('Password must contain at least one digit')
-        return v
+
+
+class PasswordResetRequest(BaseModel):
+    """Запрос на сброс пароля"""
+    email: EmailStr
+
+
+class PasswordResetConfirm(BaseModel):
+    """Подтверждение сброса пароля"""
+    token: str
+    new_password: str = Field(..., min_length=3, max_length=100)
+
+
+class EmailChangeRequest(BaseModel):
+    """Запрос на смену email"""
+    new_email: EmailStr
 
 class TokenValidationResponse(BaseModel):
     """Схема ответа для валидации токена"""

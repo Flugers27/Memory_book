@@ -79,9 +79,13 @@ class ServiceProxy:
         
         # Добавляем информацию о пользователе (если есть)
         if current_user:
-            headers['X-User-ID'] = current_user.get('user_id', '')
+            user_id = current_user.get('user_id') or current_user.get('sub') or ''
+
+            # Передаём ID пользователя в стандартном и совместимом формате
+            headers['X-User-Id'] = str(user_id)
+            headers['X-User-ID'] = str(user_id)
             headers['X-User-Email'] = current_user.get('email', '')
-            
+
             # Передаем оригинальный токен для внутренних проверок
             if 'token' in current_user:
                 headers['X-Auth-Token'] = current_user['token']

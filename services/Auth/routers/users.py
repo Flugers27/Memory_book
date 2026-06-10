@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../../'))
 from database.session import get_db
 
 # Импортируем из текущего сервиса
-from database.models.auth import User
+from database.models.auth import RefreshToken, User
 from .. import schemas
 from ..dependencies import get_current_active_user
 from ..auth_logic import verify_password
@@ -130,6 +130,44 @@ async def update_password(
         )
     
     return {"message": "Password updated successfully"}
+
+@router.put("/me/email", status_code=status.HTTP_200_OK)
+async def change_email(
+    email_data: schemas.EmailChangeRequest,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db),
+):
+    """Смена email текущего пользователя."""
+    if email_data.new_email == current_user.email:
+        return {"message": "Email is already in use"}
+
+    existing_user = db.query(User).filter(
+        User.email == email_data.new_email,
+        User.id_user != current_user.id_user,
+    ).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+
+    current_user.email = str(email_data.new_email)
+    current_user.is_verified = False
+    db.commit()
+    db.refresh(current_user)
+
+    return {"message": "Email updated successfully", "email": current_user.email}
+
+
+@router.delete("/me", status_code=status.HTTP_200_OK)
+async def delete_account(
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db),
+):
+    """Деактивация аккаунта и отзыв всех refresh-токенов."""
+    current_user.is_active = False
+    db.query(RefreshToken).filter(RefreshToken.user_id == current_user.id_user).delete()
+    db.commit()
+
+    return {"message": "Account deleted successfully"}
+
 
 @router.get("/me/tokens", status_code=status.HTTP_200_OK)
 async def get_user_tokens(
