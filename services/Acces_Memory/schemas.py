@@ -1,7 +1,7 @@
 """
 Схемы Pydantic для управления доступом.
 """
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List, Any
 from datetime import datetime, date
 import uuid
@@ -13,8 +13,7 @@ class UserShortInfo(BaseModel):
     full_name: Optional[str]
     username: Optional[str]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PageShortInfo(BaseModel):
@@ -23,8 +22,7 @@ class PageShortInfo(BaseModel):
     is_public: bool
     is_draft: bool
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class AgentShortInfo(BaseModel):
@@ -34,8 +32,7 @@ class AgentShortInfo(BaseModel):
     is_human: bool
     page: Optional[PageShortInfo] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PageAccessListItem(BaseModel):
@@ -51,8 +48,7 @@ class PageAccessListItem(BaseModel):
     expires_at: Optional[datetime]
     is_active: bool
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class GrantedAccessListItem(BaseModel):
@@ -68,8 +64,7 @@ class GrantedAccessListItem(BaseModel):
     expires_at: Optional[datetime]
     is_active: bool
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PageAccessListResponse(BaseModel):
@@ -117,8 +112,7 @@ class PageAccessResponse(PageAccessBase):
     granted_by: Optional[uuid.UUID]
     granted_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class GrantAccessRequest(BaseModel):
@@ -256,8 +250,7 @@ class AgentFullInfo(BaseModel):
     is_human: bool
     user_id: uuid.UUID
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PageFullInfo(BaseModel):
@@ -272,8 +265,7 @@ class PageFullInfo(BaseModel):
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PageAccessDetails(BaseModel):
@@ -286,8 +278,7 @@ class PageAccessDetails(BaseModel):
         default_factory=lambda: {"can_view": False, "can_edit": False}
     )
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PageAccessCheckResponse(BaseModel):
@@ -298,8 +289,7 @@ class PageAccessCheckResponse(BaseModel):
     access_details: Optional[PageAccessDetails] = None
     message: Optional[str] = None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Добавим в конец schemas.py
@@ -328,20 +318,20 @@ def create_page_access_details_from_models(
     """
     # Преобразуем страницу
     page_info = PageFullInfo(
-        id_page=uuid.UUID(page.id_page),
+        id_page=page.id_page,
         epitaph=page.epitaph,
         biography=page.biography,
         is_public=page.is_public,
         is_draft=page.is_draft,
-        agent_id=uuid.UUID(page.agent_id),
-        user_id=uuid.UUID(page.user_id),
+        agent_id=page.agent_id,
+        user_id=page.user_id,
         created_at=page.created_at,
         updated_at=page.updated_at
     )
     
     # Преобразуем агента
     agent_info = AgentFullInfo(
-        id_agent=uuid.UUID(agent.id_agent),
+        id_agent=agent.id_agent,
         full_name=agent.full_name,
         gender=agent.gender,
         birth_date=agent.birth_date,
@@ -350,7 +340,7 @@ def create_page_access_details_from_models(
         place_of_death=agent.place_of_death,
         avatar_url=agent.avatar_url,
         is_human=agent.is_human,
-        user_id=uuid.UUID(agent.user_id)
+        user_id=agent.user_id
     )
     
     # Преобразуем информацию о доступе
@@ -375,11 +365,11 @@ def create_page_access_details_from_models(
             granted_by=access_control.granted_by,
             grantor_info=grantor_info,
             agent=AgentShortInfo(
-                id_agent=uuid.UUID(agent.id_agent),
+                id_agent=agent.id_agent,
                 full_name=agent.full_name,
                 is_human=agent.is_human,
                 page=PageShortInfo(
-                    id_page=uuid.UUID(page.id_page),
+                    id_page=page.id_page,
                     is_public=page.is_public,
                     is_draft=page.is_draft
                 )
@@ -395,9 +385,9 @@ def create_page_access_details_from_models(
     current_user_permissions = {"can_view": False, "can_edit": False}
     if current_user_id:
         # Проверяем, является ли текущий пользователь владельцем
-        if str(page.user_id) == str(current_user_id):
+        if page.user_id == current_user_id:
             current_user_permissions = {"can_view": True, "can_edit": True}
-        elif access_control and str(access_control.user_id) == str(current_user_id):
+        elif access_control and access_control.user_id == current_user_id:
             current_user_permissions = {
                 "can_view": access_control.can_view,
                 "can_edit": access_control.can_edit
@@ -411,6 +401,6 @@ def create_page_access_details_from_models(
             id_user=grantor.id_user,
             full_name=grantor.full_name,
             username=grantor.username
-        ) if grantor else None,
+        ) if grantor is not None else None,
         current_user_permissions=current_user_permissions
     )

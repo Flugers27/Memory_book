@@ -18,6 +18,7 @@ class AccessConfig:
     SECRET_KEY = base_config.SECRET_KEY
     ALGORITHM = base_config.ALGORITHM
     CORS_ORIGINS = base_config.CORS_ORIGINS
+    DEBUG = base_config.DEBUG
     
     # Специфичные настройки
     SERVICE_PORT = int(os.getenv("ACCESS_PORT", 8003))

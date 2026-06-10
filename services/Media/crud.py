@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_, desc, asc
 from typing import Optional, List, Dict, Any
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 
 from database.models.media import MediaBD
@@ -16,7 +16,7 @@ from .config import config
 def create_media(db: Session, media_data: schemas.MediaCreate) -> MediaBD:
     """Создает запись о медиа в базе данных"""
     db_media = MediaBD(
-        id_media=str(uuid.uuid4()),
+        id_media=uuid.uuid4(),
         user_id=media_data.user_id,
         page_id=media_data.page_id,
         file_extension=media_data.file_extension,
@@ -38,17 +38,17 @@ def create_media(db: Session, media_data: schemas.MediaCreate) -> MediaBD:
     return db_media
 
 
-def get_media_by_id(db: Session, media_id: str) -> Optional[MediaBD]:
+def get_media_by_id(db: Session, media_id: uuid.UUID) -> Optional[MediaBD]:
     """Получает медиа по ID"""
     return db.query(MediaBD).filter(MediaBD.id_media == media_id).first()
 
 
-def get_media_by_user(db: Session, user_id: str, skip: int = 0, limit: int = 100) -> List[MediaBD]:
+def get_media_by_user(db: Session, user_id: uuid.UUID, skip: int = 0, limit: int = 100) -> List[MediaBD]:
     """Получает все медиа пользователя"""
     return db.query(MediaBD).filter(MediaBD.user_id == user_id).offset(skip).limit(limit).all()
 
 
-def get_temp_media_by_user(db: Session, user_id: str) -> List[MediaBD]:
+def get_temp_media_by_user(db: Session, user_id: uuid.UUID) -> List[MediaBD]:
     """Получает временные медиа пользователя"""
     return db.query(MediaBD).filter(
         and_(
@@ -58,7 +58,7 @@ def get_temp_media_by_user(db: Session, user_id: str) -> List[MediaBD]:
     ).all()
 
 
-def get_media_by_page(db: Session, page_id: str, include_temp: bool = False) -> List[MediaBD]:
+def get_media_by_page(db: Session, page_id: uuid.UUID, include_temp: bool = False) -> List[MediaBD]:
     """Получает все медиа страницы"""
     query = db.query(MediaBD).filter(MediaBD.page_id == page_id)
     if not include_temp:
@@ -66,13 +66,13 @@ def get_media_by_page(db: Session, page_id: str, include_temp: bool = False) -> 
     return query.order_by(MediaBD.sort_order.asc()).all()
 
 
-def update_media(db: Session, media_id: str, media_update: schemas.MediaUpdate) -> Optional[MediaBD]:
+def update_media(db: Session, media_id: uuid.UUID, media_update: schemas.MediaUpdate) -> Optional[MediaBD]:
     """Обновляет информацию о медиа"""
     db_media = get_media_by_id(db, media_id)
     if not db_media:
         return None
     
-    update_data = media_update.dict(exclude_unset=True)
+    update_data = media_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(db_media, field, value)
     
@@ -81,7 +81,7 @@ def update_media(db: Session, media_id: str, media_update: schemas.MediaUpdate) 
     return db_media
 
 
-def confirm_temp_media(db: Session, media_id: str, page_id: str) -> Optional[MediaBD]:
+def confirm_temp_media(db: Session, media_id: uuid.UUID, page_id: uuid.UUID) -> Optional[MediaBD]:
     """Подтверждает временное медиа, привязывая его к странице"""
     db_media = get_media_by_id(db, media_id)
     if not db_media:
@@ -94,7 +94,7 @@ def confirm_temp_media(db: Session, media_id: str, page_id: str) -> Optional[Med
     return db_media
 
 
-def delete_media(db: Session, media_id: str) -> bool:
+def delete_media(db: Session, media_id: uuid.UUID) -> bool:
     """Удаляет медиа из базы данных"""
     db_media = get_media_by_id(db, media_id)
     if not db_media:
@@ -107,7 +107,7 @@ def delete_media(db: Session, media_id: str) -> bool:
 
 def delete_old_temp_media(db: Session, hours_old: int = 24) -> int:
     """Удаляет старые временные медиа"""
-    cutoff_time = datetime.utcnow() - timedelta(hours=hours_old)
+    cutoff_time = datetime.now(timezone.utc) - timedelta(hours=hours_old)
     
     # Находим старые временные медиа
     old_media = db.query(MediaBD).filter(
@@ -129,7 +129,7 @@ def delete_old_temp_media(db: Session, hours_old: int = 24) -> int:
     return count
 
 
-def get_user_temp_media_count(db: Session, user_id: str) -> int:
+def get_user_temp_media_count(db: Session, user_id: uuid.UUID) -> int:
     """Получает количество временных медиа пользователя"""
     return db.query(MediaBD).filter(
         and_(
@@ -140,9 +140,9 @@ def get_user_temp_media_count(db: Session, user_id: str) -> int:
 
 
 def search_media(
-    db: Session, 
-    user_id: Optional[str] = None,
-    page_id: Optional[str] = None,
+    db: Session,
+    user_id: Optional[uuid.UUID] = None,
+    page_id: Optional[uuid.UUID] = None,
     media_type: Optional[str] = None,
     is_temp: Optional[bool] = None,
     skip: int = 0,

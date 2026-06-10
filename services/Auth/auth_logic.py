@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 import hashlib
 import uuid
@@ -60,7 +60,7 @@ def _create_token(user_id: uuid.UUID, email: str, token_type: str, expires_delta
         "sub": str(user_id),
         "email": email,
         "type": token_type,
-        "exp": datetime.utcnow() + expires_delta
+        "exp": datetime.now(timezone.utc) + expires_delta
     }
     return jwt.encode(payload, config.SECRET_KEY, algorithm=config.ALGORITHM)
 
@@ -129,7 +129,7 @@ def save_refresh_token(
             token_hash=token_hash,
             device_info=device_info,
             ip_address=ip_address,
-            expires_at=datetime.utcnow() + timedelta(days=config.REFRESH_TOKEN_EXPIRE_DAYS)
+            expires_at=datetime.now(timezone.utc) + timedelta(days=config.REFRESH_TOKEN_EXPIRE_DAYS)
         )
     )
     db.commit()
@@ -143,7 +143,7 @@ def verify_refresh_token(
     # Ищем токен по user_id и сроку действия, игнорируя device_info
     token = db.query(RefreshToken).filter(
         RefreshToken.user_id == user_id,
-        RefreshToken.expires_at > datetime.utcnow()
+        RefreshToken.expires_at > datetime.now(timezone.utc)
     ).first()
 
     if not token:
@@ -156,7 +156,7 @@ def create_verification_token(user_id: uuid.UUID, expires_minutes: int = 60) -> 
     payload = {
         "sub": str(user_id),
         "type": "email_verification",
-        "exp": datetime.utcnow() + timedelta(minutes=expires_minutes)
+        "exp": datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)
     }
     return jwt.encode(payload, config.SECRET_KEY, algorithm=config.ALGORITHM)
 
@@ -166,7 +166,7 @@ def create_password_reset_token(user_id: uuid.UUID, email: str, expires_minutes:
         "sub": str(user_id),
         "email": email,
         "type": "password_reset",
-        "exp": datetime.utcnow() + timedelta(minutes=expires_minutes)
+        "exp": datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)
     }
     return jwt.encode(payload, config.SECRET_KEY, algorithm=config.ALGORITHM)
 

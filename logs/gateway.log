@@ -4948,3 +4948,6 @@
 2026-04-28 14:19:00,540 - gateway.main - INFO - Gateway request: GET /memory/memory_page/0fe815f1-0173-45ab-8273-48004ad1cbf8
 2026-04-28 14:19:01,155 - httpx - INFO - HTTP Request: GET http://localhost:8002/memory_page/0fe815f1-0173-45ab-8273-48004ad1cbf8 "HTTP/1.1 200 OK"
 2026-04-28 14:19:01,161 - gateway.middleware - INFO - 127.0.0.1 - "GET /memory/memory_page/0fe815f1-0173-45ab-8273-48004ad1cbf8" 200 - 0.623s
+2026-06-10 20:22:21,999 - gateway.middleware - INFO - 127.0.0.1 - "GET /docs" 200 - 0.006s
+2026-06-10 20:22:22,172 - gateway.middleware - INFO - 127.0.0.1 - "GET /openapi.json" 200 - 0.021s
+2026-06-10 20:24:10,071 - gateway.middleware - INFO - 127.0.0.1 - "GET /" 200 - 0.003s

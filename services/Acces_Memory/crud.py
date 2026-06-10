@@ -2,14 +2,12 @@
 CRUD операции для управления доступом к страницам (исправленная версия).
 """
 from sqlalchemy.orm import Session
-from sqlalchemy import and_, or_, text
+from sqlalchemy import and_, text
 from typing import List, Optional, Tuple, Dict, Any
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 from database.models.access import PageAccessControl
-from database.models.memory import AgentBD, PageBD
-from database.models.auth import User
 from . import schemas
 
 
@@ -223,7 +221,7 @@ def check_user_page_access(
             access_data = dict(access_result._mapping)
             
             # Проверяем срок действия доступа
-            if access_data['expires_at'] and access_data['expires_at'] < datetime.now():
+            if access_data['expires_at'] and access_data['expires_at'] < datetime.now(timezone.utc):
                 return {
                     'has_access': False,
                     'can_view': False,
@@ -325,7 +323,7 @@ def get_page_with_access_check(
 def create_access(db: Session, access_data: schemas.PageAccessCreate, grantor_id: uuid.UUID) -> PageAccessControl:
     """Создать новую запись доступа."""
     db_access = PageAccessControl(
-        **access_data.dict(),
+        **access_data.model_dump(),
         granted_by=grantor_id
     )
     db.add(db_access)
@@ -340,7 +338,7 @@ def update_access(db: Session, access_id: uuid.UUID, update_data: schemas.PageAc
     if not db_access:
         return None
     
-    for key, value in update_data.dict(exclude_unset=True).items():
+    for key, value in update_data.model_dump(exclude_unset=True).items():
         setattr(db_access, key, value)
     
     db.commit()

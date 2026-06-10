@@ -34,6 +34,9 @@ class ServiceProxy:
         # Для Page Service добавляем префикс "page/"
         if service == "page" and not path.startswith("page/"):
             path = f"page/{path}"
+        # Для Family Tree Service добавляем префикс "family/"
+        if service == "family" and not path.startswith("family/"):
+            path = f"family/{path}"
         
         target_url = f"{service_url.rstrip('/')}/{path.lstrip('/')}"
         

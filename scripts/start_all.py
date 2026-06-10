@@ -65,6 +65,14 @@ def main():
         )
         processes.append(access_proc)
         
+        # Запускаем Family Tree Service
+        family_proc = start_service(
+            "Family Tree Service",
+            "services/Family_Tree",
+            8005
+        )
+        processes.append(family_proc)
+        
         # Даем время сервисам на запуск
         print("\n⏳ Waiting for services to start...")
         time.sleep(5)

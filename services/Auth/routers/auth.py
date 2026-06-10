@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request, Backgrou
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
 
 from database.session import get_db
@@ -61,7 +61,7 @@ async def register(user_data: schemas.UserCreate, background_tasks: BackgroundTa
         # verification_token = create_verification_token(db_user.id_user)
         # background_tasks.add_task(send_verification_email, db_user.email, verification_token)
 
-        return schemas.UserResponse.from_orm(db_user)
+        return schemas.UserResponse.model_validate(db_user)
 
     except IntegrityError as e:
         db.rollback()
@@ -96,7 +96,7 @@ async def login(
         )
 
     # Обновляем время входа
-    user.last_login_at = datetime.utcnow()
+    user.last_login_at = datetime.now(timezone.utc)
     db.commit()
 
     # Создаем токены

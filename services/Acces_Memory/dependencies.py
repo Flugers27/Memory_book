@@ -1,23 +1,20 @@
 """
-Зависимости для сервиса памяти
+Зависимости для сервиса доступа
 """
-import os
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import jwt
-import uuid
 from typing import Optional
+import uuid
 
-# Настройки JWT из .env
-SECRET_KEY = os.getenv("SECRET_KEY", "your-very-secret-key-change-this-in-production-12345")
-ALGORITHM = "HS256"
+from .config import config
 
 # Используем HTTPBearer для Bearer токенов
 security = HTTPBearer(auto_error=False)
 
 def get_current_user_id(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
-) -> str:
+) -> uuid.UUID:
     """
     Получает ID пользователя из JWT токена.
     Валидирует токен локально, без обращения к Auth сервису.
@@ -32,8 +29,8 @@ def get_current_user_id(
     token = credentials.credentials
     
     try:
-        # Декодируем токен с использованием SECRET_KEY из .env
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        # Декодируем токен с использованием SECRET_KEY из конфига
+        payload = jwt.decode(token, config.SECRET_KEY, algorithms=[config.ALGORITHM])
         user_id_str = payload.get("sub")  # JWT стандарт: 'sub' содержит user_id
         
         if not user_id_str:
@@ -44,7 +41,7 @@ def get_current_user_id(
             )
         
         # Преобразуем строку в UUID
-        return str(user_id_str)
+        return uuid.UUID(user_id_str)
         
     except jwt.ExpiredSignatureError:
         raise HTTPException(
@@ -56,11 +53,5 @@ def get_current_user_id(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Invalid token: {str(e)}",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    except ValueError as e:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"Invalid user id format: {str(e)}",
             headers={"WWW-Authenticate": "Bearer"},
         )

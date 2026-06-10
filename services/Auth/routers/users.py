@@ -71,7 +71,7 @@ async def update_user_info(
                 )
         
         # Обновляем поля
-        for field, value in user_data.dict(exclude_unset=True).items():
+        for field, value in user_data.model_dump(exclude_unset=True).items():
             if value is not None and hasattr(current_user, field):
                 setattr(current_user, field, value)
         
@@ -176,11 +176,11 @@ async def get_user_tokens(
 ):
     """Получение списка активных refresh токенов пользователя"""
     from database.models.auth import RefreshToken
-    from datetime import datetime
+    from datetime import datetime, timezone
     
     tokens = db.query(RefreshToken).filter(
         RefreshToken.user_id == current_user.id_user,
-        RefreshToken.expires_at > datetime.utcnow()
+        RefreshToken.expires_at > datetime.now(timezone.utc)
     ).all()
     
     return {

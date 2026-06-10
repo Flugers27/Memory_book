@@ -24,7 +24,7 @@ router = APIRouter(tags=["agent"])
 async def get_agents(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Получение списка агентов памяти текущего пользователя"""
@@ -35,14 +35,14 @@ async def get_agents(
 
 @router.get("/agent/{agent_id}", response_model=schemas.AgentResponse)
 async def get_agent(
-    agent_id: str,  # UUID тип
-    user_id: str = Depends(get_current_user_id),  # UUID тип
+    agent_id: uuid.UUID,
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Получение агента памяти по ID"""
     agent = select_memory_agent_by_user(db, user_id, agent_id)
     
-    if not agent or str(agent.user_id) != user_id:
+    if not agent or agent.user_id != user_id:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Agent not found or access denied")
@@ -53,7 +53,7 @@ async def get_agent(
 @router.post("/agent/add", response_model=schemas.AgentResponse, status_code=status.HTTP_201_CREATED)
 async def create_agent(
     agent_data: schemas.AgentCreate,  # Без user_id
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Создание нового агента памяти"""
@@ -66,9 +66,9 @@ async def create_agent(
 
 @router.put("/agent/update/{agent_id}", response_model=schemas.AgentResponse)
 async def update_agent(
-    agent_id: str,
+    agent_id: uuid.UUID,
     agent_update: schemas.AgentUpdate,
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Обновление агента памяти"""
@@ -89,8 +89,8 @@ async def update_agent(
 
 @router.delete("/agent/del/{agent_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_agent(
-    agent_id: str,
-    user_id: str = Depends(get_current_user_id),
+    agent_id: uuid.UUID,
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Удаление агента памяти"""

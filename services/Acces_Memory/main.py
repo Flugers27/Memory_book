@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from .config import config
 import logging
 
-from .routers import access
+from .routers import access_router, health_router
 
 # Настройка логирования
 logging.basicConfig(
@@ -49,7 +49,8 @@ app.add_middleware(
 )
 
 # Подключаем роутеры
-app.include_router(access.router)
+app.include_router(access_router)
+app.include_router(health_router)
 
 @app.get("/")
 async def root():
@@ -67,16 +68,6 @@ async def root():
                 "revoke": "DELETE /access/{access_id}",
             }
         }
-    }
-
-
-@app.get("/health")
-async def health_check():
-    """Проверка здоровья сервиса"""
-    return {
-        "status": "healthy",
-        "service": "access",
-        "timestamp": "now"
     }
 
 

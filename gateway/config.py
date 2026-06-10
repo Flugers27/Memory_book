@@ -20,6 +20,7 @@ class Settings:
     # URL микросервисов
     AUTH_SERVICE_URL = os.getenv("AUTH_SERVICE_URL", "http://localhost:8001")
     MEMORY_SERVICE_URL = os.getenv("MEMORY_SERVICE_URL", "http://localhost:8002")
+    FAMILY_TREE_SERVICE_URL = os.getenv("FAMILY_TREE_SERVICE_URL", "http://localhost:8005")
     
     # JWT настройки (должны совпадать с Auth сервисом)
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your-super-secret-key-change-in-production")
@@ -57,6 +58,11 @@ class Settings:
         "/memory/public_memory_page",
         "/memory/agent/",
         "/memory/page_list/",
+        "/family/tree/public",
+        "/family/tree/public/",
+        "/family/docs",
+        "/family/redoc",
+        "/family/openapi.json",
         "/docs",
         "/redoc",
         "/openapi.json",
@@ -69,6 +75,7 @@ class Settings:
         "memory": MEMORY_SERVICE_URL,
         "agent": MEMORY_SERVICE_URL,
         "page": MEMORY_SERVICE_URL,
+        "family": FAMILY_TREE_SERVICE_URL,
     }
     
     # Логирование

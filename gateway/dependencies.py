@@ -24,6 +24,9 @@ RATE_LIMITS = {
     },
     'memory': {
         'default': '100/minute'
+    },
+    'family': {
+        'default': '60/minute'
     }
 }
 

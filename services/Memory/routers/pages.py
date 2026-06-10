@@ -16,7 +16,7 @@ router = APIRouter(tags=["pages"])
 
 @router.get("/page_list/{agent_id}", response_model=schemas.PageListResponse)
 async def get_pages(
-    agent_id: str,
+    agent_id: uuid.UUID,
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
     user_id: uuid.UUID = Depends(get_current_user_id),
@@ -41,7 +41,7 @@ async def get_pages(
     return res
 
 @router.get("/page/{page_id}", response_model=schemas.PageResponse)
-async def get_page(page_id: str, user_id: uuid.UUID = Depends(get_current_user_id), db: Session = Depends(get_db)):
+async def get_page(page_id: uuid.UUID, user_id: uuid.UUID = Depends(get_current_user_id), db: Session = Depends(get_db)):
     """Получение страницы памяти по ID"""
     page = select_page_by_user(db, user_id, page_id)
     
@@ -53,7 +53,7 @@ async def get_page(page_id: str, user_id: uuid.UUID = Depends(get_current_user_i
     
     print(page)
     # Проверяем права доступа
-    if str(page.user_id) != user_id:
+    if page.user_id != user_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access denied"
@@ -64,7 +64,7 @@ async def get_page(page_id: str, user_id: uuid.UUID = Depends(get_current_user_i
 @router.post("/page/add", response_model=schemas.PageResponse, status_code=status.HTTP_201_CREATED)
 async def add_agent(
     page_data: schemas.PageCreate,  # Без user_id
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Создание новой страницы"""
@@ -97,7 +97,7 @@ async def update_page(
         user_id=user_id
     )
     
-    if str(page.user_id) != user_id:
+    if page.user_id != user_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access denied")

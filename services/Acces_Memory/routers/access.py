@@ -3,12 +3,12 @@
 """
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
-from typing import List, Optional, Dict, Any
 import uuid
 from sqlalchemy import text
-from datetime import datetime
+from datetime import datetime, timezone
 
 from database.session import get_db
+from database.models.memory import PageBD
 from ..dependencies import get_current_user_id
 from .. import schemas
 from ..crud import (
@@ -34,14 +34,11 @@ def get_my_access(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
     db: Session = Depends(get_db),
-    user_id: str = Depends(get_current_user_id)
+    user_id: uuid.UUID = Depends(get_current_user_id)
 ):
     """Получить список страниц, к которым у текущего пользователя есть доступ."""
-    # Преобразуем user_id в UUID
-    user_uuid = normalize_uuid(user_id)
-    
     # Получаем данные из базы
-    raw_items, total = list_access_by_user(db, user_uuid, skip=skip, limit=limit)
+    raw_items, total = list_access_by_user(db, user_id, skip=skip, limit=limit)
     
     # Преобразуем в схемы
     items = []
@@ -65,17 +62,11 @@ def get_granted_by_me(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
     db: Session = Depends(get_db),
-    grantor_id: str = Depends(get_current_user_id)
+    grantor_id: uuid.UUID = Depends(get_current_user_id)
 ):
     """Получить список страниц, к которым текущий пользователь предоставил доступ."""
-    # Преобразуем grantor_id в UUID если нужно
-    try:
-        grantor_uuid = normalize_uuid(grantor_id)
-    except (ValueError, TypeError):
-        grantor_uuid = normalize_uuid(grantor_id)
-    
     # Получаем данные из базы
-    raw_items, total = list_access_by_grantor(db, grantor_uuid, skip=skip, limit=limit)
+    raw_items, total = list_access_by_grantor(db, grantor_id, skip=skip, limit=limit)
     
     # Преобразуем в схемы
     items = []
@@ -98,14 +89,13 @@ def get_granted_by_me(
 def check_page_access(
     page_id: uuid.UUID,
     db: Session = Depends(get_db),
-    user_id: str = Depends(get_current_user_id)
+    user_id: uuid.UUID = Depends(get_current_user_id)
 ):
     """
     Проверить доступ текущего пользователя к странице.
     
     Возвращает информацию о том, есть ли доступ, и какие права у пользователя.
     """
-    
     # Проверяем доступ
     access_check = check_user_page_access(db, page_id, user_id)
     
@@ -132,14 +122,13 @@ def check_page_access(
 def get_page_with_full_info(
     page_id: uuid.UUID,
     db: Session = Depends(get_db),
-    user_id: str = Depends(get_current_user_id)
+    user_id: uuid.UUID = Depends(get_current_user_id)
 ):
     """
     Получить полную информацию о странице, агенте и доступе.
     
     Только если у пользователя есть доступ к странице.
     """
-    
     # Проверяем доступ
     access_check = check_user_page_access(db, page_id, user_id)
     
@@ -303,7 +292,7 @@ def get_page_with_full_info(
             agent=short_agent_info,
             can_view=True,
             can_edit=True,
-            granted_at=page_dict.get('created_at') or datetime.now(),
+            granted_at=page_dict.get('created_at') or datetime.now(timezone.utc),
             expires_at=None,
             is_active=True
         )
@@ -319,29 +308,27 @@ def get_page_with_full_info(
         }
     )
 
-# Остальные методы остаются без изменений
+
 @router.post("/grant", response_model=schemas.PageAccessResponse)
 def grant_access(
     request: schemas.GrantAccessRequest,
     db: Session = Depends(get_db),
-    grantor_id: str = Depends(get_current_user_id)
+    grantor_id: uuid.UUID = Depends(get_current_user_id)
 ):
     """Предоставить доступ к странице другому пользователю."""
     
-    current_user_uuid = normalize_uuid(grantor_id)
-
     page = db.query(PageBD).filter(PageBD.id_page == request.page_id).first()
     if not page:
         raise HTTPException(status_code=404, detail="Страница не найдена")
 
     page_owner_uuid = normalize_uuid(page.user_id)
-    if current_user_uuid != page_owner_uuid:
+    if grantor_id != page_owner_uuid:
         raise HTTPException(status_code=403, detail="Недостаточно прав для предоставления доступа")
 
     if request.user_id == page_owner_uuid:
         raise HTTPException(status_code=400, detail="Владелец страницы уже имеет полный доступ")
 
-    if request.expires_at and request.expires_at < datetime.utcnow():
+    if request.expires_at and request.expires_at < datetime.now(timezone.utc):
         raise HTTPException(status_code=400, detail="Дата истечения доступа не может быть в прошлом")
 
     existing = get_access_by_page_and_user(db, request.page_id, request.user_id)
@@ -353,10 +340,10 @@ def grant_access(
         existing.can_edit = bool(request.can_edit)
         existing.expires_at = request.expires_at
         existing.is_active = True
-        existing.granted_by = current_user_uuid
+        existing.granted_by = grantor_id
         db.commit()
         db.refresh(existing)
-        return schemas.PageAccessResponse.from_orm(existing)
+        return schemas.PageAccessResponse.model_validate(existing)
 
     # Создаем данные для доступа
     access_data = schemas.PageAccessCreate(
@@ -372,7 +359,7 @@ def grant_access(
     db_access = create_access(db, access_data, grantor_id)
     
     # Возвращаем ответ
-    return schemas.PageAccessResponse.from_orm(db_access)
+    return schemas.PageAccessResponse.model_validate(db_access)
 
 
 @router.put("/{access_id}", response_model=schemas.PageAccessResponse)
@@ -380,7 +367,7 @@ def update_access_record(
     access_id: uuid.UUID,
     update_data: schemas.PageAccessUpdate,
     db: Session = Depends(get_db),
-    current_user: str = Depends(get_current_user_id)
+    current_user: uuid.UUID = Depends(get_current_user_id)
 ):
     """Обновить параметры доступа (только предоставивший доступ)."""
     # Проверяем, что текущий пользователь является grantor
@@ -388,30 +375,28 @@ def update_access_record(
     if not db_access:
         raise HTTPException(status_code=404, detail="Запись доступа не найдена")
 
-    current_user_uuid = normalize_uuid(current_user)
-    if not can_manage_access(db_access.granted_by, current_user_uuid, db_access.granted_by):
+    if not can_manage_access(db_access.granted_by, current_user, db_access.granted_by):
         raise HTTPException(status_code=403, detail="Недостаточно прав для изменения")
     
     updated = update_access(db, access_id, update_data)
     if not updated:
         raise HTTPException(status_code=404, detail="Не удалось обновить запись")
     
-    return schemas.PageAccessResponse.from_orm(updated)
+    return schemas.PageAccessResponse.model_validate(updated)
 
 
 @router.delete("/{access_id}")
 def revoke_access(
     access_id: uuid.UUID,
     db: Session = Depends(get_db),
-    current_user: str = Depends(get_current_user_id)
+    current_user: uuid.UUID = Depends(get_current_user_id)
 ):
     """Отозвать доступ (деактивировать запись)."""
     db_access = get_access_by_id(db, access_id)
     if not db_access:
         raise HTTPException(status_code=404, detail="Запись доступа не найдена")
 
-    current_user_uuid = normalize_uuid(current_user)
-    if not can_manage_access(db_access.granted_by, current_user_uuid, db_access.granted_by):
+    if not can_manage_access(db_access.granted_by, current_user, db_access.granted_by):
         raise HTTPException(status_code=403, detail="Недостаточно прав для отзыва")
     
     success = deactivate_access(db, access_id)
@@ -425,19 +410,18 @@ def revoke_access(
 def delete_access_record(
     access_id: uuid.UUID,
     db: Session = Depends(get_db),
-    current_user: str = Depends(get_current_user_id)
+    current_user: uuid.UUID = Depends(get_current_user_id)
 ):
     """Полностью удалить запись доступа только владельцем страницы или тем, кто выдал доступ."""
     db_access = get_access_by_id(db, access_id)
     if not db_access:
         raise HTTPException(status_code=404, detail="Запись доступа не найдена")
 
-    page = db.query(PageBD).filter(PageBD.id_page == db_access.page_id).first()
+    page = db.query(PageBD).filter(PageBD.id_page == str(db_access.page_id)).first()
     if not page:
         raise HTTPException(status_code=404, detail="Страница не найдена")
 
-    current_user_uuid = normalize_uuid(current_user)
-    if not can_manage_access(page.user_id, current_user_uuid, db_access.granted_by):
+    if not can_manage_access(page.user_id, current_user, db_access.granted_by):
         raise HTTPException(status_code=403, detail="Недостаточно прав для полного удаления доступа")
 
     success = delete_access(db, access_id)

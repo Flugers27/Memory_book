@@ -1,7 +1,7 @@
 """
 Pydantic схемы для сервиса Media
 """
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, validator, ConfigDict
 from typing import Optional, List
 from datetime import datetime
 import uuid
@@ -9,7 +9,7 @@ import uuid
 
 class MediaBase(BaseModel):
     """Базовая схема для медиа"""
-    page_id: Optional[str] = None
+    page_id: Optional[uuid.UUID] = None
     file_extension: str = Field(..., max_length=10)
     file_size: int = Field(..., ge=1)
     media_type: str = Field(..., max_length=20)
@@ -24,12 +24,12 @@ class MediaBase(BaseModel):
 
 class MediaCreate(MediaBase):
     """Схема для создания медиа"""
-    user_id: str = Field(..., min_length=36, max_length=36)
+    user_id: uuid.UUID
 
 
 class MediaUploadResponse(BaseModel):
     """Ответ на загрузку медиа"""
-    id_media: str
+    id_media: uuid.UUID
     filename: str
     url: str
     temp_url: Optional[str] = None
@@ -39,7 +39,7 @@ class MediaUploadResponse(BaseModel):
 
 class MediaUpdate(BaseModel):
     """Схема для обновления медиа"""
-    page_id: Optional[str] = None
+    page_id: Optional[uuid.UUID] = None
     is_public: Optional[bool] = None
     sort_order: Optional[int] = None
     is_temp: Optional[bool] = None
@@ -47,26 +47,25 @@ class MediaUpdate(BaseModel):
 
 class MediaResponse(BaseModel):
     """Схема ответа с информацией о медиа"""
-    id_media: str
-    user_id: str
-    page_id: Optional[str]
+    id_media: uuid.UUID
+    user_id: uuid.UUID
+    page_id: Optional[uuid.UUID] = None
     file_extension: str
     file_size: int
     media_type: str
     mime_type: str
-    width: Optional[int]
-    height: Optional[int]
-    duration: Optional[int]
-    has_thumbnail: Optional[bool]
-    has_medium: Optional[bool]
+    width: Optional[int] = None
+    height: Optional[int] = None
+    duration: Optional[int] = None
+    has_thumbnail: Optional[bool] = None
+    has_medium: Optional[bool] = None
     is_public: bool
-    sort_order: Optional[int]
+    sort_order: Optional[int] = None
     created_at: datetime
     updated_at: datetime
     is_temp: bool
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class MediaListResponse(BaseModel):
@@ -85,13 +84,13 @@ class TempMediaCleanupResponse(BaseModel):
 
 class MediaConfirmRequest(BaseModel):
     """Запрос на подтверждение временного медиа"""
-    page_id: str = Field(..., min_length=36, max_length=36)
+    page_id: uuid.UUID
     make_permanent: bool = True
 
 
 class MediaConfirmResponse(BaseModel):
     """Ответ на подтверждение медиа"""
-    id_media: str
+    id_media: uuid.UUID
     is_temp: bool
-    page_id: str
+    page_id: uuid.UUID
     message: str

@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 import uuid
 import os
 from typing import Optional, List
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import magic
 
 from database.session import get_db
@@ -33,10 +33,10 @@ router = APIRouter(prefix="/media", tags=["media"])
 async def upload_media(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
-    page_id: Optional[str] = Form(None),
+    page_id: Optional[uuid.UUID] = Form(None),
     is_public: bool = Form(False),
     is_temp: bool = Form(True),
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """
@@ -89,7 +89,7 @@ async def upload_media(
         os.remove(temp_path)  # Удаляем временный файл
     
     # Создаем ID для медиа
-    media_id = str(uuid.uuid4())
+    media_id = uuid.uuid4()
     filename = generate_filename(file.filename, media_id)
     
     # Сохраняем файл
@@ -118,7 +118,7 @@ async def upload_media(
     
     # Для временных файлов добавляем задачу очистки
     if is_temp:
-        expires_at = datetime.utcnow() + timedelta(hours=config.TEMP_FILE_LIFETIME)
+        expires_at = datetime.now(timezone.utc) + timedelta(hours=config.TEMP_FILE_LIFETIME)
         background_tasks.add_task(cleanup_old_temp_files, config.TEMP_FILE_LIFETIME)
     else:
         expires_at = None
@@ -136,7 +136,7 @@ async def upload_media(
 @router.get("/{media_id}", response_model=schemas.MediaResponse)
 def get_media(
     media = Depends(get_media_or_404),
-    user_id: str = Depends(get_current_user_id)
+    user_id: uuid.UUID = Depends(get_current_user_id)
 ):
     """Получение информации о медиа"""
     # Проверяем доступ
@@ -151,8 +151,8 @@ def get_media(
 
 @router.get("/", response_model=schemas.MediaListResponse)
 def list_media(
-    user_id: str = Depends(get_current_user_id),
-    page_id: Optional[str] = None,
+    user_id: uuid.UUID = Depends(get_current_user_id),
+    page_id: Optional[uuid.UUID] = None,
     media_type: Optional[str] = None,
     is_temp: Optional[bool] = None,
     page: int = 1,
@@ -188,7 +188,7 @@ def list_media(
 
 @router.get("/temp/my", response_model=schemas.MediaListResponse)
 def get_my_temp_media(
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Получение временных медиа текущего пользователя"""
@@ -204,9 +204,9 @@ def get_my_temp_media(
 
 @router.post("/{media_id}/confirm", response_model=schemas.MediaConfirmResponse)
 def confirm_media(
-    media_id: str,
+    media_id: uuid.UUID,
     request: schemas.MediaConfirmRequest,
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Подтверждение временного медиа (привязка к странице)"""
@@ -266,9 +266,9 @@ def confirm_media(
 
 @router.put("/{media_id}", response_model=schemas.MediaResponse)
 def update_media_info(
-    media_id: str,
+    media_id: uuid.UUID,
     media_update: schemas.MediaUpdate,
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Обновление информации о медиа"""
@@ -287,8 +287,8 @@ def update_media_info(
 
 @router.delete("/{media_id}")
 def delete_media_file(
-    media_id: str,
-    user_id: str = Depends(get_current_user_id),
+    media_id: uuid.UUID,
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """Удаление медиа"""
@@ -357,7 +357,7 @@ def cleanup_temp_media(
 
 @router.get("/page/{page_id}", response_model=schemas.MediaListResponse)
 def get_page_media(
-    page_id: str,
+    page_id: uuid.UUID,
     include_temp: bool = False,
     db: Session = Depends(get_db)
 ):

@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path
 from typing import Optional, Tuple
 import mimetypes
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from .config import config
 
@@ -188,7 +188,7 @@ def get_file_url(filename: str, user_id: str, page_id: str = None, is_temp: bool
 def cleanup_old_temp_files(hours_old: int = 24) -> int:
     """Удаляет старые временные файлы"""
     try:
-        cutoff_time = datetime.utcnow() - timedelta(hours=hours_old)
+        cutoff_time = datetime.now(timezone.utc) - timedelta(hours=hours_old)
         deleted_count = 0
         
         # Рекурсивно обходим все папки в temp

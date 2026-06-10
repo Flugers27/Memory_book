@@ -123,9 +123,13 @@ async def gateway_proxy(
     
     # Проверяем аутентификацию (если требуется)
     full_path = f"/{service}/{path}".rstrip("/")
+    logger.info(f"Gateway auth check: full_path={full_path}, current_user={current_user}")
+    logger.info(f"Gateway PUBLIC_PATHS: {settings.PUBLIC_PATHS}")
     requires_auth = not any(full_path.startswith(public_path.rstrip("/")) for public_path in settings.PUBLIC_PATHS)
+    logger.info(f"Gateway requires_auth={requires_auth}")
     
     if requires_auth and not current_user:
+        logger.warning(f"Gateway 401: path={full_path}, requires_auth={requires_auth}, current_user={current_user}")
         raise HTTPException(status_code=401, detail="Authentication required")
     
     # Проксируем запрос к соответствующему сервису

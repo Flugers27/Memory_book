@@ -29,7 +29,7 @@ async def get_public_memory_pages_with_agents_list(
 
 @router.get("/public_memory_page/{agent_id}", response_model=schemas.PublicMemoryPageResponse)
 async def get_public_memory_page_with_agent(
-    agent_id: str,
+    agent_id: uuid.UUID,
     db: Session = Depends(get_db)
 ):
     """
@@ -63,7 +63,7 @@ async def get_user_memory_pages(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
     is_draft: Optional[bool] = Query(None, description="Фильтр по черновикам"),
-    user_id: str = Depends(get_current_user_id),
+    user_id: uuid.UUID = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
     """

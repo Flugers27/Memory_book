@@ -11,14 +11,13 @@ class UserBase(BaseModel):
     email: Optional[EmailStr] = None
     username: Optional[str] = Field(None, min_length=3, max_length=50)
     full_name: Optional[str] = Field(None, min_length=1, max_length=100)
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class UserCreate(UserBase):
     """Схема для создания пользователя"""
     email: EmailStr
     password: str = Field(..., min_length=3, max_length=100)
-    avatar_id: Optional[str] = None
+    avatar_id: Optional[uuid.UUID] = None
     
     @validator('password')
     def validate_password(cls, v):
@@ -45,7 +44,7 @@ class UserResponse(UserBase):
     last_login_at: Optional[datetime] = None
     created_at: datetime
     updated_at: datetime
-    avatar_id: Optional[str] = None
+    avatar_id: Optional[uuid.UUID] = None
     
     # Конфигурация для Pydantic v2
     model_config = ConfigDict(from_attributes=True)

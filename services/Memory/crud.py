@@ -13,7 +13,7 @@ from database.models.memory import AgentBD, PageBD
 #from config import, PageBD, MemoryTitles
 
 # ========== CRUD FOR AGENT ==========
-def select_memory_agent_list_by_user(db: Session, user_id: str, skip: int = 0, limit: int = 50) -> schemas.AgentListResponse:
+def select_memory_agent_list_by_user(db: Session, user_id: uuid.UUID, skip: int = 0, limit: int = 50) -> schemas.AgentListResponse:
     """Получает список агентов памяти пользователя в нужном формате"""
     # Получаем агентов из БД
     agents = db.query(AgentBD)\
@@ -24,7 +24,7 @@ def select_memory_agent_list_by_user(db: Session, user_id: str, skip: int = 0, l
 
     return agents
 
-def select_memory_agent_by_user(db: Session, user_id: str, agent_id: str) -> Optional[AgentBD]:
+def select_memory_agent_by_user(db: Session, user_id: uuid.UUID, agent_id: uuid.UUID) -> Optional[AgentBD]:
     """Получает агента памяти по ID"""
     res =  db.query(AgentBD).filter(and_(AgentBD.id_agent == agent_id, AgentBD.user_id == user_id)).first()
 
@@ -36,9 +36,7 @@ def create_memory_agent(
     user_id: uuid.UUID
 ) -> AgentBD:
     """Создает нового агента памяти"""
-    # Преобразуем UUID в строку для хранения в БД
-    user_id_str = str(user_id)
-    db_agent = AgentBD(**agent_data.dict(), user_id=user_id_str)
+    db_agent = AgentBD(**agent_data.model_dump(), user_id=user_id)
     db.add(db_agent)
     db.commit()
     db.refresh(db_agent)
@@ -46,17 +44,17 @@ def create_memory_agent(
 
 def update_memory_agent(
     db: Session,
-    agent_id: str,
+    agent_id: uuid.UUID,
     agent_update: schemas.AgentUpdate,
-    user_id: str
+    user_id: uuid.UUID
 ) -> Optional[AgentBD]:
     """Обновляет агента памяти"""
     db_agent = select_memory_agent_by_user(db, user_id, agent_id)
 
-    if not db_agent or str(db_agent.user_id) != user_id:
+    if not db_agent or db_agent.user_id != user_id:
         return None
     
-    update_data = agent_update.dict(exclude_unset=True)
+    update_data = agent_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         if value is not None:  # Обновляем только если значение не None
             setattr(db_agent, field, value)
@@ -72,7 +70,7 @@ def delete_memory_agent(
 ) -> bool:
     """Удаляет агента памяти"""
     db_agent = select_memory_agent_by_user(db, user_id, agent_id)
-    if not db_agent or str(db_agent.user_id) != user_id:
+    if not db_agent or db_agent.user_id != user_id:
         return False
     
     db.delete(db_agent)
@@ -85,7 +83,7 @@ def _demote_other_main_pages(
     db: Session,
     agent_id: uuid.UUID,
     user_id: uuid.UUID,
-    current_page_id: str
+    current_page_id: uuid.UUID
 ) -> None:
     """
     Вспомогательная функция:
@@ -96,9 +94,9 @@ def _demote_other_main_pages(
     """
     # Находим все опубликованные страницы агента, кроме текущей
     other_published_pages = db.query(PageBD).filter(
-        PageBD.agent_id == str(agent_id),
+        PageBD.agent_id == agent_id,
         PageBD.id_page != current_page_id,
-        PageBD.user_id == str(user_id),
+        PageBD.user_id == user_id,
         PageBD.is_draft == False  # Только опубликованные страницы
     ).all()
     
@@ -112,7 +110,7 @@ def _demote_other_main_pages(
         db.commit()
         print(f"Обновлено {len(other_published_pages)} страниц в черновики")
 
-def select_page_list(db: Session, agent_id: str, skip: int = 0, limit: int = 50) -> schemas.PageListResponse:
+def select_page_list(db: Session, agent_id: uuid.UUID, skip: int = 0, limit: int = 50) -> schemas.PageListResponse:
     """
     Получает список страниц
     Возвращает список (page)
@@ -131,21 +129,19 @@ def select_page_list(db: Session, agent_id: str, skip: int = 0, limit: int = 50)
         print(f"ERROR in select_public_memory_page_list: {e}")
         return []
     
-def select_page_by_user(db: Session, user_id: str, page_id: str) -> Optional[PageBD]:
+def select_page_by_user(db: Session, user_id: uuid.UUID, page_id: uuid.UUID) -> Optional[PageBD]:
     """Получает агента памяти по ID"""
     res =  db.query(PageBD).filter(and_(PageBD.id_page == page_id, PageBD.user_id == user_id)).first()
 
     return res
 
 def create_page(
-    db: Session, 
+    db: Session,
     page_data: schemas.PageCreate,  # Теперь без user_id
     user_id: uuid.UUID
 ) -> PageBD:
-    """Создает нового агента памяти"""
-    # Преобразуем UUID в строку для хранения в БД
-    user_id_str = str(user_id)
-    page= PageBD(**page_data.dict(), user_id=user_id_str)
+    """Создает новую страницу памяти"""
+    page= PageBD(**page_data.model_dump(), user_id=user_id)
     db.add(page)
     db.commit()
     db.refresh(page)
@@ -157,17 +153,17 @@ def create_page(
 
 def update_page_db(
     db: Session,
-    page_id: str,
+    page_id: uuid.UUID,
     page_update: schemas.PageUpdate,
-    user_id: str
+    user_id: uuid.UUID
 ) -> PageBD:
     """Обновляет агента памяти"""
     page = select_page_by_user(db, user_id, page_id)
 
-    if not page or str(page.user_id) != user_id:
+    if not page or page.user_id != user_id:
         return None
 
-    update_data = page_update.dict(exclude_unset=True)
+    update_data = page_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         if value is not None:  # Обновляем только если значение не None
             setattr(page, field, value)
@@ -184,7 +180,7 @@ def delete_page(db: Session,page_id: uuid.UUID, user_id: uuid.UUID) -> bool:
     """Удаляет агента памяти"""
     page = select_page_by_user(db, user_id, page_id)
     
-    if not page or str(page.user_id) != user_id:
+    if not page or page.user_id != user_id:
         return False
     
     db.delete(page)
@@ -220,7 +216,7 @@ def select_public_memory_page_list(
 
 def select_public_memory_page(
     db: Session,
-    agent_id: str
+    agent_id: uuid.UUID
 ) -> Optional[tuple]:
     """
     Получает публичную страницу памяти с информацией об агенте
@@ -262,7 +258,7 @@ def select_memory_page_list_by_user(
         print(f"ERROR in get_public_memory_pages_with_agents: {e}")
         return []
 
-def select_memory_page_by_user(db: Session, user_id: str, agent_id: str) -> Optional[tuple]:
+def select_memory_page_by_user(db: Session, user_id: uuid.UUID, agent_id: uuid.UUID) -> Optional[tuple]:
     """Получает список страниц памяти пользователя"""
     try:
         # Этот запрос возвращает кортежи (PageBD, AgentBD)

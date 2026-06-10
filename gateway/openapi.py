@@ -30,7 +30,7 @@ def custom_openapi(app):
             "description": "Сервис аутентификации и авторизации",
             "endpoints": [
                 "POST /auth/register",
-                "POST /auth/login", 
+                "POST /auth/login",
                 "POST /auth/refresh",
                 "POST /auth/logout",
                 "GET /users/me",
@@ -38,7 +38,7 @@ def custom_openapi(app):
             ]
         },
         "memory": {
-            "url": "http://localhost:8002", 
+            "url": "http://localhost:8002",
             "description": "Сервис работы с воспоминаниями",
             "endpoints": [
                 "GET /memory/pages",
@@ -46,6 +46,25 @@ def custom_openapi(app):
                 "GET /memory/pages/{id}",
                 "PUT /memory/pages/{id}",
                 "DELETE /memory/pages/{id}"
+            ]
+        },
+        "family": {
+            "url": "http://localhost:8005",
+            "description": "Сервис генеалогических древ",
+            "endpoints": [
+                "POST /family/tree",
+                "GET /family/tree/my",
+                "GET /family/tree/{tree_id}",
+                "PUT /family/tree/{tree_id}",
+                "DELETE /family/tree/{tree_id}",
+                "GET /family/tree/public",
+                "GET /family/tree/public/{tree_id}",
+                "POST /family/tree/{tree_id}/agent",
+                "DELETE /family/tree/{tree_id}/agent/{agent_id}",
+                "GET /family/tree/{tree_id}/relationship",
+                "POST /family/tree/{tree_id}/relationship",
+                "PUT /family/tree/{tree_id}/relationship/{rel_id}",
+                "DELETE /family/tree/{tree_id}/relationship/{rel_id}"
             ]
         }
     }

@@ -1,7 +1,7 @@
 """
 Pydantic схемы для валидации данных Memory Service.
 """
-from pydantic import BaseModel, Field, Json
+from pydantic import BaseModel, Field, Json, validator
 from typing import Optional, List, Any, Dict
 from datetime import date, datetime
 from collections import defaultdict
@@ -18,20 +18,136 @@ class MemoryBase(BaseModel):
             uuid.UUID: lambda v: str(v) if v else None,
         }
 
-class BiographyItem(BaseModel):
-    title: str = Field(..., description="Заголовок раздела")
-    info: str = Field("", description="Текстовая информация")
-    titles: List['BiographyItem'] = Field(
-        default_factory=list, 
-        description="Вложенные подразделы"
+class BiographySection(BaseModel):
+    """Секция биографии
+
+    Одна секция в структуре биографии. Секции могут быть вложенными:
+    level=1 — основной раздел, level=2 — подраздел, level=3 — подподраздел.
+    Порядок секций определяется полем order.
+    """
+    title: str = Field(
+        ...,
+        description="Заголовок раздела (например: 'Ранние годы', 'Образование', 'Трудовая биография')"
     )
-    
-    class Config:
-        from_attributes = True
+    level: int = Field(
+        1,
+        ge=1, le=10,
+        description="Уровень вложенности: 1 — основной раздел, 2 — подраздел, 3 — подподраздел и т.д."
+    )
+    order: int = Field(
+        0,
+        ge=0,
+        description="Порядок сортировки. Секции сортируются по возрастанию order. Рекомендация: 10, 20, 30... для основных разделов, 35, 40... для подразделов"
+    )
+    content: str = Field(
+        "",
+        description="HTML-содержимое секции. Можно использовать <p> для абзацев, <img> для изображений, <b>, <i> и другие HTML-теги"
+    )
 
 
-# Для рекурсивной ссылки
-BiographyItem.update_forward_refs()
+class BiographyData(BaseModel):
+    """Структура биографии в формате JSONB
+
+    Хранится в колонке biography таблицы pages.
+    Содержит список ID медиафайлов и массив секций с HTML-содержимым.
+
+    Формат:
+    {
+      "media_ids": ["uuid-медиафайла1", "uuid-медиафайла2"],
+      "sections": [
+        {
+          "title": "Название раздела",
+          "level": 1,
+          "order": 10,
+          "content": "<p>HTML-содержимое раздела</p>"
+        }
+      ]
+    }
+
+    media_ids — список UUID медиафайлов из Media Service, привязанных к биографии.
+    sections — массив секций биографии, отсортированных по полю order.
+    Каждая секция содержит заголовок (title), уровень вложенности (level),
+    порядковый номер (order) и HTML-содержимое (content).
+    """
+    media_ids: List[uuid.UUID] = Field(
+        default_factory=list,
+        description="Список UUID медиафайлов из Media Service, привязанных к данной биографии. Может быть пустым."
+    )
+    sections: List[BiographySection] = Field(
+        default_factory=list,
+        description="Массив секций биографии. Секции автоматически сортируются по полю order. Может быть пустым."
+    )
+
+
+def convert_old_biography_to_new(bio: Any) -> Any:
+    """Преобразует старый формат биографии в новый.
+
+    Старый формат (рекурсивный список):
+        [
+            {"title": "...", "info": "...", "titles": [{"title": "...", "info": "...", "titles": [...]}]},
+            ...
+        ]
+
+    Новый формат (плоский список секций):
+        {
+            "media_ids": [],
+            "sections": [
+                {"title": "...", "level": 1, "order": 10, "content": "<p>...</p>"},
+                ...
+            ]
+        }
+
+    Если bio уже в новом формате (dict с ключами media_ids/sections) — возвращается как есть.
+    Если bio — список (старый формат) — рекурсивно преобразуется в новый.
+    Если bio — None или уже BiographyData — возвращается без изменений.
+    """
+    if bio is None or isinstance(bio, BiographyData):
+        return bio
+
+    # Если это уже новый формат (dict с ключами media_ids и sections)
+    if isinstance(bio, dict):
+        if "media_ids" in bio or "sections" in bio:
+            return bio
+        # Если это dict, но не новый формат — возможно, одиночный объект старого формата
+        if "title" in bio:
+            bio = [bio]  # Оборачиваем в список для единообразной обработки
+        else:
+            return bio
+
+    # Если это список — старый формат
+    if isinstance(bio, list):
+        sections = []
+        order_counter = 0
+
+        def flatten_items(items: List[Any], parent_level: int = 1):
+            """Рекурсивно преобразует старые вложенные items в плоские секции"""
+            nonlocal order_counter
+            for item in items:
+                if not isinstance(item, dict):
+                    continue
+                title = item.get("title", "")
+                info = item.get("info", "")
+                titles = item.get("titles") or item.get("items") or []
+
+                # Конвертируем info (plain text) в content (HTML)
+                content = f"<p>{info}</p>" if info else ""
+
+                order_counter += 10
+                sections.append({
+                    "title": title,
+                    "level": parent_level,
+                    "order": order_counter,
+                    "content": content,
+                })
+
+                # Рекурсивно обрабатываем вложенные titles
+                if isinstance(titles, list) and titles:
+                    flatten_items(titles, parent_level + 1)
+
+        flatten_items(bio)
+        return {"media_ids": [], "sections": sections}
+
+    return bio
 
 
 # ========== AGENT SCHEMAS ==========
@@ -97,9 +213,27 @@ class AgentListResponse(MemoryBase):
 class PageBase(MemoryBase):
     """Базовая схема для страницы памяти"""
     epitaph: Optional[str] = Field(None, description="Эпитафия")
-    biography: Optional[List[BiographyItem]] = Field(None, description="Биография в формате JSON")
+    biography: Optional[BiographyData] = Field(None, description="Биография в формате JSON")
     is_public: bool = Field(False, description="Публичный доступ")
     is_draft: bool = Field(False, description="Черновик")
+
+    @validator('biography', pre=True, always=True)
+    def validate_biography(cls, v):
+        """Преобразует biography из БД в BiographyData.
+
+        Поддерживает:
+        - Новый формат: {"media_ids": [...], "sections": [...]}
+        - Старый формат: [{"title": "...", "info": "...", "titles": [...]}]
+        - None
+        - Уже BiographyData
+        """
+        if v is None or isinstance(v, BiographyData):
+            return v
+        # Конвертируем старый формат в новый, затем в BiographyData
+        converted = convert_old_biography_to_new(v)
+        if isinstance(converted, dict):
+            return BiographyData(**converted)
+        return converted
 
 
 class PageCreate(PageBase):
@@ -138,7 +272,7 @@ class PageListResponse(MemoryBase):
             PageInListResponse(
                 id_page=page.id_page,
                 epitaph=page.epitaph,
-                biography=page.biography,
+                biography=convert_old_biography_to_new(page.biography),
                 is_public=page.is_public,
                 is_draft=page.is_draft,
                 updated_at=page.updated_at,
@@ -173,14 +307,13 @@ class PublicMemoryPageResponse(PublicAgentResponse):
         page_response = None
 
         if page:
-            biography_val = page.biography
-            if str(page.biography)[0] =="{":
-               biography_val = [page.biography]
+            # Преобразуем biography из любого формата (старый или новый) в BiographyData
+            biography_data = convert_old_biography_to_new(page.biography)
 
             page_response = PublicPageResponse(
                 id_page=page.id_page,
                 epitaph=page.epitaph,
-                biography=biography_val,
+                biography=biography_data,
                 is_public=page.is_public,
                 is_draft=page.is_draft,
                 agent_id=page.agent_id,
@@ -250,7 +383,7 @@ class MemoryPageResponse(MemoryBase):
             page_responses.append(PageResponse(
                 id_page=page.id_page,
                 epitaph=page.epitaph,
-                biography=page.biography,
+                biography=convert_old_biography_to_new(page.biography),
                 is_public=page.is_public,
                 is_draft=page.is_draft,
                 agent_id=page.agent_id,

@@ -14,9 +14,9 @@ class MediaBD(Base):
     __tablename__ = "media"
     __table_args__ = {'extend_existing': True}
     
-    id_media = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String(36), nullable=False)  # кто загрузил
-    page_id = Column(String(36), ForeignKey('pages.id_page'), nullable=False)
+    id_media = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id = Column(UUID(as_uuid=True), nullable=False)  # кто загрузил
+    page_id = Column(UUID(as_uuid=True), nullable=False)
     
     file_extension = Column(String(10), nullable=False)  # character в БД, но мы используем String
     file_size = Column(BigInteger, nullable=False)  # bigint
@@ -33,8 +33,8 @@ class MediaBD(Base):
     is_public = Column(Boolean, nullable=False, default=False)
     sort_order = Column(Integer, nullable=True)
     
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    created_at = Column(DateTime(timezone=True), nullable=False)
+    updated_at = Column(DateTime(timezone=True), nullable=False)
     
     is_temp = Column(Boolean, nullable=False, default=False)
     
@@ -45,8 +45,8 @@ class MediaBD(Base):
         """Преобразует объект в словарь"""
         return {
             'id_media': str(self.id_media),
-            'user_id': self.user_id,
-            'page_id': self.page_id,
+            'user_id': str(self.user_id),
+            'page_id': str(self.page_id),
             'file_extension': self.file_extension,
             'file_size': self.file_size,
             'media_type': self.media_type,

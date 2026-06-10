@@ -11,11 +11,12 @@ from datetime import datetime as dt
 
 from database.base import Base
 
+
 class AgentBD(Base):
     __tablename__ = "agents"
     __table_args__ = {'extend_existing': True}
     
-    id_agent = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id_agent = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     full_name = Column(String(255), nullable=False)
     gender = Column(String(1), nullable=False)
     birth_date = Column(Date, nullable=True)
@@ -23,12 +24,13 @@ class AgentBD(Base):
     place_of_birth = Column(String(500), nullable=True)
     place_of_death = Column(String(500), nullable=True)
     avatar_url = Column(Text, nullable=True)
-    created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
-    user_id = Column(String(36), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    user_id = Column(UUID(as_uuid=True), ForeignKey('users.id_user'), nullable=False)
     is_human = Column(Boolean, default=True)
+    is_user = Column(Boolean, default=False)
 
-    # Добавляем relationship
+    # Relationships
     pages = relationship("PageBD", back_populates="agent", cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -43,36 +45,37 @@ class AgentBD(Base):
             'place_of_death': self.place_of_death,
             'avatar_url': self.avatar_url,
             'is_human': self.is_human,
+            'is_user': self.is_user,
             'user_id': str(self.user_id)
         }
+
 
 class PageBD(Base):
     __tablename__ = "pages"
     __table_args__ = {'extend_existing': True}
     
-    id_page = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id_page = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     epitaph = Column(Text, nullable=True)
     is_public = Column(Boolean, nullable=False, default=False)
-    is_draft = Column(Boolean, nullable=False, default=False)
-    agent_id = Column(String(36), ForeignKey('agents.id_agent'), nullable=False)
-    created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
-    user_id = Column(String(36), nullable=False)
+    is_draft = Column(Boolean, nullable=False, default=True)
+    agent_id = Column(UUID(as_uuid=True), ForeignKey('agents.id_agent'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    user_id = Column(UUID(as_uuid=True), ForeignKey('users.id_user'), nullable=False)
     biography = Column(JSON, nullable=True)
 
-    # Добавляем relationship
+    # Relationships
     agent = relationship("AgentBD", back_populates="pages")
-    access = relationship("PageAccessControl", back_populates="page", cascade="all, delete-orphan")
     
     def to_dict(self):
         """Преобразует объект в словарь"""
         return {
-            'id_page': self.id_page,
+            'id_page': str(self.id_page),
             'epitaph': self.epitaph,
             'is_public': self.is_public,
             'is_draft': self.is_draft,
-            'agent_id': self.agent_id,
-            'user_id': self.user_id,
+            'agent_id': str(self.agent_id),
+            'user_id': str(self.user_id),
             'biography': self.biography,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
